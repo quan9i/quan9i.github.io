@@ -3,11 +3,11 @@
   <title>小白的博客</title>
   
   <subtitle>IT界小白，计算机萌新一个</subtitle>
-  <link href="https://quan9i.github.io/blog/atom.xml" rel="self"/>
+  <link href="https://quan9i.github.io/project/atom.xml" rel="self"/>
   
-  <link href="https://quan9i.github.io/blog/"/>
+  <link href="https://quan9i.github.io/project/"/>
   <updated>2021-11-12T14:59:28.131Z</updated>
-  <id>https://quan9i.github.io/blog/</id>
+  <id>https://quan9i.github.io/project/</id>
   
   <author>
     <name>quan9i</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://quan9i.github.io/blog/2021/11/12/hello-world/"/>
-    <id>https://quan9i.github.io/blog/2021/11/12/hello-world/</id>
+    <link href="https://quan9i.github.io/project/2021/11/12/hello-world/"/>
+    <id>https://quan9i.github.io/project/2021/11/12/hello-world/</id>
     <published>2021-11-12T14:59:28.131Z</published>
     <updated>2021-11-12T14:59:28.131Z</updated>
     

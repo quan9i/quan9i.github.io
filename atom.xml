@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-13T03:52:53.480Z</updated>
+  <updated>2021-12-13T10:03:34.253Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="http://example.com/first/"/>
     <id>http://example.com/first/</id>
     <published>2021-12-12T05:20:16.178Z</published>
-    <updated>2021-12-13T03:52:53.480Z</updated>
+    <updated>2021-12-13T10:03:34.253Z</updated>
     
     
-    <summary type="html">&lt;p&gt;欢迎大家来访问我的小网站，本人只是一名网络小白，初始搭建博客耗费了很长时间，而成功之时得来的喜悦却使我感到非常值得&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;首先特别鸣谢为我选择网站背景的好朋友，阿诺！以后也要和阿诺一起加油！&lt;br&gt;欢迎大家来访问我的小网站，本人只是一名网络小白，初始搭建博客耗费了很长时间，但成功之时得来的喜悦使我倍感兴奋，因此在这里我想提一下我的座右铭：Where there is a will， there is a way。&lt;br&gt;在下面我将我所遇到的问题及解决方法分享给大家，希望能对大家有所帮助&lt;/p&gt;</summary>
     
     
     

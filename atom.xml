@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>quan9i&#39;s blog</title>
   
-  <subtitle>IT界小白，计算机萌新一个</subtitle>
+  <subtitle>小白的博客网站,一个计算机萌新</subtitle>
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>首篇文章</title>
-    <link href="http://example.com/2021/12/12/first/"/>
-    <id>http://example.com/2021/12/12/first/</id>
+    <link href="http://example.com/first/"/>
+    <id>http://example.com/first/</id>
     <published>2021-12-12T05:20:16.178Z</published>
     <updated>2021-12-13T03:52:53.480Z</updated>
     
@@ -33,8 +33,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://example.com/2021/11/12/hello-world/"/>
-    <id>http://example.com/2021/11/12/hello-world/</id>
+    <link href="http://example.com/hello-world/"/>
+    <id>http://example.com/hello-world/</id>
     <published>2021-11-12T14:59:28.131Z</published>
     <updated>2021-12-13T04:25:13.346Z</updated>
     

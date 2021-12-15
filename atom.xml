@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-15T16:10:43.023Z</updated>
+  <updated>2021-12-15T16:21:18.445Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>关于我</title>
-    <link href="http://example.com/%E5%8F%8B%E8%B0%8A/"/>
-    <id>http://example.com/%E5%8F%8B%E8%B0%8A/</id>
+    <title>博主个人介绍</title>
+    <link href="http://example.com/title/"/>
+    <id>http://example.com/title/</id>
     <published>2021-12-15T16:01:31.517Z</published>
-    <updated>2021-12-15T16:10:43.023Z</updated>
+    <updated>2021-12-15T16:21:18.445Z</updated>
     
     
     <summary type="html">&lt;p&gt;我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！&lt;br&gt;我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。&lt;/p&gt;</summary>
@@ -37,14 +37,13 @@
   
   <entry>
     <title>sql注入常用知识</title>
-    <link href="http://example.com/second/"/>
-    <id>http://example.com/second/</id>
+    <link href="http://example.com/title/"/>
+    <id>http://example.com/title/</id>
     <published>2021-12-15T00:05:29.914Z</published>
-    <updated>2021-12-15T03:14:04.023Z</updated>
+    <updated>2021-12-15T16:35:14.338Z</updated>
     
     
-    <summary type="html">&lt;p&gt;在这里我首先补充一些基本的注入语句和有关知识&lt;/p&gt;
-&lt;p&gt;首先，我们需要了解&lt;br&gt;sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行&lt;br&gt;And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;在这里我首先补充一些基本的注入语句和有关知识&lt;/p&gt;</summary>
     
     
     
@@ -57,10 +56,10 @@
   
   <entry>
     <title>首篇文章</title>
-    <link href="http://example.com/first/"/>
-    <id>http://example.com/first/</id>
+    <link href="http://example.com/title/"/>
+    <id>http://example.com/title/</id>
     <published>2021-12-12T05:20:16.178Z</published>
-    <updated>2021-12-15T03:28:34.944Z</updated>
+    <updated>2021-12-15T16:45:56.664Z</updated>
     
     
     <summary type="html">&lt;p&gt;首先特别鸣谢为我选择网站背景的好朋友，阿诺！以后也要和阿诺一起加油！&lt;br&gt;下图是我喜欢的玩偶，是心灵手巧的阿诺拼成的，真的很厉害！&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/401273754a104051b9247e5c52df6407.jpg&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;欢迎大家来访问我的小网站，本人只是一名网络小白，初始搭建博客耗费了很长时间，但成功之时得来的喜悦使我倍感兴奋，因此在这里我想提一下我的座右铭：Where there is a will， there is a way。&lt;br&gt;在下面我将我所遇到的问题及解决方法分享给大家，希望能对大家有所帮助&lt;/p&gt;</summary>

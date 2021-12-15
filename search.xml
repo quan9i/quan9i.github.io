@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>首篇文章</title>
-    <url>/first/</url>
+    <url>//title/</url>
     <content><![CDATA[<p>首先特别鸣谢为我选择网站背景的好朋友，阿诺！以后也要和阿诺一起加油！<br>下图是我喜欢的玩偶，是心灵手巧的阿诺拼成的，真的很厉害！<br><img src="https://img-blog.csdnimg.cn/401273754a104051b9247e5c52df6407.jpg" alt="在这里插入图片描述"><br>欢迎大家来访问我的小网站，本人只是一名网络小白，初始搭建博客耗费了很长时间，但成功之时得来的喜悦使我倍感兴奋，因此在这里我想提一下我的座右铭：Where there is a will， there is a way。<br>在下面我将我所遇到的问题及解决方法分享给大家，希望能对大家有所帮助</p>
 <span id="more"></span>
 <p>1、当运行hexo s时，随着你对localhost：4000的访问的次数的增加，node的警告也在增加，原因：node.js版本过高，删除node.js再下载一个低版本即可解决，<a href="https://nodejs.org/en/blog/release/">历史版本下载地址</a><br>警告如图所示<img src="https://img-blog.csdnimg.cn/12dc7272bd8a404990c6f87115ca5e44.png" alt="在这里插入图片描述"><br>2、我在将hexo部署到云端，执行hexo g 时又出现了新的报错<br><img src="https://img-blog.csdnimg.cn/35bb379a69344347a9c1ba57af599cc2.png" alt="在这里插入图片描述"><br>查看报错信息，此报错说缺少了模块’cheerio’，那我们就安装这个模块即可，解决办法</p>
@@ -21,11 +21,32 @@
       </tags>
   </entry>
   <entry>
-    <title>sql注入常用知识</title>
-    <url>/second/</url>
-    <content><![CDATA[<p>在这里我首先补充一些基本的注入语句和有关知识</p>
-<p>首先，我们需要了解<br>sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行<br>And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；</p>
+    <title>博主个人介绍</title>
+    <url>//title/</url>
+    <content><![CDATA[<p>我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！<br>我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。</p>
 <span id="more"></span>
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe 
+src="//player.bilibili.com/player.html?aid=293201273&bvid=BV1Yf4y1E7gh&cid=414166754&page=1" scrolling="no" border="0" 
+frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
+height: 100%; left: 0; top: 0;"> </iframe></div>
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe 
+src="//player.bilibili.com/player.html?aid=718157172&bvid=BV1RQ4y1k7cx&cid=413421395&page=1" scrolling="no" border="0" 
+frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
+height: 100%; left: 0; top: 0;"> </iframe></div>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>自己</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql注入常用知识</title>
+    <url>//title/</url>
+    <content><![CDATA[<p>在这里我首先补充一些基本的注入语句和有关知识</p>
+<span id="more"></span>
+<p>首先，我们需要了解<br>sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行<br>And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；</p>
 <h2 id="sql基本语句"><a href="#sql基本语句" class="headerlink" title="sql基本语句"></a>sql基本语句</h2><h1 id="sql语句"><a href="#sql语句" class="headerlink" title="sql语句"></a>sql语句</h1><p>（1)显示所有数据库名</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> schema_name <span class="keyword">from</span> information_schema.schemata ;</span><br></pre></td></tr></table></figure>
 <p>或者</p>
@@ -77,27 +98,6 @@
       </categories>
       <tags>
         <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于我</title>
-    <url>/%E5%8F%8B%E8%B0%8A/</url>
-    <content><![CDATA[<p>我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！<br>我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。</p>
-<span id="more"></span>
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe 
-src="//player.bilibili.com/player.html?aid=293201273&bvid=BV1Yf4y1E7gh&cid=414166754&page=1" scrolling="no" border="0" 
-frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
-height: 100%; left: 0; top: 0;"> </iframe></div>
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe 
-src="//player.bilibili.com/player.html?aid=718157172&bvid=BV1RQ4y1k7cx&cid=413421395&page=1" scrolling="no" border="0" 
-frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
-height: 100%; left: 0; top: 0;"> </iframe></div>
-]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>自己</tag>
       </tags>
   </entry>
 </search>

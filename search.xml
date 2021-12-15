@@ -13,22 +13,50 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>username<span class="operator">/</span>repo.git(username为你的用户名，repo为你的仓库名)</span><br></pre></td></tr></table></figure>
 <p>此时再hexo g-d<br>出现输入用户名和密码时，密码改为你刚刚复制的令牌，输入即可连接，如下图所示<br><img src="https://img-blog.csdnimg.cn/254023f8699b4b18855ba6f357f72aa7.png" alt="在这里插入图片描述"><br>此时再次hexo d ，可能直接成功连接，也可能需要再输入一次<br><img src="https://img-blog.csdnimg.cn/c760cbf5e89f4f7b9e7ec3aeb7a6d995.png" alt="在这里插入图片描述"><br>而这里我有时候会显示未连接成功，如下图所示<br><img src="https://img-blog.csdnimg.cn/6b360446100f47d5803eec1013655fe3.png" alt="在这里插入图片描述"><br>但当我查看博客时，发现已经部署到了云端，我也不明所以，可能是计算机玄学吧！<br>先写这么多，有新的报错时将继续补充。</p>
 ]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql注入常用知识</title>
+    <url>/second/</url>
+    <content><![CDATA[<p>在这里我首先补充一些基本的注入语句和有关知识</p>
+<span id="more"></span>
+<p>首先，我们需要了解<br>sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行<br>And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；</p>
+<h1 id="mysql部分基本语句句"><a href="#mysql部分基本语句句" class="headerlink" title="mysql部分基本语句句"></a>mysql部分基本语句句</h1><h2 id="常规sql指令："><a href="#常规sql指令：" class="headerlink" title="常规sql指令："></a>常规sql指令：</h2><p>（1)显示所有数据库名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> schema_name <span class="keyword">from</span> information_schema.schemata ;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+<p>语句执行结果<br><img src="https://img-blog.csdnimg.cn/d54eb8db5a1349bca17a543a8e9d7499.png" alt="在这里插入图片描述"><br>(2）显示某个库中所有表名（下图示例查询的是mysql库中的）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;mysql&#x27;</span> ;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>有关注入相关知识</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
     <url>/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h1><h2 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h2 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>

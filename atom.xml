@@ -18,8 +18,8 @@
   
   <entry>
     <title>博主个人介绍</title>
-    <link href="http://example.com/title/"/>
-    <id>http://example.com/title/</id>
+    <link href="http://example.com/%E5%8F%8B%E8%B0%8A/"/>
+    <id>http://example.com/%E5%8F%8B%E8%B0%8A/</id>
     <published>2021-12-15T16:01:31.517Z</published>
     <updated>2021-12-15T16:21:18.445Z</updated>
     
@@ -37,8 +37,8 @@
   
   <entry>
     <title>sql注入常用知识</title>
-    <link href="http://example.com/title/"/>
-    <id>http://example.com/title/</id>
+    <link href="http://example.com/second/"/>
+    <id>http://example.com/second/</id>
     <published>2021-12-15T00:05:29.914Z</published>
     <updated>2021-12-15T16:35:14.338Z</updated>
     
@@ -56,8 +56,8 @@
   
   <entry>
     <title>首篇文章</title>
-    <link href="http://example.com/title/"/>
-    <id>http://example.com/title/</id>
+    <link href="http://example.com/first/"/>
+    <id>http://example.com/first/</id>
     <published>2021-12-12T05:20:16.178Z</published>
     <updated>2021-12-15T16:45:56.664Z</updated>
     

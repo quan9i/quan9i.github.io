@@ -81,12 +81,12 @@
 
 
 
-<meta name="description" content="在这里我首先补充一些基本的注入语句和有关知识">
+<meta name="description" content="在这里我首先补充一些基本的注入语句和有关知识首先，我们需要了解sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql注入常用知识">
 <meta property="og:url" content="http://example.com/second/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="在这里我首先补充一些基本的注入语句和有关知识">
+<meta property="og:description" content="在这里我首先补充一些基本的注入语句和有关知识首先，我们需要了解sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/d54eb8db5a1349bca17a543a8e9d7499.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/81ab3110767548b1b04c8f7bb43d2de8.png">
@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/c56f39cc39fb4d768d45e7c8119f7abd.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/0b6e14451fc546bab00f7396aa7be45d.png">
 <meta property="article:published_time" content="2021-12-15T00:05:29.914Z">
-<meta property="article:modified_time" content="2021-12-15T16:35:14.338Z">
+<meta property="article:modified_time" content="2021-12-18T00:53:43.098Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  890
+                  886
                 </span>
               
 
@@ -452,10 +452,11 @@
       
 
       
-        <p>在这里我首先补充一些基本的注入语句和有关知识</p>
+        <p>在这里我首先补充一些基本的注入语句和有关知识<br>首先，我们需要了解<br>sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行<br>And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；</p>
 <span id="more"></span>
-<p>首先，我们需要了解<br>sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行<br>And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；</p>
-<h2 id="sql基本语句"><a href="#sql基本语句" class="headerlink" title="sql基本语句"></a>sql基本语句</h2><h1 id="sql语句"><a href="#sql语句" class="headerlink" title="sql语句"></a>sql语句</h1><p>（1)显示所有数据库名</p>
+
+
+<h1 id="sql语句"><a href="#sql语句" class="headerlink" title="sql语句"></a>sql语句</h1><p>（1)显示所有数据库名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> schema_name <span class="keyword">from</span> information_schema.schemata ;</span><br></pre></td></tr></table></figure>
 <p>或者</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
@@ -610,7 +611,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/%E5%8F%8B%E8%B0%8A/" rel="prev" title="博主个人介绍">
+              <a href="/myself/" rel="prev" title="博主个人介绍">
                 博主个人介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -693,7 +694,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -776,7 +777,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">sql基本语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5"><span class="nav-number"></span> <span class="nav-text">sql语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E6%89%A9%E5%85%85"><span class="nav-number"></span> <span class="nav-text">sql语句扩充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E8%AF%AD%E5%8F%A5"><span class="nav-number"></span> <span class="nav-text">sql注入相关语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number"></span> <span class="nav-text">查数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E8%A1%A8"><span class="nav-number"></span> <span class="nav-text">查表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E5%88%97%E5%90%8D"><span class="nav-number"></span> <span class="nav-text">查列名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E5%AD%97%E6%AE%B5"><span class="nav-number"></span> <span class="nav-text">查字段</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">sql语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E6%89%A9%E5%85%85"><span class="nav-number">2.</span> <span class="nav-text">sql语句扩充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">sql注入相关语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.</span> <span class="nav-text">查数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">查表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E5%88%97%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">查列名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E5%AD%97%E6%AE%B5"><span class="nav-number">7.</span> <span class="nav-text">查字段</span></a></li></ol></div>
             
 
           </div>
@@ -805,7 +806,11 @@
       
       
         <li class="recent_posts_li">
-          <a href="/%E5%8F%8B%E8%B0%8A/" title="博主个人介绍" target="_blank">博主个人介绍</a>
+          <a href="/burpsuite/" title="burpsuite软件安装过程" target="_blank">burpsuite软件安装过程</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/myself/" title="博主个人介绍" target="_blank">博主个人介绍</a>
         </li>
       
         <li class="recent_posts_li">
@@ -849,7 +854,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.7k</span>
+    <span title="Site words total count">2.3k</span>
   
 </div>
 

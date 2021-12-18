@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="自己," />
+  <meta name="keywords" content="sql注入," />
 
 
 
@@ -81,18 +81,26 @@
 
 
 
-<meta name="description" content="我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。">
+<meta name="description" content="在sql-lab中得到数据库等数据时，我们发现依靠自己来猜取数据库名称等是非常慢的，这时我们需要借助工具burpsuite，burpsuite可帮助我们进行猜解，但安装burpsuite必须有java环境，下面我将介绍burpsuite的安装及使用方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博主个人介绍">
-<meta property="og:url" content="http://example.com/%E5%8F%8B%E8%B0%8A/index.html">
+<meta property="og:title" content="burpsuite软件安装过程">
+<meta property="og:url" content="http://example.com/burpsuite/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。">
+<meta property="og:description" content="在sql-lab中得到数据库等数据时，我们发现依靠自己来猜取数据库名称等是非常慢的，这时我们需要借助工具burpsuite，burpsuite可帮助我们进行猜解，但安装burpsuite必须有java环境，下面我将介绍burpsuite的安装及使用方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-15T16:01:31.517Z">
-<meta property="article:modified_time" content="2021-12-15T16:21:18.445Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/18e0a36531fc46d4ac4c4a7d7d857d7f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/728e63bcf3a44cf3865b6547e4245b84.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cd57bf52e9aa4191ad34473dfcedf183.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6e982da6ce2646ffadc6eda15b47eab2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/26403fd7c2d9492d905dd0c16562576d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0e7b614588f74917878db33b37ab4a45.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3988187ff43e48e098ab3c35dfd3ab1f.png">
+<meta property="article:published_time" content="2021-12-18T00:45:10.145Z">
+<meta property="article:modified_time" content="2021-12-18T02:16:37.445Z">
 <meta property="article:author" content="quan9i">
-<meta property="article:tag" content="自己">
+<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/18e0a36531fc46d4ac4c4a7d7d857d7f.png">
 
 
 
@@ -122,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/友谊/"/>
+  <link rel="canonical" href="http://example.com/burpsuite/"/>
 
 
 
 
 
-  <title>博主个人介绍 | quan9i's blog</title>
+  <title>burpsuite软件安装过程 | quan9i's blog</title>
   
 
 
@@ -307,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%8F%8B%E8%B0%8A/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/burpsuite/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -324,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">博主个人介绍</h2>
+          <h2 class="post-title" itemprop="name headline">burpsuite软件安装过程</h2>
         
 
         <div class="post-meta">
@@ -336,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-16T00:01:31+08:00">
-                2021-12-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-18T08:45:10+08:00">
+                2021-12-18
               </time>
             
 
@@ -359,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index">
-                    <span itemprop="name">日常</span>
+                  <a href="/categories/%E6%9C%89%E5%85%B3%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">有关注入相关知识</span>
                   </a>
                 </span>
 
@@ -390,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  147
+                  586
                 </span>
               
 
@@ -406,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -427,16 +435,10 @@
       
 
       
-        <p>我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！<br>我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。</p>
+        <p>在sql-lab中得到数据库等数据时，我们发现依靠自己来猜取数据库名称等是非常慢的，这时我们需要借助工具burpsuite，burpsuite可帮助我们进行猜解，但安装burpsuite必须有java环境，下面我将介绍burpsuite的安装及使用方法</p>
 <span id="more"></span>
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe 
-src="//player.bilibili.com/player.html?aid=293201273&bvid=BV1Yf4y1E7gh&cid=414166754&page=1" scrolling="no" border="0" 
-frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
-height: 100%; left: 0; top: 0;"> </iframe></div>
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe 
-src="//player.bilibili.com/player.html?aid=718157172&bvid=BV1RQ4y1k7cx&cid=413421395&page=1" scrolling="no" border="0" 
-frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
-height: 100%; left: 0; top: 0;"> </iframe></div>
+<h1 id="java环境配置"><a href="#java环境配置" class="headerlink" title="java环境配置"></a>java环境配置</h1><p>java安装时搜索jdk即可找到官网，官网链接为<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java8">https://www.oracle.com/java/technologies/downloads/#java8</a><br>但是在官网安装时候，需要创建oracle账号，那你说要创建吗？<br>创建个锤子！<br>所以此时我们需要另辟蹊径，经过搜索后发现百度网盘里面有<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cdUqMfrnyfacnweoJggCuw">https://pan.baidu.com/s/1cdUqMfrnyfacnweoJggCuw</a><br>提取码：oeea<br>安装java过后无需改变它的路径，一路下一步即可，安装完成后<br>打开cmd，输入java，如下图所示为安装完成<br><img src="https://img-blog.csdnimg.cn/18e0a36531fc46d4ac4c4a7d7d857d7f.png" alt="在这里插入图片描述"></p>
+<h1 id="burpsuite安装"><a href="#burpsuite安装" class="headerlink" title="burpsuite安装"></a>burpsuite安装</h1><p>首先支持官方正版，链接如下<br><a target="_blank" rel="noopener" href="https://portswigger.net/burp/communitydownload">https://portswigger.net/burp/communitydownload</a><br>但是我选择白嫖，毕竟不用花钱，也不复杂，链接如下<br><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1II1vlx3LEYnsMDhCT3eFXQ">https://pan.baidu.com/s/1II1vlx3LEYnsMDhCT3eFXQ</a><br>提取码：537f<br>安装后，不要先打开burpsuite，先打开burp-loader-keygen.jar文件<br><img src="https://img-blog.csdnimg.cn/728e63bcf3a44cf3865b6547e4245b84.png" alt="在这里插入图片描述"><br>点击run<br><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/343eba68d78649eba4909c77ea2a3e57.png">在这里插入图片描述</a><br>此时会弹出一个窗口，如下图所示<br><img src="https://img-blog.csdnimg.cn/cd57bf52e9aa4191ad34473dfcedf183.png" alt="在这里插入图片描述"><br>然后将license中的代码复制一下，粘贴到弹出窗口中<br><img src="https://img-blog.csdnimg.cn/6e982da6ce2646ffadc6eda15b47eab2.png" alt="在这里插入图片描述"><br>此时将弹出窗口中的第二栏代码输入到之前的第二段处<br><img src="https://img-blog.csdnimg.cn/26403fd7c2d9492d905dd0c16562576d.png" alt="在这里插入图片描述"><br>此时第三段处会出现代码，将代码复制到弹出窗口中最后一行即可<br>此时即可打开<br>但是如果以后每次都这样打开的话，会很不方便，所以我们可以设置一个批处理文件来运行它，操作如下<br>首先我们需要新建一个txt文件<br>然后输入（@echo 0ff隐藏回显，第二行由于版本号不同，可能需要更改）<br>@echo off<br>java -Xbootclasspath/p:burp-loader-keygen.jar -jar burpsuite_pro_v1.7.31.jar<br>此时进行保存，然后将后缀名从txt改成bat<br><img src="https://img-blog.csdnimg.cn/0e7b614588f74917878db33b37ab4a45.png" alt="在这里插入图片描述"><br>点击即可运行<br><img src="https://img-blog.csdnimg.cn/3988187ff43e48e098ab3c35dfd3ab1f.png" alt="在这里插入图片描述"><br>但是此时还有一个cmd窗口，将其隐藏即可，不能关闭，关闭会将burpsuite也关闭<br>此时将刚刚创建的批处理文件（burpsuite.bat）创建快捷方式，移动到桌面即可，更改图标这种问题可自行百度<br>至此，burpsuite安装完成，可以开始使用！</p>
 
       
     </div>
@@ -494,7 +496,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/%E5%8F%8B%E8%B0%8A/" title="博主个人介绍">http://example.com/%E5%8F%8B%E8%B0%8A/</a>
+    <a href="http://example.com/burpsuite/" title="burpsuite软件安装过程">http://example.com/burpsuite/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -509,7 +511,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
       
         <div class="post-tags">
           
-            <a href="/tags/%E8%87%AA%E5%B7%B1/" rel="tag"># 自己</a>
+            <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"># sql注入</a>
           
         </div>
       
@@ -537,8 +539,8 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/second/" rel="next" title="sql注入常用知识">
-                <i class="fa fa-chevron-left"></i> sql注入常用知识
+              <a href="/myself/" rel="next" title="博主个人介绍">
+                <i class="fa fa-chevron-left"></i> 博主个人介绍
               </a>
             
           </div>
@@ -597,8 +599,17 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -617,7 +628,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -691,6 +702,22 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">java环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#burpsuite%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">burpsuite安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -713,7 +740,11 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
       
       
         <li class="recent_posts_li">
-          <a href="/%E5%8F%8B%E8%B0%8A/" title="博主个人介绍" target="_blank">博主个人介绍</a>
+          <a href="/burpsuite/" title="burpsuite软件安装过程" target="_blank">burpsuite软件安装过程</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/myself/" title="博主个人介绍" target="_blank">博主个人介绍</a>
         </li>
       
         <li class="recent_posts_li">
@@ -757,7 +788,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.7k</span>
+    <span title="Site words total count">2.3k</span>
   
 </div>
 

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-18T02:16:37.445Z</updated>
+  <updated>2021-12-24T16:26:34.264Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《当幸福来敲门》观后感</title>
+    <link href="http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
+    <id>http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/</id>
+    <published>2021-12-24T15:56:10.246Z</published>
+    <updated>2021-12-24T16:26:34.264Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触，每个人都有会自己糟糕的时候，我们需要控制自己的情绪，不要将情绪发泄到别人身上，因为这又不是那些人造成的，我们需要做的就是不放弃生活</summary>
+      
+    
+    
+    
+    <category term="日常" scheme="http://example.com/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+    <category term="电源观后感" scheme="http://example.com/tags/%E7%94%B5%E6%BA%90%E8%A7%82%E5%90%8E%E6%84%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>post注入</title>
+    <link href="http://example.com/post%E6%B3%A8%E5%85%A5/"/>
+    <id>http://example.com/post%E6%B3%A8%E5%85%A5/</id>
+    <published>2021-12-23T14:07:23.749Z</published>
+    <updated>2021-12-23T14:21:39.231Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;学习post注入，首先需要知道post传递，post与get注入明显区别在于，get在执行命令后在url中可以看出变化，而post则是在后台才可以看见，在url中发现不了变化，具体讲解可以看大佬的详细解释&lt;br&gt;链接：&lt;a href=&quot;https://www.zhihu.c</summary>
+      
+    
+    
+    
+    <category term="post注入" scheme="http://example.com/categories/post%E6%B3%A8%E5%85%A5/"/>
+    
+    
+    <category term="sql注入" scheme="http://example.com/tags/sql%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>burpsuite软件安装过程</title>

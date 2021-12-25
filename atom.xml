@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-24T16:40:26.395Z</updated>
+  <updated>2021-12-25T13:35:32.854Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>get注入</title>
+    <link href="http://example.com/get%E6%B3%A8%E5%85%A5/"/>
+    <id>http://example.com/get%E6%B3%A8%E5%85%A5/</id>
+    <published>2021-12-25T12:25:33.898Z</published>
+    <updated>2021-12-25T13:35:32.854Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;常用函数扩充&quot;&gt;&lt;a href=&quot;#常用函数扩充&quot; class=&quot;headerlink&quot; title=&quot;常用函数扩充&quot;&gt;&lt;/a&gt;常用函数扩充&lt;/h1&gt;&lt;p&gt;下面部分函数之前已扩充，&lt;a href=&quot;https://quan9i.github.io/second/#more&quot;&gt;点击此处查看&lt;/a&gt;&lt;br&gt;在此继续扩充一些需要用到的函数&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="get注入" scheme="http://example.com/categories/get%E6%B3%A8%E5%85%A5/"/>
+    
+    
+    <category term="sql注入" scheme="http://example.com/tags/sql%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>《当幸福来敲门》观后感</title>

@@ -59,13 +59,10 @@
     <link href="http://example.com/post%E6%B3%A8%E5%85%A5/"/>
     <id>http://example.com/post%E6%B3%A8%E5%85%A5/</id>
     <published>2021-12-23T14:07:23.749Z</published>
-    <updated>2021-12-23T14:21:39.231Z</updated>
+    <updated>2021-12-25T14:53:45.134Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;p&gt;学习post注入，首先需要知道post传递，post与get注入明显区别在于，get在执行命令后在url中可以看出变化，而post则是在后台才可以看见，在url中发现不了变化，具体讲解可以看大佬的详细解释&lt;br&gt;链接：&lt;a href=&quot;https://www.zhihu.c</summary>
-      
+    <summary type="html">&lt;p&gt;学习post注入，首先需要知道post传递，post与get注入明显区别在于，get在执行命令后在url中可以看出变化，而post则是在后台才可以看见，在url中发现不了变化，具体讲解可以看大佬的详细解释&lt;br&gt;链接：&lt;a href=&quot;https://www.zhihu.com/question/28586791&quot;&gt;https://www.zhihu.com/question/28586791&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     

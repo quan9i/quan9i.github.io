@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-25T13:35:32.854Z</updated>
+  <updated>2022-01-02T04:17:08.156Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>联合查询</title>
+    <link href="http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/"/>
+    <id>http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/</id>
+    <published>2022-01-02T03:45:14.366Z</published>
+    <updated>2022-01-02T04:17:08.156Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="post注入" scheme="http://example.com/categories/post%E6%B3%A8%E5%85%A5/"/>
+    
+    
+    <category term="sql注入" scheme="http://example.com/tags/sql%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>get注入</title>
@@ -40,7 +59,7 @@
     <link href="http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
     <id>http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/</id>
     <published>2021-12-24T15:56:10.246Z</published>
-    <updated>2022-01-01T09:01:32.134Z</updated>
+    <updated>2022-01-01T09:09:12.947Z</updated>
     
     
     <summary type="html">&lt;p&gt;今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触。&lt;/p&gt;</summary>

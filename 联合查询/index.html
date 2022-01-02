@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sql注入," />
 
 
 
@@ -81,15 +81,22 @@
 
 
 
-<meta name="description" content="少评论他人，多塑造自己">
-<meta property="og:type" content="website">
-<meta property="og:title" content="quan9i&#39;s blog">
-<meta property="og:url" content="http://example.com/tags/%E7%94%B5%E5%BD%B1%E8%A7%82%E5%90%8E%E6%84%9F/index.html">
+<meta name="description" content="近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助">
+<meta property="og:type" content="article">
+<meta property="og:title" content="联合查询">
+<meta property="og:url" content="http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="少评论他人，多塑造自己">
+<meta property="og:description" content="近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0d7a24c2207b405f94e465260bfc3840.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/66470290b76146fcbf59e72eed4b0c63.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png">
+<meta property="article:published_time" content="2022-01-02T03:45:14.366Z">
+<meta property="article:modified_time" content="2022-01-02T04:17:08.156Z">
 <meta property="article:author" content="quan9i">
+<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/0d7a24c2207b405f94e465260bfc3840.png">
 
 
 
@@ -119,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/tags/电影观后感/"/>
+  <link rel="canonical" href="http://example.com/联合查询/"/>
 
 
 
 
 
-  <title>标签: 电影观后感 | quan9i's blog</title>
+  <title>联合查询 | quan9i's blog</title>
   
 
 
@@ -152,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -290,54 +297,274 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>电影观后感<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/%E8%A7%82%E5%90%8E%E6%84%9F/" itemprop="url">
-              
-                <span itemprop="name">《当幸福来敲门》观后感</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">联合查询</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-12-24T23:56:10+08:00"
-              content="2021-12-24" >
-          12-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T11:45:14+08:00">
+                2022-01-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/post%E6%B3%A8%E5%85%A5/" itemprop="url" rel="index">
+                    <span itemprop="name">post注入</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  359
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助</p>
+<span id="more"></span>
+<p>首先我们需要知道联合查询的定义<br>1、联合查询的概念<br>联合查询是可合并多个相似的选择查询的结果集。等同于将一个表追加到另一个表，从而实现将两个表的查询组合到一起。<br>简单的说，就是union可合并两个及以上select语句的结果集。<br>前提：<br>（1）这几个select语句必须拥有相同列，而且各列的数据类型也相同。<br>（2）必须有显示位，<br>什么是显示位？<br>官方的说就是执行的sql语句得到的数据会显示到界面上去，在界面上显示数据的这个位置就称位显示位<br>简单的说就是在界面上有回显，如下图这种情况无论输入什么都显示 you are in ，此即说明不存在显示位<br><img src="https://img-blog.csdnimg.cn/0d7a24c2207b405f94e465260bfc3840.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/66470290b76146fcbf59e72eed4b0c63.png" alt="在这里插入图片描述"><br>2、查询语句使用的多为union select 语句<br>union select 在查询数据库，查询列名以及查询字段信息时候都被用到，示例如下：<br>代码：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>n<span class="string">&#x27; union select 1,group_concat(schema_name) from information_schema.schemata  #&amp;passwd=admin&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png" alt="在这里插入图片描述"><br>不断加油，继续努力，union select 简略介绍至此结束！</p>
 
       
     </div>
+    
+    
+    
 
+
+<div>
+      
+        
+      
+</div>
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/" title="联合查询">http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"># sql注入</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/get%E6%B3%A8%E5%85%A5/" rel="next" title="get注入">
+                <i class="fa fa-chevron-left"></i> get注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -345,6 +572,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -676,6 +907,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

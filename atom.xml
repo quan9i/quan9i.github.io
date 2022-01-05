@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-04T14:56:52.731Z</updated>
+  <updated>2022-01-05T08:13:35.620Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,14 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>sql-lab 源码分析</title>
+    <link href="http://example.com/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://example.com/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</id>
+    <published>2022-01-05T07:29:37.413Z</published>
+    <updated>2022-01-05T08:13:35.620Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;首先引入一些要用到的函数&lt;/p&gt;
+&lt;h1 id=&quot;函数扩充&quot;&gt;&lt;a href=&quot;#函数扩充&quot; class=&quot;headerlink&quot; title=&quot;函数扩充&quot;&gt;&lt;/a&gt;函数扩充&lt;/h1&gt;&lt;p&gt;1、check函数&lt;br&gt;CHECK 约束用于限制列中的值的范围。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="post注入" scheme="http://example.com/categories/post%E6%B3%A8%E5%85%A5/"/>
+    
+    
+    <category term="sql注入" scheme="http://example.com/tags/sql%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>sql-lab 18及其后题解</title>
     <link href="http://example.com/sql-lab/"/>
     <id>http://example.com/sql-lab/</id>
     <published>2022-01-04T13:55:13.222Z</published>
-    <updated>2022-01-04T14:56:52.731Z</updated>
+    <updated>2022-01-05T08:13:52.879Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;sql-lab-18&quot;&gt;&lt;a href=&quot;#sql-lab-18&quot; class=&quot;headerlink&quot; title=&quot;sql-lab 18&quot;&gt;&lt;/a&gt;sql-lab 18&lt;/h1&gt;&lt;p&gt;观察题目并进行测试&lt;/p&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;sql-lab-18&quot;&gt;&lt;a href=&quot;#sql-lab-18&quot; class=&quot;headerlink&quot; title=&quot;sql-lab 18&quot;&gt;&lt;/a&gt;sql-lab 18&lt;/h1&gt;&lt;p&gt;观察题目并进行测试&lt;br&gt;发现执行正确时会报出user-agent和本机地址&lt;br&gt;错误时只报出本机地址&lt;/p&gt;</summary>
     
     
     

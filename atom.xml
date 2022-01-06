@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-06T03:14:55.033Z</updated>
+  <updated>2022-01-06T08:55:29.753Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="http://example.com/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
     <id>http://example.com/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/</id>
     <published>2022-01-06T03:12:48.189Z</published>
-    <updated>2022-01-06T03:14:55.033Z</updated>
+    <updated>2022-01-06T08:55:29.753Z</updated>
     
     
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9750153a99c9481ca3e844afd8a67211.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;123&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9750153a99c9481ca3e844afd8a67211.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;活着就意味着要必须要做点什么，请好好努力。&lt;/p&gt;</summary>
     
     
     
@@ -40,11 +40,10 @@
     <link href="http://example.com/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     <id>http://example.com/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</id>
     <published>2022-01-05T07:29:37.413Z</published>
-    <updated>2022-01-05T08:14:14.032Z</updated>
+    <updated>2022-01-06T08:57:52.606Z</updated>
     
     
-    <summary type="html">&lt;p&gt;首先引入一些要用到的函数&lt;/p&gt;
-&lt;h1 id=&quot;函数扩充&quot;&gt;&lt;a href=&quot;#函数扩充&quot; class=&quot;headerlink&quot; title=&quot;函数扩充&quot;&gt;&lt;/a&gt;函数扩充&lt;/h1&gt;&lt;p&gt;1、check函数&lt;br&gt;CHECK 约束用于限制列中的值的范围。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d982834864214cefa6035b88372643f8.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;要活成两种样子，发光和不发光。不发光的时候，都是在为发光做准备。&lt;/p&gt;</summary>
     
     
     
@@ -60,10 +59,10 @@
     <link href="http://example.com/sql-lab/"/>
     <id>http://example.com/sql-lab/</id>
     <published>2022-01-04T13:55:13.222Z</published>
-    <updated>2022-01-06T02:51:32.787Z</updated>
+    <updated>2022-01-06T08:53:48.769Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;sql-lab-18&quot;&gt;&lt;a href=&quot;#sql-lab-18&quot; class=&quot;headerlink&quot; title=&quot;sql-lab 18&quot;&gt;&lt;/a&gt;sql-lab 18&lt;/h1&gt;&lt;p&gt;观察题目并进行测试&lt;br&gt;发现执行正确时会报出user-agent和本机地址&lt;br&gt;错误时只报出本机地址&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/0b1ba268322a4a82be63d97925a19961.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;愿做人间逍遥客，从此江湖无故人&lt;/p&gt;</summary>
     
     
     
@@ -79,10 +78,10 @@
     <link href="http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/"/>
     <id>http://example.com/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/</id>
     <published>2022-01-02T03:45:14.366Z</published>
-    <updated>2022-01-02T04:17:29.209Z</updated>
+    <updated>2022-01-06T09:00:03.801Z</updated>
     
     
-    <summary type="html">&lt;p&gt;近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/bb21dd35e23542f198dcf1614eac1f86.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我本是槐花院落闲散的人，满襟酒气，小池塘边跌坐看鱼，眉挑烟火过一生。&lt;/p&gt;</summary>
     
     
     
@@ -98,10 +97,10 @@
     <link href="http://example.com/get%E6%B3%A8%E5%85%A5/"/>
     <id>http://example.com/get%E6%B3%A8%E5%85%A5/</id>
     <published>2021-12-25T12:25:33.898Z</published>
-    <updated>2021-12-25T13:35:32.854Z</updated>
+    <updated>2022-01-06T09:02:42.180Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;常用函数扩充&quot;&gt;&lt;a href=&quot;#常用函数扩充&quot; class=&quot;headerlink&quot; title=&quot;常用函数扩充&quot;&gt;&lt;/a&gt;常用函数扩充&lt;/h1&gt;&lt;p&gt;下面部分函数之前已扩充，&lt;a href=&quot;https://quan9i.github.io/second/#more&quot;&gt;点击此处查看&lt;/a&gt;&lt;br&gt;在此继续扩充一些需要用到的函数&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/c3438e95b2404645b41d0930512dbafe.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;你逆光而来配得上这世间所有温柔。&lt;/p&gt;</summary>
     
     
     
@@ -117,10 +116,10 @@
     <link href="http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
     <id>http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/</id>
     <published>2021-12-24T15:56:10.246Z</published>
-    <updated>2022-01-06T03:36:24.541Z</updated>
+    <updated>2022-01-06T07:45:50.512Z</updated>
     
     
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fc564545f668466ab79b611b4df0767d.png&quot;&gt;&lt;br&gt;今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fc564545f668466ab79b611b4df0767d.png&quot;&gt;&lt;br&gt;前途浩浩荡荡 万事尽可期待。&lt;/p&gt;</summary>
     
     
     
@@ -136,10 +135,10 @@
     <link href="http://example.com/post%E6%B3%A8%E5%85%A5/"/>
     <id>http://example.com/post%E6%B3%A8%E5%85%A5/</id>
     <published>2021-12-23T14:07:23.749Z</published>
-    <updated>2022-01-04T12:05:24.162Z</updated>
+    <updated>2022-01-06T08:57:14.608Z</updated>
     
     
-    <summary type="html">&lt;p&gt;学习post注入，首先需要知道post传递，post与get注入明显区别在于，get在执行命令后在url中可以看出变化，而post则是在后台才可以看见，在url中发现不了变化，具体讲解可以看大佬的详细解释&lt;br&gt;链接：&lt;a href=&quot;https://www.zhihu.com/question/28586791&quot;&gt;https://www.zhihu.com/question/28586791&lt;/a&gt;&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/45835499f36043d6a8bc794c68cfd79d.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;如果事与愿违，请一定相信是上天另有安排。&lt;/p&gt;</summary>
     
     
     
@@ -155,10 +154,10 @@
     <link href="http://example.com/burpsuite/"/>
     <id>http://example.com/burpsuite/</id>
     <published>2021-12-18T00:45:10.145Z</published>
-    <updated>2022-01-02T04:39:09.395Z</updated>
+    <updated>2022-01-06T09:04:12.954Z</updated>
     
     
-    <summary type="html">&lt;p&gt;在sql-lab中得到数据库等数据时，我们发现依靠自己来猜取数据库名称等是非常慢的，这时我们需要借助工具burpsuite，burpsuite可帮助我们进行猜解，但安装burpsuite必须有java环境，下面我将介绍burpsuite的安装及使用方法&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/75dbc12a416a434caa3ff9b7921fc794.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;仅有一次的人生当然要活的比谁都炽热！&lt;/p&gt;</summary>
     
     
     
@@ -174,10 +173,10 @@
     <link href="http://example.com/myself/"/>
     <id>http://example.com/myself/</id>
     <published>2021-12-15T16:01:31.517Z</published>
-    <updated>2022-01-02T04:39:09.399Z</updated>
+    <updated>2022-01-06T09:06:09.203Z</updated>
     
     
-    <summary type="html">&lt;p&gt;我只是一个计算机初学者，不会太多的计算机语言，搭建此博客希望可以与志同道合之士一起进步，同时希望可以得到大佬的指点，希望大家观看我的博客文章后，有不当之处或者有更好的建议时，反馈给我这个小白，我将认真查看并改正有关问题或采用建议！&lt;br&gt;我是一个不太擅长交流的人，比较喜欢玩游戏，下面是我的游戏视频，感兴趣者可以大致浏览一下。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/a873c676d04c4e7286a1396c23f66fa9.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;人来人往满是善意，幸福的事会渐渐不期而遇。&lt;/p&gt;</summary>
     
     
     
@@ -193,10 +192,10 @@
     <link href="http://example.com/second/"/>
     <id>http://example.com/second/</id>
     <published>2021-12-15T00:05:29.914Z</published>
-    <updated>2022-01-02T04:39:09.401Z</updated>
+    <updated>2022-01-06T09:10:32.976Z</updated>
     
     
-    <summary type="html">&lt;p&gt;在这里我首先补充一些基本的注入语句和有关知识&lt;br&gt;首先，我们需要了解&lt;br&gt;sql中注释：–+   或   –(空格)  或   #  后面的语句不再执行&lt;br&gt;And和or：A and B 全部正确继续执行 A or B 有一正确或者全正确皆往下执行；&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/7dc548e8411a4bd7b4f66b710e4b657b.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;山水总相逢，来日皆可期。&lt;/p&gt;</summary>
     
     
     
@@ -212,10 +211,10 @@
     <link href="http://example.com/first/"/>
     <id>http://example.com/first/</id>
     <published>2021-12-12T05:20:16.178Z</published>
-    <updated>2022-01-02T04:39:09.397Z</updated>
+    <updated>2022-01-06T09:17:08.062Z</updated>
     
     
-    <summary type="html">&lt;p&gt;首先特别鸣谢为我选择网站背景的好朋友，阿诺！以后也要和阿诺一起加油！&lt;br&gt;下图是我喜欢的玩偶，是心灵手巧的阿诺拼成的，真的很厉害！&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/401273754a104051b9247e5c52df6407.jpg&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;欢迎大家来访问我的小网站，本人只是一名网络小白，初始搭建博客耗费了很长时间，但成功之时得来的喜悦使我倍感兴奋，因此在这里我想提一下我的座右铭：Where there is a will， there is a way。&lt;br&gt;在下面我将我所遇到的问题及解决方法分享给大家，希望能对大家有所帮助&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9d1c07a1cd9e42e09405d648b682dba1.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我行四方，以日以年。&lt;/p&gt;</summary>
     
     
     

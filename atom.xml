@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-05T08:14:14.032Z</updated>
+  <updated>2022-01-06T03:14:55.033Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>next博客优化</title>
+    <link href="http://example.com/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <id>http://example.com/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/</id>
+    <published>2022-01-06T03:12:48.189Z</published>
+    <updated>2022-01-06T03:14:55.033Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9750153a99c9481ca3e844afd8a67211.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;123&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="搭建博客" scheme="http://example.com/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="博客" scheme="http://example.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>sql-lab 源码分析</title>
@@ -41,7 +60,7 @@
     <link href="http://example.com/sql-lab/"/>
     <id>http://example.com/sql-lab/</id>
     <published>2022-01-04T13:55:13.222Z</published>
-    <updated>2022-01-05T08:34:23.895Z</updated>
+    <updated>2022-01-06T02:51:32.787Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;sql-lab-18&quot;&gt;&lt;a href=&quot;#sql-lab-18&quot; class=&quot;headerlink&quot; title=&quot;sql-lab 18&quot;&gt;&lt;/a&gt;sql-lab 18&lt;/h1&gt;&lt;p&gt;观察题目并进行测试&lt;br&gt;发现执行正确时会报出user-agent和本机地址&lt;br&gt;错误时只报出本机地址&lt;/p&gt;</summary>
@@ -98,10 +117,10 @@
     <link href="http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
     <id>http://example.com/%E8%A7%82%E5%90%8E%E6%84%9F/</id>
     <published>2021-12-24T15:56:10.246Z</published>
-    <updated>2022-01-01T09:09:12.947Z</updated>
+    <updated>2022-01-06T03:36:24.541Z</updated>
     
     
-    <summary type="html">&lt;p&gt;今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fc564545f668466ab79b611b4df0767d.png&quot;&gt;&lt;br&gt;今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触。&lt;/p&gt;</summary>
     
     
     

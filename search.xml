@@ -3,7 +3,7 @@
   <entry>
     <title>《当幸福来敲门》观后感</title>
     <url>//%E8%A7%82%E5%90%8E%E6%84%9F/</url>
-    <content><![CDATA[<p>今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触。</p>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/fc564545f668466ab79b611b4df0767d.png"><br>今天是很不好的一天（仅对我而言），但是每天都是新的一天，摒弃消极思想才是我们应该做的，积极面对生活，这是我当我看过《当幸福来敲门》后的最大感触。</p>
 <span id="more"></span>
 <p>每个人都有会自己糟糕的时候，我们需要控制自己的情绪，不要将情绪发泄到别人身上，因为这又不是那些人造成的，我们需要做的就是不放弃生活，热爱生活。人生总是要遇见一些糟糕的事情，但是我相信好运也会随之而来，就这样，不断加油！<br>宇宙的原子不会堙灭，我们终将会拥有自己的幸福<br><img src="https://img-blog.csdnimg.cn/img_convert/a8bc43709d60ed51ef0234eb10175abe.png#pic_center" alt="在这里插入图片描述"><br>原片经典语句摘抄<br>You want something. Go get it!<br>译:有了目标就要全力以赴！<br><img src="https://img-blog.csdnimg.cn/img_convert/f54da7cced2eefbb53911b191144178a.png#pic_center" alt="在这里插入图片描述"><br>You got a dream, you gotta protect it. People can’t do something themselves, they wanna tell you you can’t do it. If you want something, go get it. Period.<br>译:如果你有梦想的话，就要去捍卫它。那些一事无成的人想告诉你你也成不了大器。如果你有理想的话，就要去努力实现。就这样。<br><img src="https://img-blog.csdnimg.cn/img_convert/c42b7e2064fd0fc807edae040a4876f4.png#pic_center" alt="在这里插入图片描述"><br>I’m the type of person,if you ask me a question, and I don’t know the answer,I’m gonna to tell you that I don’t know.But I bet you what: I know how to find the answer, and I’ll find the answer.<br>译：我是这样的人，如果你问的问题我不知道答案，我会直接告诉你“我不知道”。但我向你保证：我知道如何寻找答案，而且我一定会找出答案的。<br><img src="https://img-blog.csdnimg.cn/img_convert/b4f73abba6b347ff46cebf5eb218aa0e.png#pic_center" alt="在这里插入图片描述"><br>晚安，世界！！！</p>
 ]]></content>
@@ -12,6 +12,20 @@
       </categories>
       <tags>
         <tag>电影观后感</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>next博客优化</title>
+    <url>//%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/9750153a99c9481ca3e844afd8a67211.png" alt="在这里插入图片描述"><br>123</p>
+<span id="more"></span>
+<p>222</p>
+]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -51,7 +65,8 @@ $base：转化所使用的进制。
 <h1 id="sql-lab-19"><a href="#sql-lab-19" class="headerlink" title="sql-lab 19"></a>sql-lab 19</h1><p>发现执行正确时会报出ip地址和 Referer，所以我们可以利用Referer来进行报错注入</p>
 <h2 id="查询当前数据库"><a href="#查询当前数据库" class="headerlink" title="查询当前数据库"></a>查询当前数据库</h2><p><code>&#39;  and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/a1569c37c41640c6a17f045e3c472cd1.png" alt="在这里插入图片描述"></p>
 <h2 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h2><p><code>&#39; and updatexml(1,concat(0x7e,(select schema_name from information_schema.schemata limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/285584c6d278483ea99c9a475b1ea0c3.png" alt="在这里插入图片描述"><br>其他亦是如此，与第18关类似，不再重复</p>
-<h1 id="sql-lab-20"><a href="#sql-lab-20" class="headerlink" title="sql-lab 20"></a>sql-lab 20</h1><p>发现存在多种数据，其中cookie存在回显，测试cookie，在cookie后加上单引号发现可以注入，然后构造payload<br><code>uname=admin&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</code><br><img src="https://img-blog.csdnimg.cn/9803859966384fb6a9c4cb3ec2303f78.png" alt="在这里插入图片描述"><br>其他与此类似，不再重复<br>前二十关至此结束！</p>
+<h1 id="sql-lab-20"><a href="#sql-lab-20" class="headerlink" title="sql-lab 20"></a>sql-lab 20</h1><p>发现存在多种数据，其中cookie存在回显，测试cookie，在cookie后加上单引号发现可以注入，然后构造payload<br><code>uname=admin&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</code><br><img src="https://img-blog.csdnimg.cn/9803859966384fb6a9c4cb3ec2303f78.png" alt="在这里插入图片描述"><br>其他与此类似，不再重复</p>
+<p>扩充：<br>判断cookie注入的条件<br>条件1是：程序对get和post方式提交的数据进行了过滤，但未对cookie提交的数据库进行过滤。<br>条件2是：在条件1的基础上还需要程序对提交数据获取方式是直接request(“xxx”)的方式，未指明使用request对象的具体方法进行获取。<br>判断网站是否存在cookie注入漏洞<br>1.寻找形如“.asp?id=xx”类的带参数的URL。<br>2.去掉“id=xx”查看页面显示是否正常，如果不正常，说明参数在数据传递中是直接起作用的。<br>3.清空浏览器地址栏，输入“javascript:alert(document.cookie=“id=”+escape(“xx”));”，按Enter键后弹出一个对话框，内容是“id=xx”，然后用原来的URL刷新页面，如果显示正常，说明应用是用Request(“id”)这种方式获取数据的。<br>4.重复上面的步骤，将常规SQL注入中的判断语句带入上面的URL：“javascript:alert(document.cookie=“id=”+escape(“xx and 1=1”));”<br>“javascript:alert(document.cookie=“id=”+escape(“xx and 1=2”));”。<br>和常规SQL注入一样，如果分别返回正常和不正常页面，则说明该应用存在注入漏洞，并可以进行cookie注入。<br>5.使用常规注入语句进行注入即可。<br><img src="https://www.yuque.com/docs/share/fbbec285-f658-4d90-a3ee-86142dbaa5d3#" alt="大佬讲解链接"><br><img src="https://cn.bing.com/?pc=U528" alt="必应"><br>前二十关至此结束！</p>
 ]]></content>
       <categories>
         <category>post注入</category>

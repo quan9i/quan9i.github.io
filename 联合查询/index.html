@@ -95,8 +95,9 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/0d7a24c2207b405f94e465260bfc3840.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/66470290b76146fcbf59e72eed4b0c63.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/02a1cf03ff44419d9b23d7615c101767.png">
 <meta property="article:published_time" content="2022-01-02T03:45:14.366Z">
-<meta property="article:modified_time" content="2022-01-06T09:00:03.801Z">
+<meta property="article:modified_time" content="2022-01-08T04:24:42.098Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -179,7 +180,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">小白博客</h1>
+        <h1 class="site-subtitle" itemprop="description">网络安全web废物选手</h1>
       
   </div>
 
@@ -255,6 +256,26 @@
               <i class="menu-item-icon fa fa-fw fa-star-half-o"></i> <br />
             
             精选文案
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-liuyan">
+          <a href="/liuyan/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-wechat"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
           </a>
         </li>
       
@@ -418,7 +439,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  389
+                  468
                 </span>
               
 
@@ -459,7 +480,7 @@
 <span id="more"></span>
 <p>近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助<br>首先我们需要知道联合查询的定义<br>1、联合查询的概念<br>联合查询是可合并多个相似的选择查询的结果集。等同于将一个表追加到另一个表，从而实现将两个表的查询组合到一起。<br>简单的说，就是union可合并两个及以上select语句的结果集。<br>前提：<br>（1）这几个select语句必须拥有相同列，而且各列的数据类型也相同。<br>（2）必须有显示位，<br>什么是显示位？<br>官方的说就是执行的sql语句得到的数据会显示到界面上去，在界面上显示数据的这个位置就称位显示位<br>简单的说就是在界面上有回显，如下图这种情况无论输入什么都显示 you are in ，此即说明不存在显示位<br><img src="https://img-blog.csdnimg.cn/0d7a24c2207b405f94e465260bfc3840.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/66470290b76146fcbf59e72eed4b0c63.png" alt="在这里插入图片描述"><br>2、查询语句使用的多为union select 语句<br>union select 在查询数据库，查询列名以及查询字段信息时候都被用到，示例如下：<br>代码：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>n<span class="string">&#x27; union select 1,group_concat(schema_name) from information_schema.schemata  #&amp;passwd=admin&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png" alt="在这里插入图片描述"><br>不断加油，继续努力，union select 简略介绍至此结束！</p>
+<p><img src="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png" alt="在这里插入图片描述"><br>3、union select 1,2,3的含义<br>查询字段时，经常用到union select 1，2，3 这是因为 1，2，3会对应到数据库中，先查询数据库中的数据，再来输出1，2，3<br>示例：<code>?id=1&#39;))  union select 1,2,3 from security.users into outfile &quot;D:\\1.txt&quot; --+</code><br>输出结果<br><img src="https://img-blog.csdnimg.cn/02a1cf03ff44419d9b23d7615c101767.png" alt="在这里插入图片描述"><br>不断加油，继续努力，union select 简略介绍至此结束！</p>
 
       
     </div>
@@ -783,17 +804,6 @@
 
 
 
-<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
-<div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div id="myCanvasContainer" class="widget tagcloud">
-        <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E8%A7%82%E5%90%8E%E6%84%9F/" rel="tag">电影观后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1/" rel="tag">自己</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" rel="tag">语言学习</a><span class="tag-list-count">1</span></li></ul>
-        </canvas>
-    </div>
-</div>
-
 
     </div>
   </aside>
@@ -824,7 +834,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.8k</span>
+    <span title="Site words total count">15.3k</span>
   
 </div>
 

@@ -100,10 +100,14 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/3ffa3c7d139448b1919e96cb9b22a7b6.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/07e44afcb52a4e34b6062c35d3ca48aa.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/0a7fbda29f424b619299cb0859951e22.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3cf01e6068f24b129b5103161cdba30b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/21e3a89e038d4df59afb19bb2363dc6f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c7148d185be14bbfaeb28c8357e3f15b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6c384eff744d406d9bd58f9f1dbca297.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/5116fb8a1efd49ea8ebaabd19a859d70.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2f428eb6c7e640628054bfe0c5ea09f8.png">
 <meta property="article:published_time" content="2022-01-05T07:29:37.413Z">
-<meta property="article:modified_time" content="2022-01-08T07:24:35.271Z">
+<meta property="article:modified_time" content="2022-01-08T16:02:48.289Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -445,7 +449,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  942
+                  1.1k
                 </span>
               
 
@@ -498,7 +502,7 @@ $base：转化所使用的进制。
 <h2 id="sql-lab-1-源码分析"><a href="#sql-lab-1-源码分析" class="headerlink" title="sql-lab 1 源码分析"></a>sql-lab 1 源码分析</h2><p>打开源文件<br><img src="https://img-blog.csdnimg.cn/35ae0b5919784afaa597a2d797b83f09.png" alt="在这里插入图片描述"><br>分析：<br>如果以get方式传入的id不是空的，那就把这个值加赋给变量id。<br>此时再看下方传入的sql语句<br><img src="https://img-blog.csdnimg.cn/2c1e004df94b4c1db37336c5df602ec6.png" alt="在这里插入图片描述"><br>因此可以加单引号来进行sql注入</p>
 <h2 id="sql-lab-2-源码分析"><a href="#sql-lab-2-源码分析" class="headerlink" title="sql-lab 2 源码分析"></a>sql-lab 2 源码分析</h2><p>打开源文件<br>此关卡与上关的注入方式相同，不再重复<br>观察sql语句<br><img src="https://img-blog.csdnimg.cn/3ffa3c7d139448b1919e96cb9b22a7b6.png" alt="在这里插入图片描述"><br>发现id没有被包裹，因此直接进行sql注入即可</p>
 <h2 id="sql-lab-3-源码分析"><a href="#sql-lab-3-源码分析" class="headerlink" title="sql-lab 3 源码分析"></a>sql-lab 3 源码分析</h2><p>打开源文件<br>此关卡与上关的注入方式相同，不再重复<br><img src="https://img-blog.csdnimg.cn/07e44afcb52a4e34b6062c35d3ca48aa.png" alt="在这里插入图片描述"></p>
-<h2 id="sql-lab-4-源码分析"><a href="#sql-lab-4-源码分析" class="headerlink" title="sql-lab 4 源码分析"></a>sql-lab 4 源码分析</h2><p>打开源文件<br>此关卡与上关相同，不再重复<br>往下看<br><img src="https://img-blog.csdnimg.cn/0a7fbda29f424b619299cb0859951e22.png" alt="在这里插入图片描述"><br>发现id先是被双引号包裹<br>观察sql语句<br>发现id又被括号包裹<br>因此想要进行sql注入，需要在id后加上”)</p>
+<h2 id="sql-lab-4-源码分析"><a href="#sql-lab-4-源码分析" class="headerlink" title="sql-lab 4 源码分析"></a>sql-lab 4 源码分析</h2><p>打开源文件<br>此关卡与上关相同，不再重复<br>往下看<br><img src="https://img-blog.csdnimg.cn/0a7fbda29f424b619299cb0859951e22.png" alt="在这里插入图片描述"><br>发现id先是被双引号包裹<br>观察sql语句<br>发现id又被括号包裹<br>因此想要进行sql注入，需要在id后加上”)<br>对这个sql语句中id的传参进行分析，首先是对$id加上单引号，此时呢，就相当于php中输出字符，是需要加单引号才能被识别，然后加双引号是对其字符进行包裹，再加单引号，是为了防止计算机对内部内容理解错误（可能解释不是很清楚，下面放出实例）<br><img src="https://img-blog.csdnimg.cn/3cf01e6068f24b129b5103161cdba30b.png" alt="在这里插入图片描述"><br>执行结果为<br><img src="https://img-blog.csdnimg.cn/21e3a89e038d4df59afb19bb2363dc6f.png" alt="在这里插入图片描述"><br>而当没有最外层的单引号时<br><img src="https://img-blog.csdnimg.cn/c7148d185be14bbfaeb28c8357e3f15b.png" alt="在这里插入图片描述"><br>执行结果<br><img src="https://img-blog.csdnimg.cn/6c384eff744d406d9bd58f9f1dbca297.png" alt="在这里插入图片描述"></p>
 <h2 id="sql-lab-5-源码分析"><a href="#sql-lab-5-源码分析" class="headerlink" title="sql-lab 5 源码分析"></a>sql-lab 5 源码分析</h2><p>第五关与第一关的传入和sql相一致，但不同点在于，语句正确时只会输出you are in,源码见下图<br><img src="https://img-blog.csdnimg.cn/5116fb8a1efd49ea8ebaabd19a859d70.png" alt="在这里插入图片描述"><br>因此联合查询在这里不适用，可使用报错注入或者二分法来进行sql注入</p>
 <h2 id="sql-lab-6-源码分析"><a href="#sql-lab-6-源码分析" class="headerlink" title="sql-lab 6 源码分析"></a>sql-lab 6 源码分析</h2><p>id包裹方式从单引号变成了双引号，其他与第五关一致<br>sql-lab 20 源码分析<br>首先看自定义函数<br><img src="https://img-blog.csdnimg.cn/2f428eb6c7e640628054bfe0c5ea09f8.png" alt="在这里插入图片描述"><br>分析：<br>这个自定义函数是不是定义变量如果不是空的就截取0,20位，然后再继续，如果变量中含有特殊符号都进行转义，然后再删去反斜线，相当于只保留了字符串，如果不是纯数字组，就给它用单引号包裹，并将字符串里的特殊符号进行转义，否则就将字符按照进制转换输出，返回这个变量值。</p>
 
@@ -879,7 +883,7 @@ $base：转化所使用的进制。
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.3k</span>
+    <span title="Site words total count">15.4k</span>
   
 </div>
 

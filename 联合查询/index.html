@@ -96,8 +96,9 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/66470290b76146fcbf59e72eed4b0c63.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/02a1cf03ff44419d9b23d7615c101767.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f132ac0f080949c8a6ee50204d390414.png">
 <meta property="article:published_time" content="2022-01-02T03:45:14.366Z">
-<meta property="article:modified_time" content="2022-01-08T04:24:42.098Z">
+<meta property="article:modified_time" content="2022-01-09T09:38:14.661Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -439,7 +440,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  468
+                  491
                 </span>
               
 
@@ -480,7 +481,9 @@
 <span id="more"></span>
 <p>近期在复习sql注入知识时候发现联合查询不太了解，导致一些基本语句不能理解，在这里讲解一下联合查询，希望能够对大家有些帮助<br>首先我们需要知道联合查询的定义<br>1、联合查询的概念<br>联合查询是可合并多个相似的选择查询的结果集。等同于将一个表追加到另一个表，从而实现将两个表的查询组合到一起。<br>简单的说，就是union可合并两个及以上select语句的结果集。<br>前提：<br>（1）这几个select语句必须拥有相同列，而且各列的数据类型也相同。<br>（2）必须有显示位，<br>什么是显示位？<br>官方的说就是执行的sql语句得到的数据会显示到界面上去，在界面上显示数据的这个位置就称位显示位<br>简单的说就是在界面上有回显，如下图这种情况无论输入什么都显示 you are in ，此即说明不存在显示位<br><img src="https://img-blog.csdnimg.cn/0d7a24c2207b405f94e465260bfc3840.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/66470290b76146fcbf59e72eed4b0c63.png" alt="在这里插入图片描述"><br>2、查询语句使用的多为union select 语句<br>union select 在查询数据库，查询列名以及查询字段信息时候都被用到，示例如下：<br>代码：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>n<span class="string">&#x27; union select 1,group_concat(schema_name) from information_schema.schemata  #&amp;passwd=admin&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png" alt="在这里插入图片描述"><br>3、union select 1,2,3的含义<br>查询字段时，经常用到union select 1，2，3 这是因为 1，2，3会对应到数据库中，先查询数据库中的数据，再来输出1，2，3<br>示例：<code>?id=1&#39;))  union select 1,2,3 from security.users into outfile &quot;D:\\1.txt&quot; --+</code><br>输出结果<br><img src="https://img-blog.csdnimg.cn/02a1cf03ff44419d9b23d7615c101767.png" alt="在这里插入图片描述"><br>不断加油，继续努力，union select 简略介绍至此结束！</p>
+<p><img src="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png" alt="在这里插入图片描述"><br>3、union select 1,2,3的含义<br>查询字段时，经常用到union select 1，2，3 这是因为 1，2，3会对应到数据库中，先查询数据库中的数据，再来输出1，2，3<br>示例：<code>?id=1&#39;))  union select 1,2,3 from security.users into outfile &quot;D:\\1.txt&quot; --+</code><br>输出结果<br><img src="https://img-blog.csdnimg.cn/02a1cf03ff44419d9b23d7615c101767.png" alt="在这里插入图片描述"><br>示例2：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">: uname<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,group_concat(schema_name) from information_schema.schemata#</span></span><br></pre></td></tr></table></figure>
+<p>爆出了数据库名<br><img src="https://img-blog.csdnimg.cn/f132ac0f080949c8a6ee50204d390414.png" alt="在这里插入图片描述"><br>不断加油，继续努力，union select 简略介绍至此结束！</p>
 
       
     </div>
@@ -677,7 +680,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -688,7 +691,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -779,6 +782,10 @@
       
       
         <li class="recent_posts_li">
+          <a href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" title="sql注入相关知识" target="_blank">sql注入相关知识</a>
+        </li>
+      
+        <li class="recent_posts_li">
           <a href="/python%E5%AE%89%E8%A3%85/" title="python及其编译器安装" target="_blank">python及其编译器安装</a>
         </li>
       
@@ -792,10 +799,6 @@
       
         <li class="recent_posts_li">
           <a href="/sql-lab/" title="sql-lab 18及其后题解" target="_blank">sql-lab 18及其后题解</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/" title="联合查询" target="_blank">联合查询</a>
         </li>
       
     </ul>
@@ -834,7 +837,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.4k</span>
+    <span title="Site words total count">16.9k</span>
   
 </div>
 

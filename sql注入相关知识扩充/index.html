@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sql注入," />
 
 
 
@@ -84,15 +84,20 @@
 
 
 
-<meta name="description" content="从来没有真正的绝境, 只有心灵的迷途">
-<meta property="og:type" content="website">
-<meta property="og:title" content="quan9i&#39;s blog">
-<meta property="og:url" content="https://quan9i.github.io/index.html">
+<meta name="description" content="看过浮生万物也遍览山河无数依然要独立坚强温暖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入相关知识">
+<meta property="og:url" content="https://quan9i.github.io/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="从来没有真正的绝境, 只有心灵的迷途">
+<meta property="og:description" content="看过浮生万物也遍览山河无数依然要独立坚强温暖">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7ccae1c16a134b4fb5e86a4d7117f496.png">
+<meta property="article:published_time" content="2022-01-09T12:01:24.716Z">
+<meta property="article:modified_time" content="2022-01-09T12:29:04.586Z">
 <meta property="article:author" content="quan9i">
+<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/7ccae1c16a134b4fb5e86a4d7117f496.png">
 
 
 
@@ -122,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://quan9i.github.io/"/>
+  <link rel="canonical" href="https://quan9i.github.io/sql注入相关知识扩充/"/>
 
 
 
 
 
-  <title>quan9i's blog - 小白博客</title>
+  <title>sql注入相关知识 | quan9i's blog</title>
   
 
 
@@ -155,8 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -324,567 +328,8 @@
           <div id="content" class="content">
             
 
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<style type="text/css">
-
-.glyphicon-chevron-left:before{
-	content: "《"
-}
-.glyphicon-chevron-right:before{
-	content: "》"
-}
-
-@media (max-width: 767px){
-	.rights{
-		display: none;
-	}
-	.carousel{
-		width: 100% !important;
-		height: 100% !important;
-	}
-	.slide{
-		width: 100% !important;
-		height: 100% !important;
-	}
-
-}
-
-.carousel{
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-.carousel-inner {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-.carousel-inner > .item {
-  display: none;
-  position: relative;
-  -webkit-transition: 0.6s ease-in-out left;
-  -o-transition: 0.6s ease-in-out left;
-  transition: 0.6s ease-in-out left;
-}
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  line-height: 1;
-}
-@media all and (transform-3d), (-webkit-transform-3d) {
-  .carousel-inner > .item {
-    -webkit-transition: -webkit-transform 0.6s ease-in-out;
-    -moz-transition: -moz-transform 0.6s ease-in-out;
-    -o-transition: -o-transform 0.6s ease-in-out;
-    transition: transform 0.6s ease-in-out;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    -moz-perspective: 1000px;
-    perspective: 1000px;
-  }
-  .carousel-inner > .item.next,
-  .carousel-inner > .item.active.right {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-    left: 0;
-  }
-  .carousel-inner > .item.prev,
-  .carousel-inner > .item.active.left {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-    left: 0;
-  }
-  .carousel-inner > .item.next.left,
-  .carousel-inner > .item.prev.right,
-  .carousel-inner > .item.active {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    left: 0;
-  }
-}
-.carousel-inner > .active,
-.carousel-inner > .next,
-.carousel-inner > .prev {
-  display: block;
-}
-.carousel-inner > .active {
-  left: 0;
-}
-.carousel-inner > .next,
-.carousel-inner > .prev {
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-.carousel-inner > .next {
-  left: 100%;
-}
-.carousel-inner > .prev {
-  left: -100%;
-}
-.carousel-inner > .next.left,
-.carousel-inner > .prev.right {
-  left: 0;
-}
-.carousel-inner > .active.left {
-  left: -100%;
-}
-.carousel-inner > .active.right {
-  left: 100%;
-}
-.carousel-control {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 15%;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  font-size: 20px;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: rgba(0, 0, 0, 0);
-}
-.carousel-control.left {
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
-}
-.carousel-control.right {
-  left: auto;
-  right: 0;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
-}
-.carousel-control:hover,
-.carousel-control:focus {
-  outline: 0;
-  color: #fff;
-  text-decoration: none;
-  opacity: 0.9;
-  filter: alpha(opacity=90);
-}
-.carousel-control .icon-prev,
-.carousel-control .icon-next,
-.carousel-control .glyphicon-chevron-left,
-.carousel-control .glyphicon-chevron-right {
-  position: absolute;
-  top: 50%;
-  margin-top: -10px;
-  z-index: 5;
-  display: inline-block;
-}
-.carousel-control .icon-prev,
-.carousel-control .glyphicon-chevron-left {
-  left: 50%;
-  margin-left: -10px;
-}
-.carousel-control .icon-next,
-.carousel-control .glyphicon-chevron-right {
-  right: 50%;
-  margin-right: -10px;
-}
-.carousel-control .icon-prev,
-.carousel-control .icon-next {
-  width: 20px;
-  height: 20px;
-  line-height: 1;
-  font-family: serif;
-}
-.carousel-control .icon-prev:before {
-  content: '\2039';
-}
-.carousel-control .icon-next:before {
-  content: '\203a';
-}
-.carousel-indicators {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  z-index: 15;
-  width: 60%;
-  margin-left: -30%;
-  padding-left: 0;
-  list-style: none;
-  text-align: center;
-}
-.carousel-indicators li {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 1px;
-  text-indent: -999px;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: #000 \9;
-  background-color: rgba(0, 0, 0, 0);
-}
-.carousel-indicators .active {
-  margin: 0;
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-}
-.carousel-caption {
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: 20px;
-  z-index: 10;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-}
-.carousel-caption .btn {
-  text-shadow: none;
-}
-@media screen and (min-width: 768px) {
-  .carousel-control .glyphicon-chevron-left,
-  .carousel-control .glyphicon-chevron-right,
-  .carousel-control .icon-prev,
-  .carousel-control .icon-next {
-    width: 30px;
-    height: 30px;
-    margin-top: -10px;
-    font-size: 30px;
-  }
-  .carousel-control .glyphicon-chevron-left,
-  .carousel-control .icon-prev {
-    margin-left: -10px;
-  }
-  .carousel-control .glyphicon-chevron-right,
-  .carousel-control .icon-next {
-    margin-right: -10px;
-  }
-  .carousel-caption {
-    left: 20%;
-    right: 20%;
-    padding-bottom: 30px;
-  }
-  .carousel-indicators {
-    bottom: 20px;
-  }
-}
-</style>
-<div width="100%" height="320px" style="border: 0px; overflow: hidden; border-radius: 10px;" scrolling="no">
-			
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3500" >
-		<!-- 轮播（Carousel）指标 -->
-		<ol class="carousel-indicators">
-		
-		
-
-			<li data-target="#myCarousel" data-slide-to="0"></li>
-			
-
-		
-
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			
-
-		
-
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-			
-
-		
-
-			<li data-target="#myCarousel" data-slide-to="3"></li>
-			
-
-		
-
-			<li data-target="#myCarousel" data-slide-to="4"></li>
-			
-
-		
-
-			<li data-target="#myCarousel" data-slide-to="5"></li>
-			
-
-		
-		</ol>
-		<!-- 轮播（Carousel）项目 -->
-		<div class="carousel-inner" style="height: 280px; border-radius: 10px; width: 100%;">
-
-		
-		 
-		
-	    	
-				<a class="item active" href="https://www.zhihu.com/question/398893481" target="_blank" style="height: 100%;">
-					<img src="https://img-blog.csdnimg.cn/549218e84022480c847720ca08d157b5.png"   style="width: 100%; height: 100%" >
-				</a>
-				
-				
-
-		
-		
-	    	
-					<a class="item" href="https://zhuanlan.zhihu.com/p/88828726" target="_blank" style="height: 100%;">
-						<img src="https://img-blog.csdnimg.cn/6f7d756566744b2d974eb7556f29afff.png"  style="width: 100%; height: 100%;" >
-					</a>
-			
-
-		
-		
-	    	
-					<a class="item" href="https://www.zhihu.com/question/441475695" target="_blank" style="height: 100%;">
-						<img src="https://img-blog.csdnimg.cn/c9979e69f16a429496d43133220d96a8.png"  style="width: 100%; height: 100%;" >
-					</a>
-			
-
-		
-		
-	    	
-					<a class="item" href="https://zhuanlan.zhihu.com/p/372176262" target="_blank" style="height: 100%;">
-						<img src="https://img-blog.csdnimg.cn/753c4ef231884a93b88f5578f1072a88.png"  style="width: 100%; height: 100%;" >
-					</a>
-			
-
-		
-		
-	    	
-					<a class="item" href="https://zhuanlan.zhihu.com/p/413420696" target="_blank" style="height: 100%;">
-						<img src="https://img-blog.csdnimg.cn/0a81753c41304f41a7e6430c72a40bfd.png"  style="width: 100%; height: 100%;" >
-					</a>
-			
-
-		
-		
-	    	
-					<a class="item" href="https://zhuanlan.zhihu.com/p/165413711" target="_blank" style="height: 100%;">
-						<img src="https://img-blog.csdnimg.cn/b6088bb5b69d4d50b992cd0349b324ad.png"  style="width: 100%; height: 100%;" >
-					</a>
-			
-
-		
-
-	 
-		</div>
-		<!-- 轮播（Carousel）导航 -->
-		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-		    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		    
-		</a>
-		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		   
-		</a>
-	</div> 
-</div>
-
-
-
-  <section id="posts" class="posts-expand">
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/%E8%A7%82%E5%90%8E%E6%84%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/2.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="quan9i's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E8%A7%82%E5%90%8E%E6%84%9F/" itemprop="url">《当幸福来敲门》观后感</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-24T23:56:10+08:00">
-                2021-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index">
-                    <span itemprop="name">日常</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/%E8%A7%82%E5%90%8E%E6%84%9F/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/%E8%A7%82%E5%90%8E%E6%84%9F/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  412
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://img-blog.csdnimg.cn/fc564545f668466ab79b611b4df0767d.png"><br>前途浩浩荡荡 万事尽可期待。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/%E8%A7%82%E5%90%8E%E6%84%9F/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-     
-
-<div>
-      
-</div>
-
-
-    
-
-    
-
-      
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -914,9 +359,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" itemprop="url">sql注入相关知识</a></h2>
+          <h2 class="post-title" itemprop="name headline">sql注入相关知识</h2>
         
 
         <div class="post-meta">
@@ -1029,24 +472,34 @@
       
 
       
-        
-          <p><img src="https://img-blog.csdnimg.cn/7ccae1c16a134b4fb5e86a4d7117f496.png" alt="在这里插入图片描述"><br>看过浮生万物也遍览山河无数<br>依然要独立坚强温暖</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p><img src="https://img-blog.csdnimg.cn/7ccae1c16a134b4fb5e86a4d7117f496.png" alt="在这里插入图片描述"><br>看过浮生万物也遍览山河无数<br>依然要独立坚强温暖</p>
+<span id="more"></span>
+<p>1、http请求头的内容</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、 Accept：告诉 WEB 服务器自己接受什么介质类型，<span class="operator">*</span><span class="comment">/* 表示任何类型，type/* 表示该</span></span><br><span class="line"><span class="comment">类型下的所有子类型，type/sub-type。</span></span><br><span class="line"><span class="comment">2、 Accept-Charset： 浏览器申明自己接收的字符集Mysql 注入---sqlilabs---lcamry</span></span><br><span class="line"><span class="comment">47</span></span><br><span class="line"><span class="comment">Accept-Encoding： 浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，</span></span><br><span class="line"><span class="comment">支持什么压缩方法（gzip，deflate）</span></span><br><span class="line"><span class="comment">Accept-Language：：浏览器申明自己接收的语言</span></span><br><span class="line"><span class="comment">语言跟字符集的区别：中文是语言，中文有多种字符集，比如 big5，gb2312，gbk 等等。</span></span><br><span class="line"><span class="comment">3、 Accept-Ranges：WEB 服务器表明自己是否接受获取其某个实体的一部分（比如文件的</span></span><br><span class="line"><span class="comment">一部分）的请求。bytes：表示接受，none：表示不接受。</span></span><br><span class="line"><span class="comment">4、 Age：当代理服务器用自己缓存的实体去响应请求时，用该头部表明该实体从产生到现</span></span><br><span class="line"><span class="comment">在经过多长时间了。</span></span><br><span class="line"><span class="comment">5、 Authorization：当客户端接收到来自 WEB 服务器的 WWW-Authenticate 响应时，用该</span></span><br><span class="line"><span class="comment">头部来回应自己的身份验证信息给 WEB 服务器。</span></span><br><span class="line"><span class="comment">7、 Connection：请求：close（告诉 WEB 服务器或者代理服务器，在完成本次请求的响应</span></span><br><span class="line"><span class="comment">后，断开连接，不要等待本次连接的后续请求了）。</span></span><br><span class="line"><span class="comment">keepalive（告诉 WEB 服务器或者代理服务器，在完成本次请求的响应后，保持连接，等待</span></span><br><span class="line"><span class="comment">本次连接的后续请求）。</span></span><br><span class="line"><span class="comment">响应：close（连接已经关闭）。</span></span><br><span class="line"><span class="comment">keepalive（连接保持着，在等待本次连接的后续请求）。</span></span><br><span class="line"><span class="comment">Keep-Alive：如果浏览器请求保持连接，则该头部表明希望 WEB 服务器保持连接多长时间</span></span><br><span class="line"><span class="comment">（秒）。例如：Keep-Alive：300</span></span><br><span class="line"><span class="comment">8、 Content-Encoding：WEB 服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应</span></span><br><span class="line"><span class="comment">中的对象。例如：Content-Encoding：gzip</span></span><br><span class="line"><span class="comment">9、Content-Language：WEB 服务器告诉浏览器自己响应的对象的语言。</span></span><br><span class="line"><span class="comment">10、Content-Length：WEB 服务器告诉浏览器自己响应的对象的长度。例如：Content-Length:</span></span><br><span class="line"><span class="comment">26012</span></span><br><span class="line"><span class="comment">11、Content-Range： WEB 服务器表明该响应包含的部分对象为整个对象的哪个部分。例如：</span></span><br><span class="line"><span class="comment">Content-Range: bytes 21010-47021/47022</span></span><br><span class="line"><span class="comment">12、Content-Type： WEB 服务器告诉浏览器自己响应的对象的类型。例如：Content-Type：</span></span><br><span class="line"><span class="comment">application/xml</span></span><br><span class="line"><span class="comment">24、 Proxy-Authenticate： 代理服务器响应浏览器，要求其提供代理身份验证信息。</span></span><br><span class="line"><span class="comment">Proxy-Authorization：浏览器响应代理服务器的身份验证请求，提供自己的身份信息。</span></span><br><span class="line"><span class="comment">25、 Range：浏览器（比如 Flashget 多线程下载时）告诉 WEB 服务器自己想取对象的哪</span></span><br><span class="line"><span class="comment">部分。例如：Range: bytes=1173546- 26、 Referer：浏览器向 WEB 服务器表明自己是从哪个 网页/URL 获得/点击 当前请求中</span></span><br><span class="line"><span class="comment">的网址/URL。例如：Referer：http://www.sina.com/</span></span><br><span class="line"><span class="comment">27、 Server: WEB 服务器表明自己是什么软件及版本等信息。例如：Server：Apache/2.0.61</span></span><br><span class="line"><span class="comment">(Unix)</span></span><br><span class="line"><span class="comment">28、 User-Agent: 浏览器表明自己的身份（是哪种浏览器）。例如：User-Agent：Mozilla/5.0</span></span><br><span class="line"><span class="comment">(Windows; U; Windows NT 5.1; zh-CN; rv:1.8.1.14) Gecko/20080404 Firefox/2、0、0、14</span></span><br><span class="line"><span class="comment">29、 Transfer-Encoding: WEB 服务器表明自己对本响应消息体（不是消息体里面的对象）作</span></span><br><span class="line"><span class="comment">了怎样的编码，比如是否分块（chunked）。例如：Transfer-Encoding: chunked</span></span><br></pre></td></tr></table></figure>
+<p>2、cookie注入<br>（1）利用条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">条件<span class="number">1</span>是：程序对<span class="keyword">get</span>和post方式提交的数据进行了过滤，但未对cookie提交的数据库进行过滤。</span><br><span class="line">条件<span class="number">2</span>是：在条件<span class="number">1</span>的基础上还需要程序对提交数据获取方式是直接request(&quot;xxx&quot;)的方式，未指明使用request对象的具体方法进行获取。</span><br></pre></td></tr></table></figure>
+<p>(2) 确定一个网站存在cookie注入漏洞的方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>寻找形如“.asp?id<span class="operator">=</span>xx”类的带参数的URL。</span><br><span class="line"><span class="number">2.</span>去掉“id<span class="operator">=</span>xx”查看页面显示是否正常，如果不正常，说明参数在数据传递中是直接起作用的。</span><br><span class="line"><span class="number">3.</span>清空浏览器地址栏，输入“javascript:alert(document.cookie<span class="operator">=</span>“id<span class="operator">=</span>”<span class="operator">+</span><span class="keyword">escape</span>(“xx”));”，按Enter键后弹出一个对话框，内容是“id<span class="operator">=</span>xx”，然后用原来的URL刷新页面，如果显示正常，说明应用是用Request(“id”)这种方式获取数据的。</span><br><span class="line"><span class="number">4.</span>重复上面的步骤，将常规<span class="keyword">SQL</span>注入中的判断语句带入上面的URL：“javascript:alert(document.cookie<span class="operator">=</span>“id<span class="operator">=</span>”<span class="operator">+</span><span class="keyword">escape</span>(“xx <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>”));”</span><br><span class="line">“javascript:alert(document.cookie<span class="operator">=</span>“id<span class="operator">=</span>”<span class="operator">+</span><span class="keyword">escape</span>(“xx <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span>”));”。</span><br><span class="line">和常规<span class="keyword">SQL</span>注入一样，如果分别返回正常和不正常页面，则说明该应用存在注入漏洞，并可以进行cookie注入。</span><br><span class="line"><span class="number">5.</span>使用常规注入语句进行注入即可。</span><br></pre></td></tr></table></figure>
+<p>以上知识点来自于<a target="_blank" rel="noopener" href="https://www.yuque.com/yuandian-efswk/tm4ugr/skgr19#OOL8n">大佬博客</a>，大家可自行查看。</p>
+
       
     </div>
     
     
     
      
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
 
 <div>
+      
+        
       
 </div>
 
@@ -1054,408 +507,104 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
       
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://quan9i.github.io/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" title="sql注入相关知识">https://quan9i.github.io/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/python%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/2.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="quan9i's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/python%E5%AE%89%E8%A3%85/" itemprop="url">python及其编译器安装</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-07T11:38:09+08:00">
-                2022-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> sql注入</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/python%E5%AE%89%E8%A3%85/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/python%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  678
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://img-blog.csdnimg.cn/5d8fbae214bf454594ecdac9d83e93dc.png" alt="在这里插入图片描述"><br>其实来日并不方长</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/python%E5%AE%89%E8%A3%85/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-     
-
-<div>
-      
-</div>
-
-
-    
-
-    
-
-      
-
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/2.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="quan9i's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/" itemprop="url">next博客优化</a></h2>
+        <div class="post-widgets">
         
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-06T11:12:48+08:00">
-                2022-01-06
-              </time>
-            
+        
 
-            
-
-            
-          </span>
-
+        
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
-                    <span itemprop="name">搭建博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
             </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  17
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://img-blog.csdnimg.cn/9750153a99c9481ca3e844afd8a67211.png" alt="在这里插入图片描述"><br>活着就意味着要必须要做点什么，请好好努力。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
         
+        </div>
       
-    </div>
-    
-    
-    
-     
-
-<div>
-      
-</div>
-
-
-    
-
-    
-
-      
-
-
-    <footer class="post-footer">
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python%E5%AE%89%E8%A3%85/" rel="next" title="python及其编译器安装">
+                <i class="fa fa-chevron-left"></i> python及其编译器安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1465,208 +614,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/2.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="quan9i's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" itemprop="url">sql-lab 源码分析</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-05T15:29:37+08:00">
-                2022-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/post%E6%B3%A8%E5%85%A5/" itemprop="url" rel="index">
-                    <span itemprop="name">post注入</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://img-blog.csdnimg.cn/d982834864214cefa6035b88372643f8.png" alt="在这里插入图片描述"><br>要活成两种样子，发光和不发光。不发光的时候，都是在为发光做准备。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-     
-
-<div>
-      
-</div>
-
-
-    
-
-    
-
-      
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&gt;</a>
-  </nav>
-
 
 
           </div>
@@ -1674,6 +626,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -2014,6 +973,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

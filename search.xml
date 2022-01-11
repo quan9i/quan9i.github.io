@@ -15,6 +15,27 @@
       </tags>
   </entry>
   <entry>
+    <title>堆叠注入</title>
+    <url>//%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/2766c61379ac4234808dfa4af9fedbe8.png" alt="在这里插入图片描述"><br>如果没有特别幸运，就请特别努力</p>
+<span id="more"></span>
+<p>堆叠注入概念：<br>一堆 SQL 语句(多条)一起执行。<br>在 MySQL 中, 主要是命令行中, 每一条语句结尾加; 表示语句结束。这样我们<br>就想到了是不是可以多句一起使用。<br>这个叫做 stacked injection</p>
+<p>此时我们会想到union select 联合查询，因为这个也可以执行多条语句的查询，那么这两个的区别在于那里呢<br>union select执行的语句类型有限的，只能用来查询语句，但堆叠注入可以对语句进行增删改查<br><font color='red'>注：适用的场景少，但威力强大</font><br>并不是每一个环境下都可以执行，很可能受到API或者数据库引擎不支持的限<br>制，同时权限不足也是面临的主要问题。<br>使用条件：<br>堆叠注入的使用条件十分有限，其可能受到API或者数据库引擎，又或者权限的限制只有当调用数据库函数支持执行多条sql语句时才能够使。<br>利用mysqli_multi_query()函数就支持多条sql语句同时执行<br>真实环境中：</p>
+<ol>
+<li>通常只返回一个查询结果，因此，堆叠注入第二个语句产生错误或者结<br>果只能被忽略，我们在前端界面是无法看到返回结果的；</li>
+<li>在使用堆叠注入之前，我们也是需要知道一些数据库相关信息的，例如<br>表名，列名等信息。</li>
+<li>，实际情况中，如PHP为了防止sql注入机制，往往使用调用数据库的函数是mysqli_ query()函数，其只能执行一条语句，分号后面的内容将不会被执行，所以可以说堆叠注入的使用条件十分有限，一旦能够被使用，将可能对网站造成十分大的威胁。</li>
+</ol>
+<p>对于此种注入我这种小白暂时不理解，姑且认为可以是一种可以对数据库进行破坏的注入，以后真正掌握时会继续补充！</p>
+]]></content>
+      <categories>
+        <category>get注入</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sql-lab 21-30</title>
     <url>//post%E6%B3%A8%E5%85%A52/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png" alt="在这里插入图片描述"><br>要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。</p>

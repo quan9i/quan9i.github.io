@@ -915,6 +915,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/python%E6%8F%92%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/python%E6%8F%92%E4%BB%B6/" itemprop="url">python request模块安装及所遇问题小记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-13T22:40:21+08:00">
+                2022-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/python%E6%8F%92%E4%BB%B6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/python%E6%8F%92%E4%BB%B6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  338
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python可使用第三方库requests发送请求，需要先安装requests</p>
+<h1 id="1、查看是否有pip"><a href="#1、查看是否有pip" class="headerlink" title="1、查看是否有pip"></a>1、查看是否有pip</h1><p>Python安装模块使用pip命令，现在高版本Python在安装时已经自动安装了pip，不需要再安装，在python安装目录的Scripts下<br>对于Windows用户，打开cmd，切换到scripts目录下，操作为<code>cd D:\python\Scripts</code>，具体见下图<br><img src="https://img-blog.csdnimg.cn/5157555c257042468c1a5fdc452ed86b.png" alt="在这里插入图片描述"><br>输入pip install requests，如下图<br><img src="https://img-blog.csdnimg.cn/e279527abd864b3d84593c1feb12ec12.png" alt="在这里插入图片描述"><br>此时可见下方出现警告，翻译一下可以知道是由于pip版本过低引起的问题，解决方案为<br>在cmd中输入<code>python -m pip install --upgrade pip -i https://pypi.douban.com/simple</code>，具体如下图<br><img src="https://img-blog.csdnimg.cn/73c10509caf94723a97c9b3377c23390.png" alt="在这里插入图片描述"><br>此时输入<code>pip list</code>查看当前版本，正常的可能这时候就已经更新好了，但我这个却又报了个该死的警告，如下图<br><img src="https://img-blog.csdnimg.cn/097e74f7e27b411a8671fc082fde71df.png" alt="在这里插入图片描述"><br>此时我也很麻木呀，无奈之下，继续百度，终于，找到第二个解决方案，输入代码<code>python -m pip install --upgrade pip -i https://pypi.douban.com/simple</code>(python是国外的玩意，下载比较慢，搞一个镜像可以下载快很多)，如下图<br><img src="https://img-blog.csdnimg.cn/d524c41f92524890aabd78a0a8cbd4a7.png" alt="在这里插入图片描述"><br>此时再输入<code>pip list</code>查看pip版本，如下图<br><img src="https://img-blog.csdnimg.cn/d0e6bcaecd034cf28ccc12c60b819d17.png" alt="在这里插入图片描述"><br>果然，功夫不负有心人，成功了！<br>此时继续安装我们的requests模块，输入<code>pip install requesets</code>，但好运又一次降临，这次从黄色警告升级为了红色错误，如下图<br><img src="https://img-blog.csdnimg.cn/737bda652f3f42ef85dda85a7918681f.png" alt="在这里插入图片描述"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+     
+
+<div>
+      
+</div>
+
+
+    
+
+    
+
+      
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1484,200 +1675,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/2.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="quan9i's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" itemprop="url">sql注入相关知识</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-09T20:01:24+08:00">
-                2022-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql%E6%B3%A8%E5%85%A5%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">sql注入有关知识点</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://img-blog.csdnimg.cn/7ccae1c16a134b4fb5e86a4d7117f496.png" alt="在这里插入图片描述"><br>看过浮生万物也遍览山河无数<br>依然要独立坚强温暖</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-     
-
-<div>
-      
-</div>
-
-
-    
-
-    
-
-      
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1732,7 +1729,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1834,6 +1831,10 @@
       
       
         <li class="recent_posts_li">
+          <a href="/python%E6%8F%92%E4%BB%B6/" title="python request模块安装及所遇问题小记" target="_blank">python request模块安装及所遇问题小记</a>
+        </li>
+      
+        <li class="recent_posts_li">
           <a href="/python/" title="python学习笔记 part 1" target="_blank">python学习笔记 part 1</a>
         </li>
       
@@ -1847,10 +1848,6 @@
       
         <li class="recent_posts_li">
           <a href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" title="sql注入相关知识" target="_blank">sql注入相关知识</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/python%E5%AE%89%E8%A3%85/" title="python及其编译器安装" target="_blank">python及其编译器安装</a>
         </li>
       
     </ul>
@@ -1889,7 +1886,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">20.9k</span>
+    <span title="Site words total count">21.2k</span>
   
 </div>
 

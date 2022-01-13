@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+  
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-corner-indicator.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="语言学习," />
+
+
+
+
+
+  <link rel="alternate" href="/%5Bobject%20Object%5D" title="quan9i's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="print函数（输出函数）print可以输出数字代码如下： 1print(98) 执行结果 print可以输出字符串代码; 1print(&amp;#x27;Hello world&amp;#x27;)   print可以写入文件代码： 123fp&#x3D;open(&amp;#x27;D:&#x2F;python测试&#x2F;test.txt&amp;#x27;,&amp;#x27;a+&amp;#x27;)&#x2F;&#x2F;a+的含义是如果该文件不存在，就创建一个并执行下方内容，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记 part 1">
+<meta property="og:url" content="https://quan9i.github.io/python/index.html">
+<meta property="og:site_name" content="quan9i&#39;s blog">
+<meta property="og:description" content="print函数（输出函数）print可以输出数字代码如下： 1print(98) 执行结果 print可以输出字符串代码; 1print(&amp;#x27;Hello world&amp;#x27;)   print可以写入文件代码： 123fp&#x3D;open(&amp;#x27;D:&#x2F;python测试&#x2F;test.txt&amp;#x27;,&amp;#x27;a+&amp;#x27;)&#x2F;&#x2F;a+的含义是如果该文件不存在，就创建一个并执行下方内容，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/567acdc6d00b437fb4949294d211ed25.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c332e89975e94bd7b86f2ebe000d4402.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2b807b5b67a54d3cba27fb92ebdf2d78.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f271b28a679842e69dfc3bdb677f23df.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cb9f0d8771254114bc788f7e72472584.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7d93b6b9cd114ebc92c82c7e2256a6d8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8047aeae6cf2413785850522ff0539ce.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1d53f5754ee94175b63a44c6cd0a9bf6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/00a6a5b648b840129b2314645141ddc1.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ca00de6328734eaa9513a9492de2527c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9eb5003d52624cd2ab7d35a02b80e1be.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/602840134dcf4f4abf5c2db89483d329.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8f603ee06c3a4e32818506b84e1db564.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d7b3649d62b2440c97ea2e8440807e38.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/aa846758e0a14b6a9a3d0b28f979e61d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/efb9596b7d324ec990c51087a1df6211.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/57caf0cc416545afa464adf71093f8a6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/de51ec6fe19043ef9ca167c30cb3e0ac.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/43d67853ec514c76ba71799ea92d1ceb.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/718ced84e1b342b8854aaeeb67bd82b9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/19ed9022dcc64518ba765b0a47855212.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f474bba9454d4feeb45bdd93d179a643.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7c2374765bc8438cafab0782ae867c2b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ff01082d9b4346a5b4ac4a859a78337e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bfd49f5ddc5b4191bf3b34e96fcf08d6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6d5b3bc5cc404dbea36de0ee4505d000.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e2034dc9cbb8441383b9e4249c9d6387.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/de42677861064d11b724042688d88ed2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/283777b88b124de6beb16753a7496a90.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ad616676ddb14d3bb599a36fcca4eb9f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1a1e4ce540f74dabb4d5d7fd8e3af242.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7ff6e886713e4c8db478f698d569a000.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d55cf4eca813475ea13aea7b6ca82bb4.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3ab15b3c23da489fb7e1724910e9f3fc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2c4a6a19b45e4f37bbfed30b5780099e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/285f1b4aaeb845899af3407c55782894.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/da609daa85cc4566acf11f22be6ab7d8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ef518e2a8ef14e10bea04ad47bd843d8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8ba361f973d9435d980a13766f359a44.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9a5214364fb24eae911473347c73945c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/05eade3106ed4c839149cb1b77ead606.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/86754382eeba4578894f85bb249a6865.png">
+<meta property="article:published_time" content="2022-01-13T13:27:25.437Z">
+<meta property="article:modified_time" content="2022-01-13T13:28:34.149Z">
+<meta property="article:author" content="quan9i">
+<meta property="article:tag" content="语言学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/567acdc6d00b437fb4949294d211ed25.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://quan9i.github.io/python/"/>
+
+
+
+
+
+  <title>python学习笔记 part 1 | quan9i's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">quan9i's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">小白博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-star-half-o"></i> <br />
+            
+            精选文案
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-liuyan">
+          <a href="/liuyan/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-zanshang">
+          <a href="/zanshang/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rocket"></i> <br />
+            
+            赞赏
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+<script src="/live2d-widget/autoload.js"></script>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">python学习笔记 part 1</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-13T21:27:25+08:00">
+                2022-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/python/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/python/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="print函数（输出函数）"><a href="#print函数（输出函数）" class="headerlink" title="print函数（输出函数）"></a>print函数（输出函数）</h1><h2 id="print可以输出数字"><a href="#print可以输出数字" class="headerlink" title="print可以输出数字"></a>print可以输出数字</h2><p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">98</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/567acdc6d00b437fb4949294d211ed25.png" alt="在这里插入图片描述"></p>
+<h2 id="print可以输出字符串"><a href="#print可以输出字符串" class="headerlink" title="print可以输出字符串"></a>print可以输出字符串</h2><p>代码;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello world&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/c332e89975e94bd7b86f2ebe000d4402.png" alt="在这里插入图片描述"></p>
+<h2 id="print可以写入文件"><a href="#print可以写入文件" class="headerlink" title="print可以写入文件"></a>print可以写入文件</h2><p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fp=<span class="built_in">open</span>(<span class="string">&#x27;D:/python测试/test.txt&#x27;</span>,<span class="string">&#x27;a+&#x27;</span>)//a+的含义是如果该文件不存在，就创建一个并执行下方内容，如果已存在，就在此文件中执行下方代码</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello world&#x27;</span>,file=fp)</span><br><span class="line">fp.close</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/2b807b5b67a54d3cba27fb92ebdf2d78.png" alt="在这里插入图片描述"><br>查看文件夹<br><img src="https://img-blog.csdnimg.cn/f271b28a679842e69dfc3bdb677f23df.png" alt="在这里插入图片描述"><br>点击test.txt查看<br><img src="https://img-blog.csdnimg.cn/cb9f0d8771254114bc788f7e72472584.png" alt="在这里插入图片描述"><br>已经写入</p>
+<h1 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h1><h2 id="n"><a href="#n" class="headerlink" title="\n"></a>\n</h2><p>n是缩写，全写为newline，\n的意思为换行<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello\nworld&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/7d93b6b9cd114ebc92c82c7e2256a6d8.png" alt="在这里插入图片描述"></p>
+<h2 id="t"><a href="#t" class="headerlink" title="\t"></a>\t</h2><p>t是缩写，全写tab，\t的意思为水平制表符<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello\tworld&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hellojay\thow are you&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/8047aeae6cf2413785850522ff0539ce.png" alt="在这里插入图片描述"><br>可以发现上面空了三个，下面空了四个，这是因为水平换行符以四个为一组。<br>第一行Hell为一组，然后o加上三个空格为一组<br>第二行Hello为一组，ojay为一组，这时需要四个空格自己成为一组</p>
+<h2 id="r"><a href="#r" class="headerlink" title="/r"></a>/r</h2><p>/r是缩写，全写为return，/r的意思是覆盖前面内容（回车）<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hellojay\rhow are you&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/1d53f5754ee94175b63a44c6cd0a9bf6.png" alt="在这里插入图片描述"></p>
+<h2 id="b"><a href="#b" class="headerlink" title="/b"></a>/b</h2><p>/b为缩写，全写为backspace,/b的意思是退格<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello\bworld&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/00a6a5b648b840129b2314645141ddc1.png" alt="在这里插入图片描述"></p>
+<h2 id=""><a href="#" class="headerlink" title="\\"></a>\\</h2><p>反斜线写两个才能输出一个<br>代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;http:\\taobao.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/ca00de6328734eaa9513a9492de2527c.png" alt="在这里插入图片描述"></p>
+<p>如果想输出两个\，则需要输入四个反斜线<br><img src="https://img-blog.csdnimg.cn/9eb5003d52624cd2ab7d35a02b80e1be.png" alt="在这里插入图片描述"></p>
+<h2 id="‘"><a href="#‘" class="headerlink" title="\ ‘"></a>\ ‘</h2><p>实现句子中含有单引号，则可以利用\‘来输出<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;老师说:\&#x27;大家好\&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/602840134dcf4f4abf5c2db89483d329.png" alt="在这里插入图片描述"></p>
+<h2 id="“"><a href="#“" class="headerlink" title="\\“"></a>\\“</h2><p>想要输出双引号时可以使用这个<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;老师说:\&quot;大家好\&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/8f603ee06c3a4e32818506b84e1db564.png" alt="在这里插入图片描述"></p>
+<h2 id="原字符（r或R）"><a href="#原字符（r或R）" class="headerlink" title="原字符（r或R）"></a>原字符（r或R）</h2><p>注意：最后一个字符不能是\ ,但如果后两个都为\，则可以执行<br>在转义字符前加上r或R可以使其失效<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">r&#x27;老师说:\&quot;大家好\&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/d7b3649d62b2440c97ea2e8440807e38.png" alt="在这里插入图片描述"></p>
+<h1 id="二进制与字符编码"><a href="#二进制与字符编码" class="headerlink" title="二进制与字符编码"></a>二进制与字符编码</h1><p>chr（）函数<br>将进制数进行转换成字符<br>ord（）函数<br>将字符转换成数<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">0b10011100101000</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;乘&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/aa846758e0a14b6a9a3d0b28f979e61d.png" alt="在这里插入图片描述"><br>20056的二进制数即为10011100101000</p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>变量由三部分组成，标识（id），类型（type），值<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">&quot;沙雕&quot;</span></span><br><span class="line"><span class="built_in">print</span>(name)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;标识&#x27;</span>,<span class="built_in">id</span>(name))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;类型&#x27;</span>,<span class="built_in">type</span>(name))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;值&#x27;</span>,name)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/efb9596b7d324ec990c51087a1df6211.png" alt="在这里插入图片描述"><br>很多人说与c语言指针地址相似，由于学艺不精，暂不理解，故暂不做解释</p>
+<p><font color="red">变量可进行多次赋值，但赋值后会指向新的那个空间</font><br>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">&quot;沙雕&quot;</span></span><br><span class="line"><span class="built_in">print</span>(name)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;标识&#x27;</span>,<span class="built_in">id</span>(name))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;类型&#x27;</span>,<span class="built_in">type</span>(name))</span><br><span class="line">name=<span class="string">&quot;大沙雕&quot;</span></span><br><span class="line"><span class="built_in">print</span>(name)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;标识&#x27;</span>,<span class="built_in">id</span>(name))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;类型&#x27;</span>,<span class="built_in">type</span>(name))</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/57caf0cc416545afa464adf71093f8a6.png" alt="在这里插入图片描述"><br>可以发现标识以及name发生了变化，变量名指向了新的空间，前面的那个标识此时不会被再用到，称为内存垃圾，会被python回收机制回收</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><p>int型(integer)，可以表示正数，负数和零<br><font color="blue">注：正数可以是二进制，八进制，十进制或者十六进制，默认是十进制</font><br>示例：90 -90 0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">q1=<span class="number">90</span></span><br><span class="line">q2=-<span class="number">90</span></span><br><span class="line">q3=<span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(q1,<span class="built_in">type</span>(q1))</span><br><span class="line"><span class="built_in">print</span>(q2,<span class="built_in">type</span>(q2))</span><br><span class="line"><span class="built_in">print</span>(q3,<span class="built_in">type</span>(q3))</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/de51ec6fe19043ef9ca167c30cb3e0ac.png" alt="在这里插入图片描述"><br>进制数示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;十进制&#x27;</span>,<span class="number">112</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;二进制&#x27;</span> ,<span class="number">0b1001010101</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;八进制&#x27;</span>,<span class="number">0o12346</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;十六进制&#x27;</span>,<span class="number">0x12acd</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/43d67853ec514c76ba71799ea92d1ceb.png" alt="在这里插入图片描述"></p>
+<h2 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h2><p>float型，由整数部分和小数部分组成<br>示例： 1.1，2.2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n1=<span class="number">1.1</span></span><br><span class="line">n2=<span class="number">2.2</span></span><br><span class="line"><span class="built_in">print</span>(n1+n2)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/718ced84e1b342b8854aaeeb67bd82b9.png"><br> 此时我们发现结果与预期不符，这是因为部分浮点数进行计算时会存在误差，解决方法是运用decimal函数<br> 示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"><span class="built_in">print</span>(Decimal(<span class="string">&#x27;1.1&#x27;</span>)+Decimal(<span class="string">&#x27;2.2&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/19ed9022dcc64518ba765b0a47855212.png" alt="在这里插入图片描述"></p>
+<h2 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h2><p>bool，即boolean<br>只有两个值;true false，true为1，false为0<br>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n1=<span class="literal">True</span></span><br><span class="line">n2=<span class="literal">False</span></span><br><span class="line"><span class="built_in">print</span>(n1,<span class="built_in">type</span>(n1))</span><br><span class="line"><span class="built_in">print</span>(n2,<span class="built_in">type</span>(n2))</span><br><span class="line"><span class="built_in">print</span>(n1+<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(n2+<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/f474bba9454d4feeb45bdd93d179a643.png" alt="在这里插入图片描述"></p>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><p>加上单引号，双引号亦或是三引号<br>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">t1=<span class="string">&#x27;沙,雕&#x27;</span></span><br><span class="line">t2=<span class="string">&quot;沙,雕&quot;</span></span><br><span class="line">t3=<span class="string">&quot;&quot;&quot;沙，</span></span><br><span class="line"><span class="string">雕&quot;&quot;&quot;</span></span><br><span class="line">t4=<span class="string">&#x27;&#x27;&#x27;沙,</span></span><br><span class="line"><span class="string">雕&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(t1,<span class="built_in">type</span>(t1))</span><br><span class="line"><span class="built_in">print</span>(t2,<span class="built_in">type</span>(t2))</span><br><span class="line"><span class="built_in">print</span>(t3,<span class="built_in">type</span>(t3))</span><br><span class="line"><span class="built_in">print</span>(t4,<span class="built_in">type</span>(t4))</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/7c2374765bc8438cafab0782ae867c2b.png" alt="在这里插入图片描述"><br><font color="gren">注：三引号可以换行输出，而单引号或双引号不行。</font></p>
+<h1 id="str函数、int函数和float函数"><a href="#str函数、int函数和float函数" class="headerlink" title="str函数、int函数和float函数"></a>str函数、int函数和float函数</h1><p>str()函数可将其他类型转换成字符串类型<br>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">t1=<span class="number">1</span>;</span><br><span class="line">t2=<span class="number">2.9</span>;</span><br><span class="line">t3=<span class="literal">False</span>;</span><br><span class="line"><span class="built_in">print</span>(t1,t2,t3,<span class="built_in">type</span>(t1),<span class="built_in">type</span>(t2),<span class="built_in">type</span>(t3))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(t1),<span class="built_in">str</span>(t2),<span class="built_in">str</span>(t3),<span class="built_in">type</span>(<span class="built_in">str</span>(t1)),<span class="built_in">type</span>(<span class="built_in">str</span>(t2)),<span class="built_in">type</span>(<span class="built_in">str</span>(t3)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/ff01082d9b4346a5b4ac4a859a78337e.png" alt="在这里插入图片描述"></p>
+<p>int函数，将其他类型转换成整型<br>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t1=<span class="string">&#x27;122&#x27;</span>;</span><br><span class="line">t2=<span class="number">2.9</span>;</span><br><span class="line">t3=<span class="literal">False</span>;</span><br><span class="line"><span class="built_in">print</span>(t1,t2,t3,<span class="built_in">type</span>(t1),<span class="built_in">type</span>(t2),<span class="built_in">type</span>(t3))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(t1),<span class="built_in">int</span>(t2),<span class="built_in">int</span>(t3),<span class="built_in">type</span>(<span class="built_in">int</span>(t1)),<span class="built_in">type</span>(<span class="built_in">int</span>(t2)),<span class="built_in">type</span>(<span class="built_in">int</span>(t3)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/bfd49f5ddc5b4191bf3b34e96fcf08d6.png" alt="在这里插入图片描述"><font color='red'>注：只能将数字型字符串转换成整型，否则会报错。浮点型转换成整型，抹零取整</font></p>
+<p>float函数<br>将其他类型转换为单精度浮点型<br><font color='red'>注：不能转换字符串，转换数字串是可以的。</font></p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t1=<span class="string">&#x27;122.89&#x27;</span>;</span><br><span class="line">t2=<span class="number">2</span>;</span><br><span class="line">t3=<span class="literal">False</span>;</span><br><span class="line"><span class="built_in">print</span>(t1,t2,t3,<span class="built_in">type</span>(t1),<span class="built_in">type</span>(t2),<span class="built_in">type</span>(t3))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">float</span>(t1),<span class="built_in">float</span>(t2),<span class="built_in">float</span>(t3),<span class="built_in">type</span>(<span class="built_in">float</span>(t1)),<span class="built_in">type</span>(<span class="built_in">float</span>(t2)),<span class="built_in">type</span>(<span class="built_in">float</span>(t3)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/6d5b3bc5cc404dbea36de0ee4505d000.png" alt="在这里插入图片描述"></p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>单行代码 ：加#可以作为注释<br>多行注释：加三引号作为多行注释：如图所示<br><img src="https://img-blog.csdnimg.cn/e2034dc9cbb8441383b9e4249c9d6387.png" alt="在这里插入图片描述"><br>中文编码声明注释：<br><img src="https://img-blog.csdnimg.cn/de42677861064d11b724042688d88ed2.png" alt="在这里插入图片描述"></p>
+<h1 id="input函数"><a href="#input函数" class="headerlink" title="input函数"></a>input函数</h1><p><img src="https://img-blog.csdnimg.cn/283777b88b124de6beb16753a7496a90.png" alt="在这里插入图片描述"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1=<span class="built_in">input</span>(<span class="string">&#x27;今年是几几年&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(s1,<span class="built_in">type</span>(s1))</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/ad616676ddb14d3bb599a36fcca4eb9f.png" alt="在这里插入图片描述"><br>input函数进行加减运算<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="built_in">input</span>(<span class="string">&#x27;请输入一个加数:&#x27;</span>)</span><br><span class="line">b=<span class="built_in">input</span>(<span class="string">&#x27;请输入另一个加数:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a),<span class="built_in">type</span>(b))</span><br><span class="line"><span class="built_in">print</span>(a+b)</span><br></pre></td></tr></table></figure>
+
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/1a1e4ce540f74dabb4d5d7fd8e3af242.png" alt="在这里插入图片描述"><br>相加时显示1122，而不是33，这是因为input输出的是字符串类型，直接相加就只是把两个字符拼接到一起了，如果想输出正常，则应该转换成整型<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="built_in">input</span>(<span class="string">&#x27;请输入一个加数:&#x27;</span>)</span><br><span class="line">b=<span class="built_in">input</span>(<span class="string">&#x27;请输入另一个加数:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a),<span class="built_in">type</span>(b))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(a)+<span class="built_in">int</span>(b))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/7ff6e886713e4c8db478f698d569a000.png" alt="在这里插入图片描述"></p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">1</span>+<span class="number">1</span>) <span class="comment">#加法运算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">10</span>-<span class="number">1</span>) <span class="comment">#减法运算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">2</span>*<span class="number">3</span>) <span class="comment">#乘法运算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">2</span>/<span class="number">4</span>) <span class="comment">#除法运算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">11</span>//<span class="number">2</span>) <span class="comment">#整除运算（除法取整）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">11</span>%<span class="number">2</span>) <span class="comment">#取余运算（除法取余）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">2</span>**<span class="number">3</span>) <span class="comment"># 幂运算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>//<span class="number">4</span>) <span class="comment">#整除运算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>//-<span class="number">4</span>) <span class="comment">#较难理解的整除运算 ，其实就是负数往下取整</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>%<span class="number">4</span>) <span class="comment">#取余运算 9=4*2+1 ,1即为余数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>%-<span class="number">4</span>) <span class="comment">#较难理解的取余运算  9=-4*3+(-3).-3即为余数</span></span><br><span class="line"><span class="built_in">print</span>(-<span class="number">9</span>%<span class="number">4</span>) <span class="comment">#-9=4*（-3）+3,3即为余数</span></span><br><span class="line"><span class="built_in">print</span>(-<span class="number">15</span>%<span class="number">4</span>)<span class="comment">#-15=4*4+1,1即为余数</span></span><br></pre></td></tr></table></figure>
+<p>答案为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">0.5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">-<span class="number">3</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">-<span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>取余的公式是余数=被除数-除数*商，<a target="_blank" rel="noopener" href="https://blog.csdn.net/U0101010/article/details/107884816">我用的方法在这里。</a></p>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><p>执行顺序：从右到左</p>
+<h3 id="支持链式赋值：a-b-c-20"><a href="#支持链式赋值：a-b-c-20" class="headerlink" title="支持链式赋值：a=b=c=20"></a>支持链式赋值：a=b=c=20</h3><p>解释：20等于c等于b等于a<br><img src="https://img-blog.csdnimg.cn/d55cf4eca813475ea13aea7b6ca82bb4.png" alt="在这里插入图片描述"></p>
+<h3 id="支持参数赋值"><a href="#支持参数赋值" class="headerlink" title="支持参数赋值"></a>支持参数赋值</h3><p>1、+=<br>2、-=<br>3、*=<br>4、/=<br>5、//=<br>6、%=</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(a,<span class="built_in">type</span>(a))</span><br><span class="line">a-=<span class="number">10</span></span><br><span class="line"><span class="built_in">print</span>(a,<span class="built_in">type</span>(a))</span><br><span class="line">a*=<span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(a,<span class="built_in">type</span>(a))</span><br><span class="line">a/=<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(a,<span class="built_in">type</span>(a))</span><br><span class="line">a//=<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(a,<span class="built_in">type</span>(a))</span><br><span class="line">a%=<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(a,<span class="built_in">type</span>(a))</span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">20</span> &lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">int</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">10 &lt;<span class="title">class</span> &#x27;<span class="title">int</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">30 &lt;<span class="title">class</span> &#x27;<span class="title">int</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">15.0 &lt;<span class="title">class</span> &#x27;<span class="title">float</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">7.0 &lt;<span class="title">class</span> &#x27;<span class="title">float</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">1.0 &lt;<span class="title">class</span> &#x27;<span class="title">float</span>&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="支持解包赋值"><a href="#支持解包赋值" class="headerlink" title="支持解包赋值"></a>支持解包赋值</h3><p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a,b,c=<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span></span><br><span class="line"><span class="built_in">print</span>(a,b,c)</span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">30</span></span><br></pre></td></tr></table></figure>
+<p>可以通过此来实现交换数值<br>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a,b=<span class="number">10</span>,<span class="number">20</span></span><br><span class="line">a,b=b,a</span><br><span class="line"><span class="built_in">print</span>(a,b)</span><br></pre></td></tr></table></figure>
+<p>运算结果为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">20</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><p>比较运算符有 &lt; ， &gt; ， &lt;= ， &gt;= ， == ， != ， in ， not in ， is ， is not 。<br>示例1：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a,b,c=<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a&gt;b吗?&#x27;</span>,a&gt;b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a&lt;b吗?&#x27;</span>,a&lt;b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a&lt;=b吗?&#x27;</span>,a&lt;=b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a&gt;=b吗?&#x27;</span>,a&gt;=b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a!=b吗?&#x27;</span>,a!=b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a==b吗?&#x27;</span>,a==b)</span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a&gt;b吗? <span class="literal">False</span></span><br><span class="line">a&lt;b吗? <span class="literal">True</span></span><br><span class="line">a&lt;=b吗? <span class="literal">True</span></span><br><span class="line">a&gt;=b吗? <span class="literal">False</span></span><br><span class="line">a!=b吗? <span class="literal">True</span></span><br><span class="line">a==b吗? <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p><font color='red'>注:在计算机语言中，=为赋值运算符，==为比较运算符，变量由标识（id），类型（type）已经值（value）组成，这里比较的是值（value）</font><br>示例2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=&#123;<span class="number">10</span>,<span class="number">20</span>&#125;</span><br><span class="line">b=&#123;<span class="number">10</span>,<span class="number">20</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(a==b)</span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)</span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> <span class="keyword">not</span> b)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(a))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(b))</span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="number">1641728005504</span></span><br><span class="line"><span class="number">1641728004608</span></span><br></pre></td></tr></table></figure>
+<p>可能这时候有人会疑惑，为什么数组内容一致，但二者的标识却不一样（以下仅为个人观点，如有不当还请多多指教），这是因为对于一个名字不同的数组来说，其id是不一样的，这里的一个变量名是a，一个是b，两个变量名不同，因而具有不同的id，即标识不同。</p>
+<h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><h3 id="and运算符"><a href="#and运算符" class="headerlink" title="and运算符"></a>and运算符</h3><p>必须两个结果都正确，才能输出true<br>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a，b=<span class="number">10</span>,<span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(a==<span class="number">10</span> <span class="keyword">and</span> b==<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(a==<span class="number">10</span> <span class="keyword">and</span> b!=<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(a&lt;<span class="number">10</span>  <span class="keyword">and</span> b==<span class="number">20</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<h3 id="or-运算符"><a href="#or-运算符" class="headerlink" title="or 运算符"></a>or 运算符</h3><p>两个中有一个是正确，就会输出正确<br>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a,b=<span class="number">10</span>,<span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(a==<span class="number">10</span> <span class="keyword">or</span> b==<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(a==<span class="number">10</span> <span class="keyword">or</span> b!=<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(a&lt;<span class="number">10</span>  <span class="keyword">or</span> b==<span class="number">20</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h3 id="not运算符"><a href="#not运算符" class="headerlink" title="not运算符"></a>not运算符</h3><p>即取反运算符，示例如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a,b=<span class="literal">True</span>,<span class="literal">False</span></span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">not</span> a)</span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">not</span> b)</span><br></pre></td></tr></table></figure>
+<p>执行结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p><font color=$blue>注:这里的true和false首字母需要大写，否则无法识别</p>
+<h3 id="in运算符和-not-in-运算符"><a href="#in运算符和-not-in-运算符" class="headerlink" title="in运算符和 not in 运算符"></a>in运算符和 not in 运算符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">&#x27;hellowwwww&#x27;</span></span><br><span class="line">b=<span class="string">&#x27;wwadadawd&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;w&#x27;</span> <span class="keyword">in</span> a)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;r&#x27;</span> <span class="keyword">in</span> b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;r&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> b)</span><br></pre></td></tr></table></figure>
+<p>运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><h3 id="按位与-amp"><a href="#按位与-amp" class="headerlink" title="按位与&amp;"></a>按位与&amp;</h3><p><font color='green'>知识小扩充：二进制中默认8个位为一个字节。</font><br>对应数位都是1，结果数位才为1，否则为0<br>示例：<br>进行4和8的按位与运算，都为1才为1，否则结果为0，如下图所示<br><img src="https://img-blog.csdnimg.cn/3ab15b3c23da489fb7e1724910e9f3fc.png" alt="在这里插入图片描述">得到结果为0<br>代码输出则如下图所示<br><img src="https://img-blog.csdnimg.cn/2c4a6a19b45e4f37bbfed30b5780099e.png" alt="在这里插入图片描述"></p>
+<h3 id="按位或"><a href="#按位或" class="headerlink" title="按位或|"></a>按位或|</h3><p>对应数位都是0，结果数位才为0，否则为1<br>示例：<br><img src="https://img-blog.csdnimg.cn/285f1b4aaeb845899af3407c55782894.png" alt="在这里插入图片描述">输出到代码中则如下图所示<br><img src="https://img-blog.csdnimg.cn/da609daa85cc4566acf11f22be6ab7d8.png" alt="在这里插入图片描述"></p>
+<h3 id="左移位运算符-lt-lt"><a href="#左移位运算符-lt-lt" class="headerlink" title="左移位运算符&lt;&lt;"></a>左移位运算符&lt;&lt;</h3><p>高位溢出舍弃，低位补0<br><img src="https://img-blog.csdnimg.cn/ef518e2a8ef14e10bea04ad47bd843d8.png" alt="在这里插入图片描述"><font color='red'>注：高位溢出处是舍弃的，读取数值至高位溢出右边结束</font><br>用代码书写则如下图所示<br><img src="https://img-blog.csdnimg.cn/8ba361f973d9435d980a13766f359a44.png" alt="在这里插入图片描述"></p>
+<h3 id="右移位运算符-gt-gt"><a href="#右移位运算符-gt-gt" class="headerlink" title="右移位运算符&gt;&gt;"></a>右移位运算符&gt;&gt;</h3><p>低位溢出舍弃，高位补0<br>示例：<br><img src="https://img-blog.csdnimg.cn/9a5214364fb24eae911473347c73945c.png" alt="在这里插入图片描述"><br><font color='red'>注：低位截断处是舍弃的，在读取数值时从其左边开始</font><br>用代码书写如下图所示:<br><img src="https://img-blog.csdnimg.cn/05eade3106ed4c839149cb1b77ead606.png" alt="在这里插入图片描述"></p>
+<h2 id="运算符优先顺序"><a href="#运算符优先顺序" class="headerlink" title="运算符优先顺序"></a>运算符优先顺序</h2><p><img src="https://img-blog.csdnimg.cn/86754382eeba4578894f85bb249a6865.png" alt="在这里插入图片描述"><br>前三个为算术运算符，挨着的三个为位运算符，再后面的一个是比较运算符，其后两个是布尔运算符，最后一个是赋值运算符<br>因此常规情况下，优先顺序为：<br><code>算术运算符&gt;位运算符&gt;比较运算符&gt;布尔运算符&gt;赋值运算符</code><br>为什么说常规，因为但当存在小括号时，优先计算小括号内内容</p>
+
+      
+    </div>
+    
+    
+    
+     
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+
+<div>
+      
+        
+      
+</div>
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+      
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://quan9i.github.io/python/" title="python学习笔记 part 1">https://quan9i.github.io/python/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 语言学习</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" rel="next" title="堆叠注入">
+                <i class="fa fa-chevron-left"></i> 堆叠注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/2.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/%5Bobject%20Object%5D" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/Reme_mber" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-gg-circle"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=1537969147&site=qq&menu=yes" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/quan9i" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:shijishangjieke@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1890733342&auto=1&height=66"></iframe>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#print%E5%87%BD%E6%95%B0%EF%BC%88%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">print函数（输出函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#print%E5%8F%AF%E4%BB%A5%E8%BE%93%E5%87%BA%E6%95%B0%E5%AD%97"><span class="nav-number">1.1.</span> <span class="nav-text">print可以输出数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#print%E5%8F%AF%E4%BB%A5%E8%BE%93%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.</span> <span class="nav-text">print可以输出字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#print%E5%8F%AF%E4%BB%A5%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">print可以写入文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">转义字符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#n"><span class="nav-number">2.1.</span> <span class="nav-text">\n</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#t"><span class="nav-number">2.2.</span> <span class="nav-text">\t</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#r"><span class="nav-number">2.3.</span> <span class="nav-text">&#x2F;r</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b"><span class="nav-number">2.4.</span> <span class="nav-text">&#x2F;b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.5.</span> <span class="nav-text">\\</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%98"><span class="nav-number">2.6.</span> <span class="nav-text">\ ‘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C"><span class="nav-number">2.7.</span> <span class="nav-text">\\“</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%AD%97%E7%AC%A6%EF%BC%88r%E6%88%96R%EF%BC%89"><span class="nav-number">2.8.</span> <span class="nav-text">原字符（r或R）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">二进制与字符编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">整数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.2.</span> <span class="nav-text">浮点类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">布尔类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.4.</span> <span class="nav-text">字符串类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#str%E5%87%BD%E6%95%B0%E3%80%81int%E5%87%BD%E6%95%B0%E5%92%8Cfloat%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">str函数、int函数和float函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">7.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#input%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">input函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.2.</span> <span class="nav-text">赋值运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E9%93%BE%E5%BC%8F%E8%B5%8B%E5%80%BC%EF%BC%9Aa-b-c-20"><span class="nav-number">9.2.1.</span> <span class="nav-text">支持链式赋值：a&#x3D;b&#x3D;c&#x3D;20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%8F%82%E6%95%B0%E8%B5%8B%E5%80%BC"><span class="nav-number">9.2.2.</span> <span class="nav-text">支持参数赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E8%A7%A3%E5%8C%85%E8%B5%8B%E5%80%BC"><span class="nav-number">9.2.3.</span> <span class="nav-text">支持解包赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.3.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.4.</span> <span class="nav-text">布尔运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#and%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.4.1.</span> <span class="nav-text">and运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#or-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.4.2.</span> <span class="nav-text">or 运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#not%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.4.3.</span> <span class="nav-text">not运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C-not-in-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.4.4.</span> <span class="nav-text">in运算符和 not in 运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.5.</span> <span class="nav-text">位运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E-amp"><span class="nav-number">9.5.1.</span> <span class="nav-text">按位与&amp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E6%88%96"><span class="nav-number">9.5.2.</span> <span class="nav-text">按位或|</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6-lt-lt"><span class="nav-number">9.5.3.</span> <span class="nav-text">左移位运算符&lt;&lt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6-gt-gt"><span class="nav-number">9.5.4.</span> <span class="nav-text">右移位运算符&gt;&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E9%A1%BA%E5%BA%8F"><span class="nav-number">9.6.</span> <span class="nav-text">运算符优先顺序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li class="recent_posts_li">
+          <a href="/python/" title="python学习笔记 part 1" target="_blank">python学习笔记 part 1</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" title="堆叠注入" target="_blank">堆叠注入</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/post%E6%B3%A8%E5%85%A52/" title="sql-lab 21-30" target="_blank">sql-lab 21-30</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sql%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%89%A9%E5%85%85/" title="sql注入相关知识" target="_blank">sql注入相关知识</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/python%E5%AE%89%E8%A3%85/" title="python及其编译器安装" target="_blank">python及其编译器安装</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+<div class="copyright">&copy; 2021-11 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">quan9i</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">20.9k</span>
+  
+</div>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/12/2021 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+
+
+
+
+        
+  
+-   <span class="site-uv" title="我的第 undefined 位朋友">
++   <span class="site-uv">
++     我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+-   <span class="site-pv" title="历经 undefined 次回眸才与你相遇">
++   <span class="site-pv">
++     历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cM9V6UXqe4qtpXHOvQO5eS6R-gzGzoHsz',
+        appKey: 'lzYVPw46IOBJRFvDrn85wuxE',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "vertical";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>

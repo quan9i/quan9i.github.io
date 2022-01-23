@@ -72,11 +72,17 @@ $(document).ready(function () {
   // TOC item animation navigate & prevent #item selector in adress bar.
   $('.post-toc a').on('click', function (e) {
     e.preventDefault();
-    var targetSelector =  decodeURI(this.getAttribute('href'))
+    this.currentTarget
+    // var targetSelector =  decodeURI(this.getAttribute('href'))
     // 对获取到的url进行重编码
-targetSelector = decodeURI(this.getAttribute('href'))
-    var offset = $(targetSelector).offset().top;
-
+    var href = this.getAttribute('href');
+    var offsetElem;
+    if (href) {
+      offsetElem = $(decodeURI(href));
+    } else {
+      offsetElem = $('#'+this.lastElementChild.textContent)
+    }
+    var offset = offsetElem.offset().top
     hasVelocity ?
       html.velocity('stop').velocity('scroll', {
         offset: offset  + 'px',

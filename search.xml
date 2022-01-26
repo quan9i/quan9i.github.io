@@ -15,6 +15,20 @@
       </tags>
   </entry>
   <entry>
+    <title>kali环境安装docker搭建漏洞平台</title>
+    <url>//docker%20installation%20/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/f2231df141c04e5482946703e10098b3.png" alt="在这里插入图片描述"><br>我会努力追上曾经那个寄予厚望的自己</p>
+<span id="more"></span>
+<p>近期需要在搭建一个本地环境，用来扩充命令执行注入漏洞等相关知识，所以我选择在虚拟机中用kali操作系统安装docker来搭建靶场，<br>记录安装过程如下：<br>首先需打开终端，安装docker，语句如下<br><code>apt-get install docker.io</code><br><img src="https://img-blog.csdnimg.cn/42bdd9f4526a4a5d87c3624849a6e885.png" alt="在这里插入图片描述"><br>发现报错，说权限不够，需要root权限，此时我们输入如下语句<br><code>sudo su - </code><br><img src="https://img-blog.csdnimg.cn/82826e3d1f5046fba52d9d25a6b0b310.png" alt="在这里插入图片描述"><br>将我们之前设置的密码输入<br><font color="red">注:密码是不显现的，直接输入即可，不要以为是自己电脑卡了的问题</font><br><img src="https://img-blog.csdnimg.cn/c4d34224b49b4ab3b290800607918f46.png" alt="在这里插入图片描述"><br>输入后可以看到已经得到root权限了<br>此时再次输入安装docker的语句<br><code>apt-get install docker.io</code><br><img src="https://img-blog.csdnimg.cn/0ce8ed1995434439b4b418fb21981d3f.png" alt="在这里插入图片描述"><br>如图所示，已经可以安装（到最后会出现一个选择框，分为yes和no，选yes）<br>安装完成后，需要再安装一下docker-compose，语句如下<br><code>pip install docker-compose</code><br><img src="https://img-blog.csdnimg.cn/9faea12b90244156a441fbbba08c799a.png" alt="在这里插入图片描述"><br>发现缺少pip3模块，百度过后了解到了一个冷知识<br>kali自带有python2和python3，但是没有安装pip2和pip3<br>因此我们需要自己安装一下pip3模块，语句如下<br><code>apt-get install python3-pip  </code><br><img src="https://img-blog.csdnimg.cn/8910f79ea4274968b047e782114e8b96.png" alt="在这里插入图片描述"><br>到最后会出现一个框，直接按enter键进行<br>安装完成后再次安装docker-compose,语句如下<br><code>pip install docker-compose</code><br><img src="https://img-blog.csdnimg.cn/9da814bed5484ee89bb60b0c951d169c.png" alt="在这里插入图片描述"><br>安装完成后，执行下一步，下载vulstudy项目，语句如下<br><code>git clone https://github.com/c0ny1/vulstudy.git</code><br><img src="https://img-blog.csdnimg.cn/9ed66e585fd14cea9cbdb2df0f79fe9d.png" alt="在这里插入图片描述"><br>然后这里需要安装的基本就完成了，现在就可以选择我们用的漏洞平台了，我用的是DVWA漏洞平台，那就跳转到该目录下，语句如下<br><code>cd vulstudy/DVWA</code><br><img src="https://img-blog.csdnimg.cn/2f7e66db49a643fbba3c2953b6a6fcc2.png" alt="在这里插入图片描述"><br>开启容器和关闭容器的语句如下<br><code>docker-compose up -d #启动容器</code><br><code>docker-compose stop #停止容器</code><br><img src="https://img-blog.csdnimg.cn/7985f0ff49b54521b9b42470c67366d2.png" alt="在这里插入图片描述"><br>完成后即说明搭建完毕<br>查看ip地址，输入如下语句<br><code>ip-addr</code><br><img src="https://img-blog.csdnimg.cn/560ab7a9f3914008820e6999c57ad235.png" alt="在这里插入图片描述"><br>访问<code>http://192.168.134.132/</code><br><img src="https://img-blog.csdnimg.cn/0017d7e14cb445bb82d0045ae64b85dc.png" alt="在这里插入图片描述"><br>任务结束，晚安。</p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>语言学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>游玩小记(堆雪人)</title>
     <url>//play/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/6486b2d884884fb7aca9ead621115640.png" alt="在这里插入图片描述"><br>若你决定灿烂，山无遮，，海无拦</p>

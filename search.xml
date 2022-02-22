@@ -17,6 +17,28 @@
       </tags>
   </entry>
   <entry>
+    <title>codeblock报错解决及正确安装</title>
+    <url>//c/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/9b5b849a70f6439c8199990d28cd34fd.png" alt="在这里插入图片描述"><br>亦是此间少年！</p>
+<span id="more"></span>
+<p>@[toc]</p>
+<h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客，欢迎大家访问！<br>最近在重新使用codeblock时发现了部分问题，总结如下</p>
+<h1><span id="报错解决">报错解决</span></h1><p>在运行时出现如下报错</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;HelloWorld - Debug&quot;</span>: The compiler<span class="number">&#x27;</span><span class="function">s <span class="title">setup</span> <span class="params">(GNUGCC Compiler)</span> is invalid, so Code::Blocks cannot find/run the compiler.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Probably the toolchain path within the compiler optionsis <span class="keyword">not</span> setup correctly?! <span class="params">(Do you have a compiler installed?)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Goto &quot;Settings-&gt;Compiler...-&gt;Global compilersettings-&gt;GNU GCC Compiler-&gt;Toolchain executables&quot; <span class="keyword">and</span> fix thecompiler&#x27;s setup.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Skipping...</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Nothing to be <span class="title">done</span> <span class="params">(all items are up-to-date)</span>.</span></span><br><span class="line"><span class="function">Target uses an invalid compiler</span>; run aborted</span><br></pre></td></tr></table></figure>
+<p>这种出现的结果有两种原因</p>
+<h2><span id="原因一">原因一</span></h2><p>设置的文件路径不对，codeblock未检测到，解决方法如下<br><img src="https://img-blog.csdnimg.cn/06fa7680e2c54ac5b2eec375f17a3d83.png" alt="在这里插入图片描述"><br>点击自动检测<br><img src="https://img-blog.csdnimg.cn/562a7e3dee664e4d9d0dbe6e87465eb8.png" alt="在这里插入图片描述">执行结果如下<br><img src="https://img-blog.csdnimg.cn/af71e0c5a4914c889112281faef8fc1d.png" alt="在这里插入图片描述"><br>此时点击下面ok，再次运行<br><img src="https://img-blog.csdnimg.cn/c56874d11627468ba7bb6149f7760b6e.png" alt="在这里插入图片描述"></p>
+<h2><span id="原因二">原因二</span></h2><p>安装的时候安装错了版本，安装的版本缺少编译器模块，这个你如何看呢，打开codeblock文件夹，看是否有此文件夹，如下图<br><img src="https://img-blog.csdnimg.cn/8b8659bd525545039aac8a5359e4b423.png" alt="在这里插入图片描述"><br>没有的话说明安装的版本没有编译器，这时候可以自己安装一下<a href="https://www.mingw-w64.org/downloads/">MINGW</a>，安装后把他放到codeblock文件下，再进行检测即可发现可以正常运行<br>，此时还有小部分人是无法执行成功的，此时可以进行卸载，安装一个带编译器版本的codeblock即可</p>
+<h1><span id="正确安装">正确安装</span></h1><p>安装包链接<a href="https://www.fosshub.com/Code-Blocks.html?dwl=codeblocks-20.03mingw-setup.exe">codeblock安装</a><br><img src="https://img-blog.csdnimg.cn/5fa9118bc2c74e699b67e3444d96ba51.png" alt="在这里插入图片描述"><br>下方第一个是64位且包含编译器的，点击即可下载，可以下载到d盘，因为c盘是系统盘，文件过多会导致电脑卡顿，下载完成后打开此exe文件<br><img src="https://img-blog.csdnimg.cn/f011db12cd3c4c7186097074f9a36f66.png" alt="在这里插入图片描述"><br>一路往下<img src="https://img-blog.csdnimg.cn/852df5c7671546268bc690940c9dfb03.png" alt="在这里插入图片描述">这里全选，默认也是全选，直接下一步即可<br><img src="https://img-blog.csdnimg.cn/7f1ae3fcffd54bffb58a76064ab34364.png" alt="在这里插入图片描述"><br>在这里，我们需要把路径更改为d盘某个文件夹下，然后点击下一步安装就可以了，最后你再次运行就可以看见Hello World了</p>
+<p>本人只是小白，如果有问题还请各位师傅多多指教！</p>
+]]></content>
+      <categories>
+        <category>c</category>
+      </categories>
+      <tags>
+        <tag>语言学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python学习笔记 part 2</title>
     <url>//python2/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/fce435253b604a5b821b0b9d248fb419.png" alt="在这里插入图片描述"><br>希望可以被喜欢的事情填满生活。</p>

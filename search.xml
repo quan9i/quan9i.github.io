@@ -17,6 +17,30 @@
       </tags>
   </entry>
   <entry>
+    <title>vc 6.0++解决兼容性及闪退问题</title>
+    <url>//vc++/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/be0b0ffce75a4f188d00a8d733b4fc38.png" alt="在这里插入图片描述"><br>去发光，而不是被照亮</p>
+<span id="more"></span>
+<h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客，欢迎大家访问<br>我在安装好vc6.0后出现了如下问题，总结如下</p>
+<h1><span id="不兼容">不兼容</span></h1><p>在安装完成后运行程序会出现不兼容的情况，如下图所示<br><img src="https://img-blog.csdnimg.cn/bdd0fdd24e1049ba85f9160366f3a540.png" alt="在这里插入图片描述">此时我们右键一下，然后选择打开文件所在位置<br><img src="https://img-blog.csdnimg.cn/a315f9a32132457d85036f4e38b838d3.png" alt="在这里插入图片描述"><br>找到MSDEV文件，并更名为MSDEV2<img src="https://img-blog.csdnimg.cn/d3cdd4d5c4be493782583c84c429714d.png" alt="在这里插入图片描述"></p>
+<p>此时我们右键快捷方式，点击属性<br><img src="https://img-blog.csdnimg.cn/e122d1a2cc7c4a89b1b4f4d0a8f8c216.png" alt="在这里插入图片描述"><br>把文件名改为刚刚更改的MSDEV2<br><img src="https://img-blog.csdnimg.cn/37178e76ea924b738f66797f854d5129.png" alt="在这里插入图片描述"></p>
+<p>此时再切换到兼容性一栏，勾选下方以兼容模式运行程序<br><img src="https://img-blog.csdnimg.cn/8e4d237e008547658401e7ff12a29da8.png" alt="在这里插入图片描述"><br>最后点击应用，再点确定即可<br>此时再次运行程序，发现可以正常打开<br><img src="https://img-blog.csdnimg.cn/cf8319691e3d4b6da38f337e1e18a5fd.png" alt="在这里插入图片描述"></p>
+<h1><span id="打开文件闪退">打开文件闪退</span></h1><p><img src="https://img-blog.csdnimg.cn/488a2cad70774e2c870a1bac897c2d12.png" alt="在这里插入图片描述">在点击这个的时候，我发现程序会闪退，针对这个的解决方法如下所示<br>想法是在程序中自己添加一个打开文件的选项，这里引用别人写好的dll文件来运行即可，具体步骤如下：</p>
+<p>1、<br>首先下载一个dll文件，链接如下<a href="https://pan.baidu.com/s/1c0GImvI">https://pan.baidu.com/s/1c0GImvI</a><br>下载后解压到<code>&quot;D:\c语言\vc+\Microsoft Visual Studio\Common\MSDev98\AddIns\&quot;</code>（路径需要看自己安装的路径，大部分人默认安装的话是在c盘，在c盘中找到Microsoft Visual Studio\Common\MSDev98\，放在这个路径下即可）如下图<br><img src="https://img-blog.csdnimg.cn/6b8e6adbbe054a0eb42bebc49a53f6db.png" alt="在这里插入图片描述">此时在搜索框中搜索cmd，选择以管理员身份运行<img src="https://img-blog.csdnimg.cn/ac14dd250221464abbafac086fa28e91.png" alt="在这里插入图片描述"><br>输入代码如下<br><font color="red">注:这个路径需要更改为你们的路径，文件放到路径下后右键可以复制文件路径</font></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">regsvr32 <span class="string">&quot;D:\c语言\vc+\Microsoft Visual Studio\Common\MSDev98\AddIns\FileTool.dll&quot;</span></span><br></pre></td></tr></table></figure>
+<p>成功执行后会出现如下结果<br><img src="https://img-blog.csdnimg.cn/091ed656258e412abc807206988e4058.png" alt="在这里插入图片描述"><br>此时打开vc选择工具中的定制<br><img src="https://img-blog.csdnimg.cn/0527d0a10b7949c28bd4f2c1a8ed5da8.png" alt="在这里插入图片描述"><br>选择最后一个，勾选第一个<br><img src="https://img-blog.csdnimg.cn/bc3e1c9164d6497fb3d455a9a624c5d9.png" alt="在这里插入图片描述"><br>关闭后发现程序多了个东西<br><img src="https://img-blog.csdnimg.cn/766d6e86ac464d1c9838656fb04bb55b.png" alt="在这里插入图片描述">A的全拼·Add File to Project<br>O的全拼：·Open<br>但是这样的话不是很美观，左键拖动这个正方形到上面，可以放入框中<br><img src="https://img-blog.csdnimg.cn/1fc27a5e22ce464199ad8b0b44d6bcbd.png" alt="在这里插入图片描述"></p>
+<p>点击o即可选择文件<br><img src="https://img-blog.csdnimg.cn/52a55904e303477fa1bb1d859dfc137f.png" alt="在这里插入图片描述"></p>
+<p>问题解决完成</p>
+<p>本人只是小白，如果出现问题还请各位师傅多多指教！</p>
+]]></content>
+      <categories>
+        <category>c</category>
+      </categories>
+      <tags>
+        <tag>语言学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>codeblock报错解决及正确安装</title>
     <url>//c/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/9b5b849a70f6439c8199990d28cd34fd.png" alt="在这里插入图片描述"><br>亦是此间少年！</p>

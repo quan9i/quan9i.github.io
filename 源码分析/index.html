@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2f428eb6c7e640628054bfe0c5ea09f8.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/4ec722113e714626a567528433943841.png">
 <meta property="article:published_time" content="2022-01-19T06:44:56.788Z">
-<meta property="article:modified_time" content="2022-01-10T08:45:12.000Z">
+<meta property="article:modified_time" content="2022-03-01T14:05:44.745Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -208,7 +208,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">小白博客</h1>
+        <h1 class="site-subtitle" itemprop="description">少年有梦不应止于心动 更要付诸 行动</h1>
       
   </div>
 
@@ -480,7 +480,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.8k
                 </span>
               
 
@@ -496,7 +496,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -534,6 +534,21 @@ $base：转化所使用的进制。
 <h2><span id="sql-lab-2-源码分析">sql-lab 2 源码分析</span></h2><p>打开源文件<br>此关卡与上关的注入方式相同，不再重复<br>观察sql语句<br><img src="https://img-blog.csdnimg.cn/3ffa3c7d139448b1919e96cb9b22a7b6.png" alt="在这里插入图片描述"><br>发现id没有被包裹，因此直接进行sql注入即可</p>
 <h2><span id="sql-lab-3-源码分析">sql-lab 3 源码分析</span></h2><p>打开源文件<br>此关卡与上关的注入方式相同，不再重复<br><img src="https://img-blog.csdnimg.cn/07e44afcb52a4e34b6062c35d3ca48aa.png" alt="在这里插入图片描述"></p>
 <h2><span id="sql-lab-4-源码分析">sql-lab 4 源码分析</span></h2><p>打开源文件<br>此关卡与上关相同，不再重复<br>往下看<br><img src="https://img-blog.csdnimg.cn/0a7fbda29f424b619299cb0859951e22.png" alt="在这里插入图片描述"><br>发现id先是被双引号包裹<br>观察sql语句<br>发现id又被括号包裹<br>因此想要进行sql注入，需要在id后加上”)<br>对这个sql语句中id的传参进行分析，首先是对$id加上单引号，此时呢，就相当于php中输出字符，是需要加单引号才能被识别，然后加双引号是对其字符进行包裹，再加单引号，是为了防止计算机对内部内容理解错误（可能解释不是很清楚，下面放出实例）<br><img src="https://img-blog.csdnimg.cn/3cf01e6068f24b129b5103161cdba30b.png" alt="在这里插入图片描述"><br>执行结果为<br><img src="https://img-blog.csdnimg.cn/21e3a89e038d4df59afb19bb2363dc6f.png" alt="在这里插入图片描述"><br>而当没有最外层的单引号时<br><img src="https://img-blog.csdnimg.cn/c7148d185be14bbfaeb28c8357e3f15b.png" alt="在这里插入图片描述"><br>执行结果<br><img src="https://img-blog.csdnimg.cn/6c384eff744d406d9bd58f9f1dbca297.png" alt="在这里插入图片描述"></p>
+<p>近期在进行sql注入实战时出现了闭合方式不理解，可能是由于长时间未学习，突然再次做题出现了这种问题。对此我将问题总结如下，希望此能解决部分正在学习sql注入的人</p>
+<h3><span id="错误理解">错误理解</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;select username,password from ctfshow_user2 where username !=&#x27;flag&#x27; </span></span><br><span class="line"><span class="string">and id = &#x27;&quot;</span>.<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&quot;&#x27; limit 1;&quot;</span>;  </span><br></pre></td></tr></table></figure>
+<p>此语句中的id首先可以看出是get注入，此时我的想法是<code>&#39;id&#39;</code>是php中引用变量的固定格式，<code>.</code>是·拼接符，<code>&quot;</code>是包裹方式，再外层的<code>&#39;</code>仍是与最内层那个相似，是引用变量固定格式，这样看的话会误以为<code>&quot;</code>是实际的包裹方式，我们此时注入语句的话，肯定会构造如下payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-<span class="number">1</span><span class="string">&quot; union select 1,2 --+</span></span><br></pre></td></tr></table></figure>
+<p>可是我却发现这样无法正确执行，得到的数据并不是2(正解是2)，我看了看相关题目的wp，发现闭合方式是<code>&#39;</code>，这让我有点费解，在思考了一些时间并请假了大佬后，我发现之前的想法是不可取且错误的</p>
+<h4><span id="正解">正解</span></h4><p>首先看变量sql，其整个语句就是拿双引号写的，那出现双引号是想干什么呢，肯定是想闭合前面的，此时我们把语句分开来看</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;select username,password from ctfshow_user2 where username !=&#x27;flag&#x27; </span></span><br><span class="line"><span class="string">and id = &#x27;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这是第一部分，后面的双引号与前面进行对应，把语句给闭合了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&#x27; limit 1;&quot;</span>;  </span><br></pre></td></tr></table></figure>
+<p>这是第二部分，两个双引号闭合了一句话<br>此时我们发现中间还有</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>].</span><br></pre></td></tr></table></figure>
+<p>.用来把这个get注入的id和前后两句连起来，我们此时再看语句，发现第一部分最后多了一个<code>&#39;</code>，很巧，第二部分也有一个<code>&#39;</code>，此时就可以很明显的看出来id是被单引号包裹的<br>，假如传入的id=1，实际执行的sql语句就是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select username,password <span class="keyword">from</span> ctfshow_user2 where username !=<span class="string">&#x27;flag&#x27;</span> </span><br><span class="line"><span class="keyword">and</span> id = <span class="string">&#x27;1&#x27;</span> limit <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>本人只是小白，如有问题还请各位师傅多多指正。</p>
 <h2><span id="sql-lab-5-源码分析">sql-lab 5 源码分析</span></h2><p>第五关与第一关的传入和sql相一致，但不同点在于，语句正确时只会输出you are in,源码见下图<br><img src="https://img-blog.csdnimg.cn/5116fb8a1efd49ea8ebaabd19a859d70.png" alt="在这里插入图片描述"><br>因此联合查询在这里不适用，可使用报错注入或者二分法来进行sql注入</p>
 <h2><span id="sql-lab-6-源码分析">sql-lab 6 源码分析</span></h2><p>id包裹方式从单引号变成了双引号，其他与第五关一致</p>
 <h2><span id="sql-lab-20-源码分析">sql-lab 20 源码分析</span></h2><p>首先看自定义函数<br><img src="https://img-blog.csdnimg.cn/2f428eb6c7e640628054bfe0c5ea09f8.png" alt="在这里插入图片描述"><br>分析：<br>这个自定义函数是不是定义变量如果不是空的就截取0,20位，然后再继续，如果变量中含有特殊符号都进行转义，然后再删去反斜线，相当于只保留了字符串，如果不是纯数字组，就给它用单引号包裹，并将字符串里的特殊符号进行转义，否则就将字符按照进制转换输出，返回这个变量值。</p>
@@ -745,7 +760,7 @@ $base：转化所使用的进制。
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -835,7 +850,7 @@ $base：转化所使用的进制。
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">函数扩充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">sql-lab 1 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">sql-lab 2 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">sql-lab 3 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">sql-lab 4 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">sql-lab 5 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.6.</span> <span class="nav-text">sql-lab 6 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.7.</span> <span class="nav-text">sql-lab 20 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.8.</span> <span class="nav-text">sql-lab 23 源码分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">函数扩充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">sql-lab 1 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">sql-lab 2 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">sql-lab 3 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">sql-lab 4 源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.1.</span> <span class="nav-text">错误理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">正解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">sql-lab 5 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.6.</span> <span class="nav-text">sql-lab 6 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.7.</span> <span class="nav-text">sql-lab 20 源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.8.</span> <span class="nav-text">sql-lab 23 源码分析</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -864,6 +879,14 @@ $base：转化所使用的进制。
       
       
         <li class="recent_posts_li">
+          <a href="/sqlprotect/" title="浅谈防御sql注入" target="_blank">浅谈防御sql注入</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/command2/" title="浅析命令执行" target="_blank">浅析命令执行</a>
+        </li>
+      
+        <li class="recent_posts_li">
           <a href="/vc++/" title="vc 6.0++解决兼容性及闪退问题" target="_blank">vc 6.0++解决兼容性及闪退问题</a>
         </li>
       
@@ -873,14 +896,6 @@ $base：转化所使用的进制。
       
         <li class="recent_posts_li">
           <a href="/python2/" title="python学习笔记 part 2" target="_blank">python学习笔记 part 2</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/sqlmap/" title="sqlmap使用(sqli-labs为例)" target="_blank">sqlmap使用(sqli-labs为例)</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/dockerstudy/" title="docker初学小结" target="_blank">docker初学小结</a>
         </li>
       
     </ul>
@@ -919,7 +934,7 @@ $base：转化所使用的进制。
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">45k</span>
+    <span title="Site words total count">52.9k</span>
   
 </div>
 
@@ -1529,5 +1544,4 @@ setInterval("createtime()",250);
 
 <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
 <script type="text/javascript" src="/js/src/custom.js"></script>
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

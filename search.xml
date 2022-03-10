@@ -39,6 +39,7 @@
     <url>//command2/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/ba34a7b1ac2e4ec588d09b44552b499b.png" alt="在这里插入图片描述"><br>华夏波澜壮阔，少年仍需向前</p>
 <span id="more"></span>
+<h1><span id="声明">声明</span></h1><p>文章首发于先知社区<a href="https://xz.aliyun.com/t/10947">https://xz.aliyun.com/t/10947</a></p>
 <h1><span id="前言">前言</span></h1><p>之前在DVWA靶场浅学了一下命令执行，近期又遇见了命令执行此类问题，因此在此对此类问题进行一个总结，希望能够对学习命令执行的人有所帮助！</p>
 <h1><span id="漏洞相关信息">漏洞相关信息</span></h1><h2><span id="漏洞成因">漏洞成因</span></h2><p>命令执行漏洞形成的原因是web服务器对用户输入的命令安全监测不足，导致恶意代码被执行。</p>
 <h2><span id="定义">定义</span></h2><p>当应用需要调用一些外部程序去处理内容的情况下，就会用到一些执行系统命令的函数。如PHP中的system，exec，shell_exec等，当用户可以控制命令执行函数中的参数时，将可注入恶意系统命令到正常命令中，造成命令执行攻击。</p>

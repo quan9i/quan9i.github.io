@@ -93,20 +93,21 @@
 
 
 
-<meta name="description" content="前言文章同步于我的个人博客由于学习sql注入时看了部分师傅的脚本，涉及到二分法，才发现自己对二分法的所知甚少，因此来对二分法进行学习，希望能对正在学习二分法的人有所帮助。 定义123​ 二分法(Bisection method)，即一分为二的的方法。对于在区间[a,b]上连续不断且满足f(a)*f(b)&lt;0的函数y&#x3D;f(x),通过不断地把函数f(x)的零点所在区间二等分，使区间两个端点逐步逼">
+<meta name="description" content="越来越喜欢简单的事和乐观的人。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql二进制学习">
 <meta property="og:url" content="https://quan9i.top/twofen/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="前言文章同步于我的个人博客由于学习sql注入时看了部分师傅的脚本，涉及到二分法，才发现自己对二分法的所知甚少，因此来对二分法进行学习，希望能对正在学习二分法的人有所帮助。 定义123​ 二分法(Bisection method)，即一分为二的的方法。对于在区间[a,b]上连续不断且满足f(a)*f(b)&lt;0的函数y&#x3D;f(x),通过不断地把函数f(x)的零点所在区间二等分，使区间两个端点逐步逼">
+<meta property="og:description" content="越来越喜欢简单的事和乐观的人。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0375d02f7e22491fa790c58da12473a9.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/a6995e14de1c479993a12fd08c5e31b4.png">
 <meta property="article:published_time" content="2022-03-17T15:03:03.950Z">
-<meta property="article:modified_time" content="2022-03-17T15:04:58.510Z">
+<meta property="article:modified_time" content="2022-03-17T15:08:44.914Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/a6995e14de1c479993a12fd08c5e31b4.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/0375d02f7e22491fa790c58da12473a9.png">
 
 
 
@@ -502,7 +503,9 @@
       
 
       
-        <h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客<br>由于学习sql注入时看了部分师傅的脚本，涉及到二分法，才发现自己对二分法的所知甚少，因此来对二分法进行学习，希望能对正在学习二分法的人有所帮助。</p>
+        <p><img src="https://img-blog.csdnimg.cn/0375d02f7e22491fa790c58da12473a9.png" alt="在这里插入图片描述"><br>越来越喜欢简单的事和乐观的人。</p>
+<span id="more"></span>
+<h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客<br>由于学习sql注入时看了部分师傅的脚本，涉及到二分法，才发现自己对二分法的所知甚少，因此来对二分法进行学习，希望能对正在学习二分法的人有所帮助。</p>
 <h1><span id="定义">定义</span></h1><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">​ 二分法(Bisection <span class="function"><span class="keyword">method</span>)，即一分为二的的方法。对于在区间[<span class="title">a</span>,<span class="title">b</span>]上连续不断且满足<span class="title">f</span><span class="params">(a)</span>*<span class="title">f</span><span class="params">(b)</span>&lt;0</span></span><br><span class="line"><span class="function">的函数<span class="title">y</span>=<span class="title">f</span><span class="params">(x)</span>,通过不断地把函数<span class="title">f</span><span class="params">(x)</span>的零点所在区间二等分，使区间两个端点逐步逼近零点，进而得到</span></span><br><span class="line"><span class="function">零点的近似值的方法。</span></span><br></pre></td></tr></table></figure>
 <p>小白理解，设置极小值与极大值，然后不断缩小范围，最终确定答案</p>
 <h1><span id="详细过程">详细过程</span></h1><p>以下是小白个人见解(有误还请各位师傅多多指教)<br>二分法讲解(赋值讲解)<br>设置极大值100和极小值1(这两个值不可能是要求的那个,在在这里假设所求值为56)<br>然后取出平均值50<br><code>第一次比较</code><br>将平均值与所求值进行比较，50&lt;56,发现平均值比所求值要小，说明所求值介于55到100之间，<br><code>第二次比较</code><br>此时我们就把极小值更改为51(本来应改为50，但不可能是50)，取出平均值75，将所求值与平均值进行比较，75&gt;56，发现平均值比所求值大，说明平均值介于51到75之间<br><code>第三次比较</code><br>此时更改极大值为75，取出平均值63,将所求值与平均值进行比较，63&gt;56，发现平均值比所求值大，说明平均值介于55到63之间<br><code>第四次比较</code><br>此时更改极大值为63，取出平均值57，将所求值与平均值进行比较，57&gt;56，发现平均值比所求值大，说明平均值介于55到57之间<br><code>第五次比较</code><br>此时更改极大值为57，取出平均值56，将所求值与平均值进行比较，56=56,两者相等，结束。</p>

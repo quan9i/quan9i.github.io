@@ -4,6 +4,7 @@
     <title>web安全基础知识学习-part3</title>
     <url>//websecurity3/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/c711534a0b204d19b3e5fdc89721942d.png" alt="在这里插入图片描述"><br>终结三月的遗憾，开启人间四月天</p>
+<span id="more"></span>
 <h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客<a href="https://quan9i.top/websecurity3/">https://quan9i.top/websecurity3/</a>，欢迎大家访问<br>上传简单的介绍了一下各种漏洞,今天我们来讲一下工具的使用，希望对正在学习的师傅们能够有所帮助</p>
 <h1><span id="漏洞扫描工具">漏洞扫描工具</span></h1><p>常用的是<code>AWVS</code>,它可以扫描出网站存在哪种漏洞，这里提供一下下载的链接<br>网页链接：<a href="https://pan.baidu.com/s/1FIwYHIEKfLf4XAyeXfhVnA">https://pan.baidu.com/s/1FIwYHIEKfLf4XAyeXfhVnA </a><br>提取码：6sa8<br>安装教程<br><a href="https://www.cnblogs.com/chun-xiaolin001/p/10060830.html">https://www.cnblogs.com/chun-xiaolin001/p/10060830.html</a><br>还有这个也可以<br><a href="https://blog.csdn.net/weixin_46318141/article/details/121058698">https://blog.csdn.net/weixin_46318141/article/details/121058698</a><br>使用教程<br><a href="http://blog.tianles.com/89.html">http://blog.tianles.com/89.html</a></p>
 <h1><span id="sql漏洞检测">SQL漏洞检测</span></h1><p>SQL注入常用的是SQLmap，但是sqlmap这个工具需要python环境，因此我们需要先安装python，安装python的教程可以看这篇文章<br><a href="https://quan9i.top/python%E5%AE%89%E8%A3%85/">python及其编译器安装</a><br>然后呢，再安装SQLmap，官网链接<a href="https://sqlmap.org/">https://sqlmap.org/</a><br>sqlmap安装教程<a href="https://www.jianshu.com/p/6f4451e79d6e">https://www.jianshu.com/p/6f4451e79d6e</a><br>有关sqlmap的使用和基础命令，可以查看这篇文章<a href="https://quan9i.top/sqlmap/">https://quan9i.top/sqlmap/</a></p>
@@ -72,6 +73,7 @@
     <title>浅析文件包含</title>
     <url>//fileinclude/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/a8d2c2940abd43c3b9908bb76e63d9be.png" alt="在这里插入图片描述"><br>功成未必在我，功成一定有我。</p>
+<span id="more"></span>
 <h1><span id="前言">前言</span></h1><p>近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。</p>
 <h1><span id="漏洞相关信息">漏洞相关信息</span></h1><h2><span id="漏洞成因">漏洞成因</span></h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就</span><br><span class="line">被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端</span><br><span class="line">可以远程调用文件，造成文件包含漏洞。这个漏洞在php中十分常见，其他语言也有。</span><br></pre></td></tr></table></figure>
 <h2><span id="漏洞危害">漏洞危害</span></h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">文件包含漏洞可能带来的危害有：</span><br><span class="line">1、web服务器的文件被外界浏览，导致信息泄露；</span><br><span class="line">2、脚本被任意执行，导致网站被篡改。文件包含漏洞是一种常见的依赖于脚本运行而影响web应用程序</span><br><span class="line">的漏洞。</span><br></pre></td></tr></table></figure>
@@ -191,6 +193,7 @@
     <title>web安全基础知识学习-part2</title>
     <url>//websecurity2/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/1bdf88baf96d4ad2beb625d7c009c4b9.png" alt="在这里插入图片描述"><br>少年安得长少年，海波尚变为桑田</p>
+<span id="more"></span>
 <h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客<a href="https://quan9i.top/websecurity2/">https://quan9i.top/websecurity2/</a>，欢迎大家访问。<br>书接上回，上次简单的讲解了xss，这节开始讲解其他的安全漏洞，总结如下</p>
 <h1><span id="csrf">CSRF</span></h1><h2><span id="漏洞定义">漏洞定义</span></h2><p>（Cross Site Request Forgery, 跨站域请求伪造）是一种网络的攻击方式，它在 2007 年曾被列为互联网 20 大安全隐患之一,也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，并且攻击方式几乎相左。XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
 <h2><span id="漏洞危害">漏洞危害</span></h2><p>主要的危害来自于，攻击者盗用用户身份，发送恶意请求。比如：模拟用户发送邮件，发消息，以及支付、转账等。</p>
@@ -263,7 +266,8 @@
   <entry>
     <title>web安全基础知识学习-part1</title>
     <url>//websecurity1/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/d86651891d5c46a5bcb2dfbd1092918c.png" alt="在这里插入图片描述"><br>无病无灾，小小生活，悠哉悠哉~</p>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/7b250c3d6b4d47a38bd9671e6c42caf8.png" alt="在这里插入图片描述"><br>无病无灾，小小生活，悠哉悠哉~</p>
+<span id="more"></span>
 <h1><span id="前言">前言</span></h1><p>之前并没有系统的对web安全进行一个全面的学习，最近学习了一下，并总结如下，希望能给正在学习的师傅们有所帮助</p>
 <h1><span id="web介绍">web介绍</span></h1><h2><span id="web是什么">web是什么</span></h2><p>web，全称为World Wide Web，即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超级链接将Internet上的信息节点组织成一个互为关联的网状结构。</p>
 <h2><span id="web发展的阶段">web发展的阶段</span></h2><p>web分为web1.0和web2.0时代。</p>
@@ -310,6 +314,7 @@
     <title>浅析sql注入</title>
     <url>//sqlzhuru/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/75922d491ae74793920c08fc519975ba.png" alt="在这里插入图片描述"><br>少年游,踏浪回首，万千冬藏一春柔。</p>
+<span id="more"></span>
 <h1><span id="前言">前言</span></h1><p>在sqli-labs靶场中学过一点sql注入，最近遇到了很多此类题目，对sql注入进行了进一步的学习，汇总如下，希望能对正在学习的各位师傅们有所帮助</p>
 <h1><span id="漏洞相关信息">漏洞相关信息</span></h1><h2><span id="漏洞成因">漏洞成因</span></h2><p>程序没有细致地过滤用户输入的数据，致使非法数据侵入系统。</p>
 <h2><span id="定义">定义</span></h2><p>web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的 SQL语句 ，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p>

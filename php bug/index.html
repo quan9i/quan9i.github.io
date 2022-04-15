@@ -80,7 +80,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="漏洞学习," />
 
 
 
@@ -93,15 +93,25 @@
 
 
 
-<meta name="description" content="人生如逆旅，我亦是行人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="quan9i&#39;s blog">
-<meta property="og:url" content="https://quan9i.top/categories/%E6%97%A5%E5%B8%B8/index.html">
+<meta name="description" content="看不到未来时，就比别人坚持久一点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php preg_replace &#x2F;e 模式 漏洞分析">
+<meta property="og:url" content="https://quan9i.top/php%20bug/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
-<meta property="og:description" content="人生如逆旅，我亦是行人">
+<meta property="og:description" content="看不到未来时，就比别人坚持久一点。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ed33d86405594e20a60ccf0c06837fc5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/061483e51c5748328f1777221f1b9e28.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fd1b0d57b3094c749692cd292c37d0b7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/183031525d054129947f0599f6873f87.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/91b26bd8641a46588fe38b4889c35c54.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/aecb79589efe4ff2a3c5bbb47b439464.png">
+<meta property="article:published_time" content="2022-04-15T10:44:50.321Z">
+<meta property="article:modified_time" content="2022-04-15T10:59:22.267Z">
 <meta property="article:author" content="quan9i">
+<meta property="article:tag" content="漏洞学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/ed33d86405594e20a60ccf0c06837fc5.png">
 
 
 
@@ -131,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="https://quan9i.top/categories/日常/"/>
+  <link rel="canonical" href="https://quan9i.top/php bug/"/>
 
 
 
 
 
-  <title>分类: 日常 | quan9i's blog</title>
+  <title>php preg_replace /e 模式 漏洞分析 | quan9i's blog</title>
   
 
 
@@ -172,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -353,139 +363,321 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>日常<small>分类</small>
-        </h2>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.top/php%20bug/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="quan9i's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/happy%20year/" itemprop="url">
-              
-                <span itemprop="name">新年快乐</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">php preg_replace /e 模式 漏洞分析</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-02-01T08:56:21+08:00"
-              content="2022-02-01" >
-          02-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-15T18:44:50+08:00">
+                2022-04-15
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" itemprop="url" rel="index">
+                    <span itemprop="name">命令执行</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/php%20bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/php%20bug/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/play/" itemprop="url">
-              
-                <span itemprop="name">游玩小记(堆雪人)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-01-25T09:59:49+08:00"
-              content="2022-01-25" >
-          01-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p><img src="https://img-blog.csdnimg.cn/ed33d86405594e20a60ccf0c06837fc5.png" alt="在这里插入图片描述"><br>看不到未来时，就比别人坚持久一点。</p>
+<span id="more"></span>
+<h1><span id="前言">前言</span></h1><p>在做一道可以进行rce的相关题时，发现很多之前不知道的知识，并且感到这个漏洞很有意思，进行了简单分析，总结如下，希望能对师傅们有帮助</p>
+<h1><span id="案例">案例</span></h1><h2><span id="0x01">0X01</span></h2><p>首先我们来看这代码进行分析</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">echo</span> preg_replace(<span class="string">&quot;/s*(.*)s*/ies&quot;</span>, <span class="string">&quot;\\1&quot;</span>, <span class="variable">$_GET</span>[<span class="string">&quot;h&quot;</span>]);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>想读懂这段代码，首先你需要了解一下<code>preg_replace</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">preg_replace — 执行一个正则表达式的搜索和替换</span><br><span class="line"><span class="keyword">mixed</span> preg_replace( <span class="keyword">mixed</span> <span class="variable">$pattern</span>, <span class="keyword">mixed</span> <span class="variable">$replacement</span>, <span class="keyword">mixed</span> <span class="variable">$subject</span>)</span><br><span class="line">搜索subject中匹配pattern的部分，以replacement进行替换。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以及一部分修正符的含义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、/g 表示该表达式将用来在输入字符串中查找所有可能的匹配，返回的结果可以是多个。如果不加/g最多只会匹配一个</span><br><span class="line"><span class="number">2</span>、/i 表示匹配的时候不区分大小写，这个跟其它语言的正则用法相同</span><br><span class="line"><span class="number">3</span>、/m 表示多行匹配。什么是多行匹配呢？就是匹配换行符两端的潜在匹配。影响正则中的^$符号</span><br><span class="line"><span class="number">4</span>、/s 与/m相对，单行模式匹配。</span><br><span class="line"><span class="number">5</span>、/e 可执行模式，此为PHP专有参数，例如preg_replace函数。</span><br><span class="line"><span class="number">6</span>、/x 忽略空白模式。</span><br></pre></td></tr></table></figure>
+<p>还有<code>\\1</code>这个东西</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">反向引用</span><br><span class="line"></span><br><span class="line">对一个正则表达式模式或部分模式 两边添加圆括号 将导致相关 匹配存储到一个临时缓冲区 中</span><br><span class="line">，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从<span class="number"> 1 </span>开始，</span><br><span class="line">最多可存储<span class="number"> 99 </span>个捕获的子表达式。每个缓冲区都可以使用 &#x27;\n&#x27; 访问，其中 n 为一个标识特定缓冲区的</span><br><span class="line">一位或两位十进制数。</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/myself/" itemprop="url">
-              
-                <span itemprop="name">博主个人介绍</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-01-19T14:44:56+08:00"
-              content="2022-01-19" >
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/%E8%A7%82%E5%90%8E%E6%84%9F/" itemprop="url">
-              
-                <span itemprop="name">《当幸福来敲门》观后感</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-01-19T14:44:56+08:00"
-              content="2022-01-19" >
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<p>那么我们可以看出其大致含义就是匹配出的任意内容，都用()包含起来，作为子字符串，存在缓冲区，\1是访问括号内的内容，此时我们上面那个代码，我们就可以构造如下payload进行rce</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?h=$&#123;phpinfo()&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/061483e51c5748328f1777221f1b9e28.png" alt="在这里插入图片描述"><br>对于payload中<code>$&#123;&#125;</code>的解释，它这里其实是一个可变变量<br><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.variable.php">https://www.php.net/manual/zh/language.variables.variable.php</a><br>我们输入了<code>$&#123;phpinfo()&#125;</code>，那么它呢因为被括号包裹了，就会存进缓冲区，此时他是符合那个过滤函数的，所以要更替为第二个语句，而这里用到了<code>/e</code>，就相当于将第二个语句给执行了，就相当于<code>eval(xx)，第二个语句</code>也就是<code>//1</code>，而<code>//1</code>的含义是<code>$&#123;phpinfo()&#125;</code>,他这个时候总的语句呢就是<code>eval($&#123;phpinfo()&#125;)</code>,这玩意就相当于变量里面套变量，所以我们需要先执行里面的，也就是<code>$&#123;phpinfo()</code>} 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)，此时我们呢再执行这个<code>eval$&#123;1&#125;</code>,这玩意能正常执行出来，由于我们没有给1赋值，他会给个警告，但是没问题，不影响我们的语句，所以这个时候我们的rce就实现了<br>对于上述过程，你可以直接用如下代码测试</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">eval</span>($&#123;phpinfo()&#125;);</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/fd1b0d57b3094c749692cd292c37d0b7.png" alt="在这里插入图片描述"></p>
+<h2><span id="0x02">0X02</span></h2><p>代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>];</span><br><span class="line">preg_replace(<span class="string">&#x27;/&lt;data&gt;(.*)&lt;\/data&gt;/e&#x27;</span>,<span class="string">&#x27;$ret=&quot;\\1&quot;;&#x27;</span>,<span class="variable">$data</span>);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再看这个，这个的话，我们先按之前那样，输入payload为如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?data=&lt;data&gt;$&#123;phpinfo()&#125;&lt;/data&gt;</span><br></pre></td></tr></table></figure>
+<p>执行结果为<br><img src="https://img-blog.csdnimg.cn/183031525d054129947f0599f6873f87.png" alt="在这里插入图片描述"></p>
+<p>分析原因，此时括号内的内容是<code>$&#123;phpinfo()&#125;</code>，传到了缓冲区，执行后面语句时会调用，那么后面语句此时就相当于<code>$ret=$&#123;phpinfo()&#125;</code>，肯定会先执行<code>phpinfo()</code>，然后呢返回了1，此时语句是<code>$ret=1</code>，加上我们的/e是执行语句的，所以这里执行的就等同于<code>eval($ret=1)</code>；我们本地测试一下输出结果<br><img src="https://img-blog.csdnimg.cn/91b26bd8641a46588fe38b4889c35c54.png" alt="在这里插入图片描述"><br>所以，这就是执行报错的原因所在，有没有解决办法呢，当然有，再加个<code>&#123;&#125;</code>，此时执行结果如下<br><img src="https://img-blog.csdnimg.cn/aecb79589efe4ff2a3c5bbb47b439464.png" alt="在这里插入图片描述"></p>
+<p>这是为啥呢，我们不妨再来分析一下，此时存入缓冲区的是<code>&#123;$&#123;phpinfo()&#125;&#125;</code>，此时由于<code>\\1</code>是反向引用，再加上/e，实际的执行语句就是<code>eval($ret=&#123;$&#123;phpinfo()&#125;&#125;)</code>执行过里面之后，得到的就是<code>eval($ret=&#123;1&#125;)</code>,而里面会当做变量来执行，也就是<code>eval($ret=$&#123;1&#125;)</code>，此时就执行出来了。</p>
+<h2><span id="0x03">0X03</span></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span></span><br><span class="line"><span class="meta">&lt;?</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">preg_replace(<span class="string">&quot;/s*(.*)s*/ies&quot;</span>, <span class="string">&quot;test(\\1)&quot;</span>, <span class="variable">$_GET</span>[<span class="string">&quot;h&quot;</span>]);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">*eval(&quot;\$&#123;phpinfo()&#125;&quot;);</span></span><br><span class="line"><span class="comment">*eval(&quot;test(\&quot;&#123;\$&#123;phpinfo()&#125;&#125;\&quot;);&quot;);</span></span><br><span class="line"><span class="comment">*$&#123;phpinfo()&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个的话payload如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?h=$&#123;phpinfo()&#125;</span><br></pre></td></tr></table></figure>
+<p>此时执行的就是<code>eval(test($&#123;phpinfo()&#125;)</code>，，而后为<code>eval(test(1))</code>，里面那个是空的，所以执行结果为空，没有错误，可以正常执行</p>
+<h1><span id="总结">总结</span></h1><p>这个漏洞可被利用性很大，但是在php5.5版本上<code>/e</code>就被弃用，因此这里只当学习一下思路和知识即可，本人只是小白，分析过程极有可能出现错误，还请各位师傅多多指正。</p>
 
       
     </div>
+    
+    
+    
+     
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
 
+<div>
+      
+        
+      
+</div>
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+      
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    quan9i
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://quan9i.top/php%20bug/" title="php preg_replace /e 模式 漏洞分析">https://quan9i.top/php%20bug/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 漏洞学习</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pikachu/" rel="next" title="pikachuXSS类型学习">
+                <i class="fa fa-chevron-left"></i> pikachuXSS类型学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/competition/" rel="prev" title="php preg_replace /e 模式 漏洞分析">
+                php preg_replace /e 模式 漏洞分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -493,6 +685,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -515,8 +714,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -615,6 +823,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">0X01</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">0X02</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">0X03</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -859,6 +1083,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

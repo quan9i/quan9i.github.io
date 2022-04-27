@@ -96,7 +96,7 @@
 <meta name="description" content="少年安得长少年，海波尚变为桑田">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web安全基础知识学习-part2">
-<meta property="og:url" content="https://quan9i.top/websecurity2/index.html">
+<meta property="og:url" content="https://quan9i.github.io/websecurity2/index.html">
 <meta property="og:site_name" content="quan9i&#39;s blog">
 <meta property="og:description" content="少年安得长少年，海波尚变为桑田">
 <meta property="og:locale" content="zh_CN">
@@ -149,7 +149,7 @@
 
 
 
-  <link rel="canonical" href="https://quan9i.top/websecurity2/"/>
+  <link rel="canonical" href="https://quan9i.github.io/websecurity2/"/>
 
 
 
@@ -385,7 +385,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://quan9i.top/websecurity2/">
+    <link itemprop="mainEntityOfPage" href="https://quan9i.github.io/websecurity2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -517,7 +517,7 @@
       
         <p><img src="https://img-blog.csdnimg.cn/1bdf88baf96d4ad2beb625d7c009c4b9.png" alt="在这里插入图片描述"><br>少年安得长少年，海波尚变为桑田</p>
 <span id="more"></span>
-<h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客<a href="https://quan9i.top/websecurity2/">https://quan9i.top/websecurity2/</a>，欢迎大家访问。<br>书接上回，上次简单的讲解了xss，这节开始讲解其他的安全漏洞，总结如下</p>
+<h1><span id="前言">前言</span></h1><p>文章同步于我的个人博客<a target="_blank" rel="noopener" href="https://quan9i.top/websecurity2/">https://quan9i.top/websecurity2/</a>，欢迎大家访问。<br>书接上回，上次简单的讲解了xss，这节开始讲解其他的安全漏洞，总结如下</p>
 <h1><span id="csrf">CSRF</span></h1><h2><span id="漏洞定义">漏洞定义</span></h2><p>（Cross Site Request Forgery, 跨站域请求伪造）是一种网络的攻击方式，它在 2007 年曾被列为互联网 20 大安全隐患之一,也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，并且攻击方式几乎相左。XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
 <h2><span id="漏洞危害">漏洞危害</span></h2><p>主要的危害来自于，攻击者盗用用户身份，发送恶意请求。比如：模拟用户发送邮件，发消息，以及支付、转账等。</p>
 <h2><span id="漏洞原理">漏洞原理</span></h2><p>一般过程是，用户输入自己的用户名和密码，登录网站，进行转账等操作，这是正常的过程<br>而当有CSRF时，则是用户成功登录后，点击了黑客的伪造页面(这种一般是具有迷惑和吸引性的界面)，此时你就会点击进去，那么黑客网站就会向正常网站发送一个请求获取cookie(任何一个请求都会带上已知的cookie)，cookie就相当于保险箱的钥匙，被黑客获取后，黑客就可以实现转账的操作<br><img src="https://img-blog.csdnimg.cn/d9cce9c284054e308c05d90c0e75f635.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/252925e3f1d140888ada1ac77ab1b1b2.png" alt="在这里插入图片描述"></p>
@@ -552,7 +552,7 @@
 <h3><span id="meta实例">meta实例</span></h3><p>这里引出一个meta跳转的作为示例，构造源代码如下</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;url跳转&lt;/title&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">&quot;Content-Type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&quot;url&quot;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$url</span> = <span class="variable">$_REQUEST</span>[<span class="string">&quot;url&quot;</span>];</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$url</span> = <span class="string">&quot;https://quan9i.top&quot;</span>;<span class="comment">//跳转的路径</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Refresh&quot;</span> content=<span class="string">&quot;2; url=&lt;?php echo <span class="subst">$url</span>?&gt;&quot;</span>/&gt;<span class="comment">//content中的数字是延时2秒的意思</span></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <p>此时访问这个网站<br><img src="https://img-blog.csdnimg.cn/3350d9db26124d429f497dee28c3602c.png" alt="在这里插入图片描述"><br>一开始是空白的，这是因为未对这个界面进行设置，两秒过后，它变成了这样<br><img src="https://img-blog.csdnimg.cn/47cef1d88ec147bab9b2029e6a92b380.png" alt="在这里插入图片描述"><br>也就是我们设置的url</p>
-<h1><span id="sql注入">SQL注入</span></h1><p>可以看这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/Reme_mber/article/details/121708283?spm=1001.2014.3001.5502">sqli-labs1-10</a>来了解sql注入的注入具体过程<br>防御sql注入可以看这篇文章<a href="https://quan9i.top/sqlprotect/">浅谈防御SQL注入</a></p>
+<h1><span id="sql注入">SQL注入</span></h1><p>可以看这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/Reme_mber/article/details/121708283?spm=1001.2014.3001.5502">sqli-labs1-10</a>来了解sql注入的注入具体过程<br>防御sql注入可以看这篇文章<a target="_blank" rel="noopener" href="https://quan9i.top/sqlprotect/">浅谈防御SQL注入</a></p>
 <h1><span id="命令执行">命令执行</span></h1><p>大家可以参考这篇文章<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10947">浅析命令执行</a></p>
 <h1><span id="文件操作漏洞">文件操作漏洞</span></h1><h2><span id="文件包含">文件包含</span></h2><h3><span id="定义">定义</span></h3><p>文件包含漏洞是一种常见的web类型漏洞,因为很多脚本语言支持使用文件包含,也就是我们所说的文件包含函数，网站开发者经常会把一些代码插入到指定的地方,从而节省之间避免再次编写 ,这就是包含函数的基础解释 ,但是我们不光可以包含我们预先指定的文件，也可以包含我们服务器内部的其他文件，前提条件就是我们需要有可读的权限才能读取这些文件 ,所以这样就会导致文件包含漏洞</p>
 <h3><span id="前提">前提</span></h3><p>其文件包含漏洞共分为两大类，本地文件包含和远程文件包含，但是如果想要实现远程文件包含，需要php.ini开启了allow_url_fopen和allow_url_include的配置。包含的文件是第三方服务器的文件。本地文件包含的含义就是包含本地服务器的文件</p>
@@ -576,7 +576,7 @@
 </ul>
 <h3><span id="危害">危害</span></h3><p> 下载服务器任意文件，如脚本代码、服务及系统配置文件等</p>
 <p>可用得到的代码进一步代码审计，得到更多可利用漏洞</p>
-<h1><span id="代理工具">代理工具</span></h1><p>常见的是burpsuite，安装过程可以看这篇文章<a href="https://quan9i.top/burpsuite/">https://quan9i.top/burpsuite/</a></p>
+<h1><span id="代理工具">代理工具</span></h1><p>常见的是burpsuite，安装过程可以看这篇文章<a target="_blank" rel="noopener" href="https://quan9i.top/burpsuite/">https://quan9i.top/burpsuite/</a></p>
 <h1><span id="敏感文件扫描">敏感文件扫描</span></h1><p>对于一些敏感文件，如.gz或者后台登录界面，当被识别出来时可以进行利用，那我们正常的情况下只能自己进行猜测，然后观察状态码来进行查看，但是这样太慢了，我们选择使用工具来进行查看，这里我用的是御剑，下载链接如下<br>网页链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Bn7GtWb7AStcjzVahFOjSQ">https://pan.baidu.com/s/1Bn7GtWb7AStcjzVahFOjSQ</a><br>提取码：zkaq<br>下载完成后你需要先运行exe文件，将生产的配置文件保存到，再将zip中的txt文件拖到配置文件夹下，此时就可以正常运行exe文件了<br><img src="https://img-blog.csdnimg.cn/7b351f25a8dd4196ab2f90890eeb5607.png" alt="在这里插入图片描述"></p>
 
       
@@ -643,7 +643,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://quan9i.top/websecurity2/" title="web安全基础知识学习-part2">https://quan9i.top/websecurity2/</a>
+    <a href="https://quan9i.github.io/websecurity2/" title="web安全基础知识学习-part2">https://quan9i.github.io/websecurity2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -904,7 +904,7 @@
       
       
         <li class="recent_posts_li">
-          <a href="/wzsql/" title="" target="_blank"></a>
+          <a href="/wzsql/" title="ctf签到题" target="_blank">ctf签到题</a>
         </li>
       
         <li class="recent_posts_li">
